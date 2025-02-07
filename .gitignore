@@ -52,6 +52,7 @@ Desktop.ini
 # Ignore Store Assets NOT shared in Teams (Optional)
 # If you want to exclude some store assets manually, uncomment below:
 /Assets/StoreAssets/
+/Assets/Scenes/TestScenes
 
 # If you are using Git LFS, track large files (e.g., textures, audio)
 #*.psd filter=lfs diff=lfs merge=lfs -text
