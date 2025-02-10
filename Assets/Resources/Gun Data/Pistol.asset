@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2365aa63aa52ceb4b90715fb31ef4c47, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  gunName: Pistol
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  shootingRange: 100
+  fireRate: 4
+  magazineSize: 10
+  reloadTime: 2
+  defaultWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
+  adsWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
+  recoilAmount: 1
+  maxRecoil: {x: 1, y: 2}
+  recoilSpeed: 2
+  resetRecoilSpeed: 4
+  bulletTrailPrefab: {fileID: 3688642848477571922, guid: 9647437b9b4b4b4418fa9c96585a47dc,
+    type: 3}
+  bulletSpeed: 100
+  fireSound: {fileID: 8300000, guid: 5116b315a293b8a4c81cd098ea2af7c6, type: 3}
