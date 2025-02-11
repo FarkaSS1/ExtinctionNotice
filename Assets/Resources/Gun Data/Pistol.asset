@@ -15,7 +15,8 @@ MonoBehaviour:
   gunName: Pistol
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
+  damage: 25
   shootingRange: 100
   fireRate: 4
   magazineSize: 10

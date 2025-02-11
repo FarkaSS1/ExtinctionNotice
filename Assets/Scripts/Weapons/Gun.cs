@@ -6,6 +6,7 @@ public abstract class Gun : MonoBehaviour
 {
     public AudioSource audioSource;
     public GunData gunData;
+
     public Transform gunMuzzle;
     public GameObject bulletHolePrefab;
     public GameObject bulletHitParticlePrefab;
@@ -111,8 +112,6 @@ private void Start() {
     // Toggle aiming state based on input
     isAiming = aimingInput;
 
-    Debug.Log(isAiming ? "Aiming..." : "Not Aiming...");
-
     // Choose target position and rotation based on aiming state
     Vector3 targetPosition = isAiming ? adsPosition.localPosition : weaponPosition.localPosition;
     Quaternion targetRotation = isAiming ? adsPosition.localRotation : weaponPosition.localRotation;
@@ -122,66 +121,5 @@ private void Start() {
     transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
 }
 
-
-    // private void HandleAimDownSights() {
-    //     bool aimingInput = Input.GetMouseButton(1); // Right-click for ADS
-    //     if(aimingInput) {
-    //         isAiming = aimingInput;
-    //         Debug.Log("Aiming...");
-
-    //         // Use local positions and local rotations within the WeaponPosition hierarchy
-    //         Vector3 targetPosition = isAiming ? adsPosition.localPosition : Vector3.zero;
-    //         Quaternion targetRotation = isAiming ? adsPosition.localRotation : Quaternion.identity;
-
-    //         // Smoothly transition between positions and rotations
-    //         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
-    //         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
-    //         }
-    // }
-
-    // private void HandleAimDownSights() {
-    //     bool aimingInput = Input.GetMouseButton(1); // Right-click for ADS
-    //     isAiming = aimingInput;
-    //     if(isAiming) {Debug.Log("Aiming...");}
-        
-    //     // Use stored default position instead of weaponPosition.localPosition
-    //     Vector3 targetPosition = isAiming ? adsPosition.localPosition : defaultWeaponPosition;
-    //     Quaternion targetRotation = isAiming ? adsPosition.localRotation : defaultWeaponRotation;
-
-    //     // Smoothly transition between positions and rotations
-    //     transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
-    //     transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
-    // }
-
-    // private void HandleAimDownSights() {
-    //     bool aimingInput = Input.GetMouseButton(1); // Right-click for ADS
-    //     isAiming = aimingInput;
-
-    //     // Determine the target position and rotation
-    //     Vector3 targetPosition = isAiming ? adsPosition.localPosition : weaponPosition.localPosition;
-    //     Quaternion targetRotation = isAiming ? adsPosition.localRotation : weaponPosition.localRotation;
-
-    //     // Smooth transition using Lerp & Slerp
-    //     transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
-    //     transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
-    // }
-
-
-    // private void HandleAimDownSights() {
-    //     if (Input.GetMouseButton(1)) // Right-click for ADS
-    //     {
-    //         isAiming = true;
-    //     }
-    //     else
-    //     {
-    //         isAiming = false;
-    //     }
-
-    //     Vector3 targetPosition = isAiming ? adsPosition.localPosition : weaponPosition.localPosition;
-    //     transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
-    // }
-
-
-    //public abstract void AimDownsights();
     public abstract void Shoot();
 }

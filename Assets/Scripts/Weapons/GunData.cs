@@ -8,6 +8,8 @@ public class GunData : ScriptableObject
     public string gunName;
 
     public LayerMask targetLayerMask;
+    [Header("Weapon Damage")]
+    public float damage;
 
     [Header("Fire Config")]
     public float shootingRange;

@@ -150,20 +150,6 @@ public class PlayerController : MonoBehaviour
         noiseComponent.m_FrequencyGain = Mathf.Lerp(noiseComponent.m_FrequencyGain, targetFrequency, Time.deltaTime * bobSmoothing);
     }
 
-    // private void CameraBob() {
-    //     float targetAmplitude = (controller.isGrounded && controller.velocity.magnitude > 0.1f) 
-    //         ? bobAmplitude * currentSpeedMultiplier 
-    //         : 0.0f;
-
-    //     float targetFrequency = (controller.isGrounded && controller.velocity.magnitude > 0.1f) 
-    //         ? bobFrequency * currentSpeedMultiplier 
-    //         : 0.0f;
-
-    //     // Smoothly transition instead of instant stop
-    //     noiseComponent.m_AmplitudeGain = Mathf.Lerp(noiseComponent.m_AmplitudeGain, targetAmplitude, Time.deltaTime * bobSmoothing);
-    //     noiseComponent.m_FrequencyGain = Mathf.Lerp(noiseComponent.m_FrequencyGain, targetFrequency, Time.deltaTime * bobSmoothing);
-    // }
-
 
     private void PlayFootstepSound()
     {
