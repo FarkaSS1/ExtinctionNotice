@@ -26,6 +26,8 @@ MemoryCaptures/
 *.svd
 *.pdb
 *.mdb
+.vsconfig
+
 
 # Ignore system files
 .DS_Store
