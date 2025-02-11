@@ -105,21 +105,24 @@ private void Start() {
     }
 
 
-    void HandleAimDownSights()
-{
-    bool aimingInput = Input.GetMouseButton(1); // Right-click for ADS
+    void HandleAimDownSights() {
+        bool aimingInput = Input.GetMouseButton(1); // Right-click for ADS
 
-    // Toggle aiming state based on input
-    isAiming = aimingInput;
+        // Toggle aiming state based on input
+        isAiming = aimingInput;
 
-    // Choose target position and rotation based on aiming state
-    Vector3 targetPosition = isAiming ? adsPosition.localPosition : weaponPosition.localPosition;
-    Quaternion targetRotation = isAiming ? adsPosition.localRotation : weaponPosition.localRotation;
+        // Choose target position and rotation based on aiming state
+        Vector3 targetPosition = isAiming ? adsPosition.localPosition : weaponPosition.localPosition;
+        Quaternion targetRotation = isAiming ? adsPosition.localRotation : weaponPosition.localRotation;
 
-    // Smoothly transition to the target position and rotation
-    transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
-    transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
-}
+        // Smoothly transition to the target position and rotation
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * adsSpeed);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * adsSpeed);
+
+        // FOV change
+        float targetFOV = isAiming ? 40f : 60f; // 40 FOV when aiming, 60 FOV for normal
+        playerController.virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(playerController.virtualCamera.m_Lens.FieldOfView, targetFOV, Time.deltaTime * adsSpeed);
+    }
 
     public abstract void Shoot();
 }

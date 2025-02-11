@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     private float xRotation;
 
     [Header("Camera Bob Settings")]
-    [SerializeField] private float bobFrequency = 1f;
-    [SerializeField] private float bobAmplitude = 1f;
+    [SerializeField] private float bobFrequency = 1.5f;
+    [SerializeField] private float bobAmplitude = 0.07f;
     //private float bobTimer = 0f;
     private readonly float bobSmoothing = 5.0f; // Higher = smoother stop
     private readonly float idleBobAmplitude = 0.1f;
@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         noiseComponent = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        // lock cursor // SHIT CRASHED
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

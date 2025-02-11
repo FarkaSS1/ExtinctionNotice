@@ -23,6 +23,7 @@ public class Health : MonoBehaviour, IHealth
         if (currentHealth <= 0)
         {
             Die();
+            currentHealth = 0;
         }
     }
 

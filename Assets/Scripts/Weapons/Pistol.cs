@@ -9,7 +9,7 @@ public class Pistol : Gun
     public override void Update()
     {
         base.Update();
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetMouseButton(0)) {
             TryShoot();
         }
 
@@ -18,23 +18,30 @@ public class Pistol : Gun
         }
         
     }
-    public override void Shoot()
-    {
-        RaycastHit hit;
-        Vector3 target = Vector3.zero;
 
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.shootingRange, gunData.targetLayerMask)) {
-            Debug.Log(gunData.gunName + " hit " + hit.collider.name);
-            target = hit.point;
-            if (hit.collider.TryGetComponent<IHealth>(out var health)) {
-                
-                health.TakeDamage(gunData.damage); // Deal damage to the enemy
-            }
-        } else {
-            target = cameraTransform.position + (cameraTransform.forward)*gunData.shootingRange;
+    public override void Shoot()
+{
+    RaycastHit hit;
+    Vector3 target = Vector3.zero;
+
+    // Use the camera's forward direction, adjusted for sway
+    Vector3 shootDirection = Camera.main.transform.forward;
+
+    // Raycast to determine where the bullet will hit
+    if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, gunData.shootingRange, gunData.targetLayerMask)) {
+        Debug.Log(gunData.gunName + " hit " + hit.collider.name);
+        target = hit.point;
+        if (hit.collider.TryGetComponent<IHealth>(out var health)) {
+            health.TakeDamage(gunData.damage); // Deal damage to the enemy
         }
-        StartCoroutine(BulletFire(target, hit));
+    } else {
+        target = cameraTransform.position + (shootDirection * gunData.shootingRange);
     }
+
+    // Start bullet firing coroutine with the calculated target
+    StartCoroutine(BulletFire(target, hit));
+}
+
 
     private IEnumerator BulletFire(Vector3 target, RaycastHit hit) {
         GameObject bulletTrail = Instantiate(gunData.bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);  
@@ -58,7 +65,7 @@ public class Pistol : Gun
         bulletHole.transform.parent = hit.collider.transform;
         hitParticle.transform.parent = hit.collider.transform;
 
-        Destroy(bulletHole, 5f);
-        Destroy(hitParticle, 5f);
+        Destroy(bulletHole, 1f);
+        Destroy(hitParticle, 1f);
     }
 }

@@ -18,12 +18,12 @@ MonoBehaviour:
     m_Bits: 64
   damage: 25
   shootingRange: 100
-  fireRate: 4
+  fireRate: 2
   magazineSize: 10
   reloadTime: 2
   defaultWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
   adsWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
-  recoilAmount: 1
+  recoilAmount: 5
   maxRecoil: {x: 1, y: 2}
   recoilSpeed: 2
   resetRecoilSpeed: 4
