@@ -27,7 +27,7 @@ public class Pistol : Gun
             Debug.Log(gunData.gunName + " hit " + hit.collider.name);
             target = hit.point;
             if (hit.collider.TryGetComponent<IHealth>(out var health)) {
-                Debug.Log("apapapapa");
+                
                 health.TakeDamage(gunData.damage); // Deal damage to the enemy
             }
         } else {

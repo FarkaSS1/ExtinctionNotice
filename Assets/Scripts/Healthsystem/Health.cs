@@ -9,7 +9,7 @@ public class Health : MonoBehaviour, IHealth
     public event Action<float> OnHealthChanged; 
     public event Action OnDeath; 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -18,7 +18,8 @@ public class Health : MonoBehaviour, IHealth
     {
         currentHealth -= damage;
         OnHealthChanged?.Invoke(currentHealth / maxHealth);
-        Debug.Log(this.currentHealth);
+        float healthPercentage = currentHealth / maxHealth;
+         Debug.Log($"Health changed! Current: {currentHealth}, Percentage: {healthPercentage}");
         if (currentHealth <= 0)
         {
             Die();
