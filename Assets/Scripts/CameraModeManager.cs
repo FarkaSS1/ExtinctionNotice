@@ -11,17 +11,17 @@ public class CameraModeManager : MonoBehaviour
     public GameObject thirdPersonCam;
     public GameObject baseViewCam;
     public GameObject player;
-    public PlayerController2 playerMovementScript; // The script handling player movement (e.g., ThirdPersonController)
+    public PlayerController2 playerMovementScript; // The script handling player movement 
     public float baseViewMoveSpeed = 10f;
     public float zoomSpeed = 5f;
     public Transform baseCameraTransform; // Drag your BaseViewCam here in the inspector
+    public GameObject HUD; // Drag your HUD here in the inspector
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Make sure we start in Player Mode
         SwitchMode(GameMode.PlayerMode);
     }
 
@@ -57,6 +57,8 @@ public class CameraModeManager : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            HUD.SetActive(false);  // Hide HUD when in Player Mode
+
         }
         else if (newMode == GameMode.BaseViewMode)
         {
@@ -68,6 +70,8 @@ public class CameraModeManager : MonoBehaviour
             Cursor.visible = true;
 
             baseViewCam.GetComponent<BaseCameraController>().ResetToHub();
+            HUD.SetActive(true);  // Hide HUD when in Player Mode
+
 
         }
     }

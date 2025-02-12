@@ -5,22 +5,25 @@ using UnityEngine;
 public class BaseCameraController : MonoBehaviour
 {
     [Header("Camera Settings")]
-    public Transform hub; // Assign the hub GameObject here in the Inspector
-    public float moveSpeed = 2f;
-    public float zoomSpeed = 3f;
+    public Transform hub;
+    public float moveSpeed = 5f;
+    public float zoomSpeed = 5f;
     public float minZoom = 10f;
     public float maxZoom = 30f;
-    public float moveLimit = 50f; // Limit how far the camera can move from the hub
+    public float moveLimit = 50f;
 
     private Vector3 startPosition;
+    private float targetZoom;
 
     private void Start()
     {
         if (hub != null)
         {
             startPosition = hub.position;
-            transform.position = startPosition;
+            transform.position = startPosition + new Vector3(0, maxZoom, 0); // Start at max zoom
+            transform.LookAt(hub.position);
         }
+        targetZoom = maxZoom;
     }
 
     private void Update()
@@ -31,31 +34,34 @@ public class BaseCameraController : MonoBehaviour
 
     private void HandleMovement()
     {
-        float h = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        float v = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        float zoomFactor = Mathf.InverseLerp(minZoom, maxZoom, transform.position.y);
+        float dynamicSpeed = moveSpeed + (moveSpeed * zoomFactor * 2); // Increase speed when zoomed out
 
-        Vector3 newPos = transform.position + new Vector3(h, 0, v);
+        float h = Input.GetAxis("Horizontal") * dynamicSpeed;
+        float v = Input.GetAxis("Vertical") * dynamicSpeed;
 
-        // Clamp movement within a circular range around the hub
-        Vector3 offset = newPos - startPosition;
+        Vector3 targetPos = transform.position + new Vector3(h, 0, v) * Time.deltaTime;
+
+        Vector3 offset = targetPos - startPosition;
         if (offset.magnitude > moveLimit)
         {
-            newPos = startPosition + offset.normalized * moveLimit;
+            targetPos = startPosition + offset.normalized * moveLimit;
         }
 
-        transform.position = newPos;
+        transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
     }
 
     private void HandleZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        float newY = Mathf.Clamp(transform.position.y - scroll, minZoom, maxZoom);
+        targetZoom = Mathf.Clamp(targetZoom - scroll, minZoom, maxZoom);
 
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, targetZoom, transform.position.z), 0.1f);
     }
 
     public void ResetToHub()
     {
-        transform.position = startPosition;
+        transform.position = startPosition + new Vector3(0, maxZoom, 0);
+        targetZoom = maxZoom;
     }
 }
