@@ -8,7 +8,7 @@ public class CameraModeManager : MonoBehaviour
     public GameMode currentMode = GameMode.PlayerMode;
 
     [Header("References")]
-    public GameObject thirdPersonCam;
+    public GameObject mainCamera;
     public GameObject baseViewCam;
     public GameObject player;
     public PlayerController2 playerMovementScript; // The script handling player movement 
@@ -16,6 +16,8 @@ public class CameraModeManager : MonoBehaviour
     public float zoomSpeed = 5f;
     public Transform baseCameraTransform; // Drag your BaseViewCam here in the inspector
     public GameObject HUD; // Drag your HUD here in the inspector
+    public SelectionManager selectionManager; // Reference to SelectionManager
+
 
     private void Start()
     {
@@ -51,26 +53,54 @@ public class CameraModeManager : MonoBehaviour
 
         if (newMode == GameMode.PlayerMode)
         {
-            thirdPersonCam.SetActive(true);
+            mainCamera.SetActive(true);
             baseViewCam.SetActive(false);
-            if (playerMovementScript != null) playerMovementScript.enabled = true;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = true; // Enable player movement
+            }
+
+            // Disable Base View Camera's AudioListener & Enable Player Camera's
+            mainCamera.GetComponent<AudioListener>().enabled = true;
+            baseViewCam.GetComponent<AudioListener>().enabled = false;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             HUD.SetActive(false);  // Hide HUD when in Player Mode
 
+            if (selectionManager != null) selectionManager.enabled = false; // Disable selection
+                                                                            // Update Camera Tags
+            mainCamera.tag = "MainCamera";
+            baseViewCam.tag = "Untagged"; // Remove MainCamera tag
+    
+            selectionManager.Deselect(); // Deselect any selected objects
         }
         else if (newMode == GameMode.BaseViewMode)
         {
-            thirdPersonCam.SetActive(false);
+            mainCamera.SetActive(false);
             baseViewCam.SetActive(true);
-            if (playerMovementScript != null) playerMovementScript.enabled = false;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false; // Disable player movement!
+
+            }
+
+            // Disable Player Camera's AudioListener & Enable Base View Camera's
+            mainCamera.GetComponent<AudioListener>().enabled = false;
+            baseViewCam.GetComponent<AudioListener>().enabled = true;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             baseViewCam.GetComponent<BaseCameraController>().ResetToHub();
             HUD.SetActive(true);  // Hide HUD when in Player Mode
+
+            if (selectionManager != null) selectionManager.enabled = true; // Enable selection
+
+            // Update Camera Tags
+            mainCamera.tag = "Untagged"; // Remove MainCamera tag
+            baseViewCam.tag = "MainCamera";
+
 
 
         }
