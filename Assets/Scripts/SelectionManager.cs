@@ -30,6 +30,7 @@ public class SelectionManager : MonoBehaviour
 
                     selectedObject = newSelection;
                     selectedObject.Select(); // Select new
+
                 }
                 else
                 {
@@ -57,4 +58,12 @@ public class SelectionManager : MonoBehaviour
             selectedObject = null;
         }
     }
+
+    //if we change how uimanger get the selected object we need to change this method
+    //public SelectableObject GetSelectedObject()
+    //{
+    //    return selectedObject;
+    //}
+
+
 }

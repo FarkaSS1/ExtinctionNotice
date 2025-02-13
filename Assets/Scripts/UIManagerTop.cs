@@ -2,16 +2,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManagerTop : MonoBehaviour
 {
     public TMP_Text goldText;
     public TMP_Text powerText;
     public TMP_Text elementXText;
 
+ 
+
     private void Start()
     {
-        UpdateResourceUI(); 
+        UpdateResourceUI();
+      
     }
+
 
     private void OnEnable()
     {
