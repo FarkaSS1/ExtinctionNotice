@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UIManager.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\UIManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\UIManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T15:37:27.6Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -51,7 +38,8 @@
               "RelativeToolTip": "Assets\\Scripts\\CameraModeManager.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowDoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T12:39:24.243Z"
+              "WhenOpened": "2025-02-13T12:39:24.243Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -61,21 +49,36 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\SelectionManager.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\SelectionManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\SelectionManager.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAUwB8AAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T12:23:14.017Z"
+              "WhenOpened": "2025-02-13T12:23:14.017Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "UIManagerBot.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\UIManagerBot.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManagerBot.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\UIManagerBot.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIManagerBot.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T15:52:48.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "SelectableObject.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\SelectableObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SelectableObject.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\SelectableObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\SelectableObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T12:21:57.381Z"
+              "WhenOpened": "2025-02-13T12:21:57.381Z",
+              "EditorCaption": ""
             }
           ]
         }

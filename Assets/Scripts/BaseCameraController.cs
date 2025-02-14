@@ -19,12 +19,13 @@ public class BaseCameraController : MonoBehaviour
     {
         if (hub != null)
         {
-            startPosition = hub.position;
+            startPosition = hub.position - new Vector3(0, 0, 400);
             transform.position = startPosition + new Vector3(0, maxZoom, 0); // Start at max zoom
-            transform.LookAt(hub.position);
+            transform.rotation = Quaternion.Euler(60, 0, 0); // Tilt the camera to a 45-degree angle
         }
         targetZoom = maxZoom;
     }
+
 
     private void Update()
     {

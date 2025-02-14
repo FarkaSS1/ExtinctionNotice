@@ -59,11 +59,5 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    //if we change how uimanger get the selected object we need to change this method
-    //public SelectableObject GetSelectedObject()
-    //{
-    //    return selectedObject;
-    //}
-
 
 }

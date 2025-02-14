@@ -6,6 +6,8 @@ public class SelectableObject : MonoBehaviour
     private Color originalColor;
     public Color selectedColor = Color.green; // Highlight color when selected
     public GameObject selectionManager;
+    public int cost = 500;
+    public string costType = "elementX";
 
     private void Start()
     {

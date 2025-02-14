@@ -1,15 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public Button buildTowerButton;
     public Button destroyTowerButton;
     public GameObject towerPrefab; // Prefab for the tower
-    //public GameObject SelectionManager; // Reference to SelectionManager
+    public GameStateManager gameStateManager; // Reference to GameStateManager
 
     private bool isBuildingTower = false;
+    private GameObject blueprint; // The preview object
+    private Renderer blueprintRenderer; // Store renderer for color changes
     private SelectableObject selectedObject;
+
+    // Placeholder cost, ideally this should be stored per tower type
+    int towerCost = 500;
+    string towerTypeCost = "elementX";
 
     private void Start()
     {
@@ -21,46 +28,80 @@ public class UIManager : MonoBehaviour
     {
         if (isBuildingTower)
         {
+            UpdateBlueprintPosition();
+
             if (Input.GetMouseButtonDown(0)) // Left click to place tower
             {
-                PlaceTowerAtMousePosition();
+                TryPlaceTower();
             }
         }
     }
 
-    // Called when the "Build Tower" button is clicked
     private void OnBuildTowerButtonClick()
     {
-        isBuildingTower = true; // Activate building mode
-    }
-
-    // Called when the "Destroy Tower" button is clicked
-    private void OnDestroyTowerButtonClick()
-    {
-        //SetSelectedObject();
-        if (selectedObject != null)
+        if (blueprint == null)
         {
-            Destroy(selectedObject.gameObject);
-            selectedObject = null; // Deselect after destruction
+            blueprint = Instantiate(towerPrefab); // Create preview object
+            blueprintRenderer = blueprint.GetComponent<Renderer>();
+            MakeBlueprintTransparent();
         }
+        isBuildingTower = true;
     }
 
-    private void PlaceTowerAtMousePosition()
+    private void UpdateBlueprintPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
-            GameObject newTower = Instantiate(towerPrefab, hit.point, Quaternion.identity); // Create the tower
+            blueprint.transform.position = hit.point; // Move blueprint to cursor position
+            UpdateBlueprintColor();
+        }
+    }
 
-            // Ensure the tower has a SelectableObject component
-            if (!newTower.GetComponent<SelectableObject>())
-            {
-                newTower.AddComponent<SelectableObject>();
-            }
+    private void TryPlaceTower()
+    {
 
-            isBuildingTower = false; // Exit build mode
+        if (gameStateManager.CanAfford(towerTypeCost,towerCost))
+        {
+            gameStateManager.RemoveResources(towerTypeCost, towerCost);
+            Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
+            isBuildingTower = false;
+            Destroy(blueprint);
+        }
+    }
+
+    private void UpdateBlueprintColor()
+    {
+        if (gameStateManager.CanAfford(towerTypeCost, towerCost))
+        {
+            blueprintRenderer.material.color = new Color(0, 1, 0, 0.5f); // Green if affordable
+        }
+        else
+        {
+            blueprintRenderer.material.color = new Color(1, 0, 0, 0.5f); // Red if not affordable
+        }
+    }
+
+    private void MakeBlueprintTransparent()
+    {
+        if (blueprintRenderer != null)
+        {
+            Color transparentColor = blueprintRenderer.material.color;
+            transparentColor.a = 0.5f; // Make it semi-transparent
+            blueprintRenderer.material.color = transparentColor;
+        }
+    }
+
+    private void OnDestroyTowerButtonClick()
+    {
+        if (selectedObject != null)
+        {
+            int refundAmount = selectedObject.cost; // Refund 100% of cost for now
+            gameStateManager.AddResource(towerTypeCost, refundAmount);
+            Destroy(selectedObject.gameObject);
+            selectedObject = null;
         }
     }
 
