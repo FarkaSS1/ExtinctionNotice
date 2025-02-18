@@ -19,6 +19,8 @@ public class ThirdPersonCam2 : MonoBehaviour
     public GameObject topDownCam;
 
     public CameraStyle currentStyle;
+    private CameraStyle[] cameraModes = { CameraStyle.Basic, CameraStyle.Combat, CameraStyle.Topdown };
+    private int cameraIndex = 0;
 
     public enum CameraStyle
     {
@@ -32,39 +34,41 @@ public class ThirdPersonCam2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Auto-find the player if not assigned in the Inspector
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
                 player = playerObj.transform;
-                orientation = player.Find("Orientation"); // Find the Orientation inside the Player
-                this.playerObj = player.Find("PlayerObj"); // Find the PlayerObj inside the Player
-                rb = this.playerObj.GetComponent<Rigidbody>(); // Get Rigidbody of the player
+                orientation = player.Find("Orientation");
+                this.playerObj = player.Find("PlayerObj");
+                rb = this.playerObj.GetComponent<Rigidbody>();
             }
         }
 
-        // Auto-find the cameras if not assigned
         if (thirdPersonCam == null) thirdPersonCam = GameObject.Find("ThirdPersonCam");
         if (combatCam == null) combatCam = GameObject.Find("CombatCam");
         if (topDownCam == null) topDownCam = GameObject.Find("TopDownCam");
 
         // Ensure we start with the correct camera
-        SwitchCameraStyle(CameraStyle.Basic);
+        SwitchCameraStyle(cameraModes[cameraIndex]);
     }
-
 
     private void Update()
     {
-        // Switch styles
         if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchCameraStyle(CameraStyle.Basic);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchCameraStyle(CameraStyle.Combat);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchCameraStyle(CameraStyle.Topdown);
 
-        if (player == null || orientation == null) return; // Prevent errors if the player is missing
+        // **New feature: Press "C" to cycle through cameras**
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            cameraIndex = (cameraIndex + 1) % cameraModes.Length;
+            SwitchCameraStyle(cameraModes[cameraIndex]);
+        }
 
-        // Rotate orientation
+        if (player == null || orientation == null) return;
+
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 

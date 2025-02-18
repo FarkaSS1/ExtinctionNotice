@@ -1,0 +1,10 @@
+# Force text files to always use LF
+* text eol=lf
+
+# Keep binary files untouched
+*.png binary
+*.jpg binary
+*.exe binary
+*.dll binary
+*.unity binary
+*.prefab binary
