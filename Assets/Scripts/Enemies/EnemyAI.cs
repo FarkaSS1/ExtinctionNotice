@@ -7,11 +7,19 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
     private Transform baseTarget;
     private Transform player;
+
     public float playerDetectionRange = 10f;
     public bool isRangedEnemy = false;
-    public float attackRange = 2f; // Melee attack range
+    public float attackRange = 6f; // Melee attack range
     public float attackCooldown = 2f;
     private float nextAttackTime = 0f;
+
+    // Aggro System
+    public float aggroDuration = 5f; // Time before losing aggro
+    private bool isAggroed = false;
+
+    public bool IsAggroed => isAggroed; // read-only property
+    private float aggroTimer = 0f;
 
     void Start()
     {
@@ -36,6 +44,16 @@ public class EnemyAI : MonoBehaviour
 
         float distanceToPlayer = player != null ? Vector3.Distance(transform.position, player.position) : Mathf.Infinity;
 
+        // If enemy is aggroed, update aggro timer
+        if (isAggroed)
+        {
+            aggroTimer -= Time.deltaTime;
+            if (aggroTimer <= 0)
+            {
+                isAggroed = false; // Lose aggro after time
+            }
+        }
+
         //  Check if the enemy should attack (melee or ranged)
         if (player != null && distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
         {
@@ -47,14 +65,14 @@ public class EnemyAI : MonoBehaviour
             MoveTowardsTarget(distanceToPlayer);
         }
 
-        // ?? Update Animator Speed
+        // Update Animator Speed
         float moveSpeed = agent.velocity.magnitude;
         animator.SetFloat("Speed", moveSpeed);
     }
 
     void MoveTowardsTarget(float distanceToPlayer)
     {
-        if (player != null && distanceToPlayer <= playerDetectionRange)
+        if ((player != null && distanceToPlayer <= playerDetectionRange) || isAggroed)
         {
             if (isRangedEnemy)
             {
@@ -93,4 +111,51 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
+    // Called when the enemy gets attacked
+    public void AggroEnemy()
+    {
+        if (agent == null || !agent.isOnNavMesh) // 
+        {
+            Debug.LogWarning(gameObject.name + " tried to aggro but is either dead or not on a NavMesh!");
+            return;
+        }
+
+        isAggroed = true;
+        aggroTimer = aggroDuration;
+        agent.SetDestination(player.position);
+        Debug.Log(gameObject.name + " is now aggroed!");
+
+        AlertNearbyEnemies(); // Aggroes closeby enemies
+    }
+
+
+    // Notifies nearby enemies to aggro
+    private void AlertNearbyEnemies()
+    {
+        float alertRadius = 10f; // Adjust for how far the aggro spreads
+        Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, alertRadius);
+
+        foreach (Collider col in nearbyEnemies)
+        {
+            EnemyAI enemy = col.GetComponent<EnemyAI>();
+            if (enemy != null && enemy != this && !enemy.IsAggroed)
+            {
+                enemy.AggroEnemy();
+                enemy.ResetAggroTimer(); // Reset timer only for enemies that were aggroed
+            }
+        }
+
+
+
+    }
+
+    public void ResetAggroTimer()
+    {
+        if (isAggroed)
+        {
+            aggroTimer = aggroDuration; // Reset aggro timer so enemy doesn't lose interest
+        }
+    }
+
+
 }

@@ -14,7 +14,7 @@ public class Health : MonoBehaviour, IHealth
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
         OnHealthChanged?.Invoke(currentHealth / maxHealth);
