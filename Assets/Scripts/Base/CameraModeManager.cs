@@ -11,12 +11,15 @@ public class CameraModeManager : MonoBehaviour
     public GameObject mainCamera;
     public GameObject baseViewCam;
     public GameObject player;
-    public PlayerController2 playerMovementScript; // The script handling player movement 
+    public PlayerController playerMovementScript; // The script handling player movement 
     public float baseViewMoveSpeed = 10f;
     public float zoomSpeed = 5f;
     public Transform baseCameraTransform; // Drag your BaseViewCam here in the inspector
     public GameObject HUD; // Drag your HUD here in the inspector
     public SelectionManager selectionManager; // Reference to SelectionManager
+    public GameObject weaponHolder; // Drag the Weapon Holder object here in the Inspector
+    public GameObject health; 
+
 
 
     private void Start()
@@ -60,6 +63,16 @@ public class CameraModeManager : MonoBehaviour
                 playerMovementScript.enabled = true; // Enable player movement
             }
 
+            if (weaponHolder != null)
+            {
+                weaponHolder.SetActive(true);
+            }
+
+            if (health != null)
+            {
+                health.SetActive(true);
+            }
+
             // Disable Base View Camera's AudioListener & Enable Player Camera's
             mainCamera.GetComponent<AudioListener>().enabled = true;
             baseViewCam.GetComponent<AudioListener>().enabled = false;
@@ -83,6 +96,16 @@ public class CameraModeManager : MonoBehaviour
             {
                 playerMovementScript.enabled = false; // Disable player movement!
 
+            }
+
+            if (weaponHolder != null)
+            {
+                weaponHolder.SetActive(false);
+            }
+
+            if (health != null)
+            {
+                health.SetActive(false);
             }
 
             // Disable Player Camera's AudioListener & Enable Base View Camera's
