@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    public static GameStateManager Instance; 
+    public static GameStateManager Instance;
 
     private int gold = 1000;
     private int power = 500;
     private int elementX = 2000;
-   // public List<GameObject> activeUnits = new List<GameObject>();
     private List<GameObject> builtStructures = new List<GameObject>();
+
+    // Time Variables
+    private float elapsedTime = 0f;
+    public int gameDays = 1;
+    public int gameHours = 0;
+
+    public float timeMultiplier = 10f; // 1 real second = 10 in-game minutes
+
+    public event Action<int, int> OnTimeUpdated; // UI Hook
 
     private void Awake()
     {
@@ -18,7 +26,35 @@ public class GameStateManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void AddResource(string type, int amount)
+    private void Update()
+    {
+        UpdateGameTime();
+    }
+
+    private void UpdateGameTime()
+    {
+        elapsedTime += Time.deltaTime * timeMultiplier;
+
+        // Convert elapsed time into hours
+        int newGameHours = (int)(elapsedTime / 60f) % 24;
+        int newGameDays = (int)(elapsedTime / 1440f) + 1;
+
+        // Only update if time has changed
+        if (newGameHours != gameHours || newGameDays != gameDays)
+        {
+            gameHours = newGameHours;
+            gameDays = newGameDays;
+
+            OnTimeUpdated?.Invoke(gameDays, gameHours); // Notify UI
+        }
+    }
+
+    public string GetGameTimeString()
+    {
+        return $"Day {gameDays}, {gameHours}:00";
+    }
+
+public void AddResource(string type, int amount)
     {
         if (type == "gold") gold += amount;
         else if (type == "power") power += amount;

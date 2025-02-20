@@ -17,6 +17,13 @@ public class UIManager : MonoBehaviour
     private int currentTowerCost;
     private string currentTowerCostType;
 
+
+    public float minBuildDistance = 5f;  // Prevents building too close
+    public float maxBuildDistance = 30f; // Ensures building stays within range
+    public Transform centralHub; // Assign in Inspector
+
+
+
     private void Start()
     {
         buildTowerButton.onClick.AddListener(OnBuildTowerButtonClick);
@@ -29,10 +36,25 @@ public class UIManager : MonoBehaviour
         {
             UpdateBlueprintPosition();
 
-            if (Input.GetMouseButtonDown(0)) // Left click to place tower
+            if (Input.GetMouseButtonDown(0)) // Left-click to place tower
             {
                 TryPlaceTower();
             }
+
+            if (Input.GetMouseButtonDown(1)) // Right-click to cancel
+            {
+                CancelBuildingMode();
+            }
+        }
+    }
+
+    private void CancelBuildingMode()
+    {
+        Debug.Log("Building mode cancelled!");
+        isBuildingTower = false;
+        if (blueprint != null)
+        {
+            Destroy(blueprint);
         }
     }
 
@@ -60,8 +82,6 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.LogError("Tower prefab is missing TowerOne component! Using default values.");
-            currentTowerCost = 400; // Fallback
-            currentTowerCostType = "elementX";
         }
 
         isBuildingTower = true;
@@ -79,6 +99,7 @@ public class UIManager : MonoBehaviour
             Vector3 fixedPosition = hit.point;
 
             //  Ensure the Y value is locked to terrain height
+            // THIS CAN BE REMOVED IF WE FIX THE SCALING ISSUE IN THE PREFAB
             fixedPosition.y = 1.5f; // Adjust this value to match your game
 
             blueprint.transform.position = fixedPosition;
@@ -94,17 +115,33 @@ public class UIManager : MonoBehaviour
 
     private void TryPlaceTower()
     {
+        if (blueprint == null) return; 
+
+        float distanceToHub = Vector3.Distance(blueprint.transform.position, centralHub.position);
+
+        // Check if within allowed range
+        if (distanceToHub < minBuildDistance)
+        {
+            Debug.Log("Too close to CentralHub! Choose another spot.");
+            return;
+        }
+        if (distanceToHub > maxBuildDistance)
+        {
+            Debug.Log("Too far from CentralHub! Choose another spot.");
+            return;
+        }
+
+        // Check if player has enough resources
         if (gameStateManager.CanAfford(currentTowerCostType, currentTowerCost))
         {
             gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
 
-            // Instantiate the real tower and get the correct cost from the new instance
+            // Instantiate real tower
             GameObject newTower = Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
-            TowerOne towerComponent = newTower.GetComponent<TowerOne>();
 
+            TowerOne towerComponent = newTower.GetComponent<TowerOne>();
             if (towerComponent != null)
             {
-                // Ensure correct cost values
                 currentTowerCost = towerComponent.GetCost();
                 currentTowerCostType = towerComponent.GetCostType();
             }
@@ -121,15 +158,23 @@ public class UIManager : MonoBehaviour
 
     private void UpdateBlueprintColor()
     {
-        if (gameStateManager.CanAfford(currentTowerCostType, currentTowerCost))
+        if (blueprint == null) return;
+
+        float distanceToHub = Vector3.Distance(blueprint.transform.position, centralHub.position);
+
+        bool isAffordable = gameStateManager.CanAfford(currentTowerCostType, currentTowerCost);
+        bool isInValidRange = (distanceToHub >= minBuildDistance && distanceToHub <= maxBuildDistance);
+
+        if (isAffordable && isInValidRange)
         {
-            blueprintRenderer.material.color = new Color(0, 1, 0, 0.5f); // Green if affordable
+            blueprintRenderer.material.color = new Color(0, 1, 0, 0.5f); // Green if valid
         }
         else
         {
-            blueprintRenderer.material.color = new Color(1, 0, 0, 0.5f); // Red if not affordable
+            blueprintRenderer.material.color = new Color(1, 0, 0, 0.5f); // Red if invalid
         }
     }
+
 
     private void MakeBlueprintTransparent()
     {

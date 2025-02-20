@@ -7,19 +7,16 @@ public class UIManagerTop : MonoBehaviour
     public TMP_Text goldText;
     public TMP_Text powerText;
     public TMP_Text elementXText;
-
- 
+    public TMP_Text timeText; 
 
     private void Start()
     {
         UpdateResourceUI();
-      
     }
-
 
     private void OnEnable()
     {
-        InvokeRepeating(nameof(UpdateResourceUI), 0f, 1f); 
+        InvokeRepeating(nameof(UpdateResourceUI), 0f, 1f);
     }
 
     private void OnDisable()
@@ -32,5 +29,6 @@ public class UIManagerTop : MonoBehaviour
         goldText.text = "Gold: " + GameStateManager.Instance.Gold;
         powerText.text = "Power: " + GameStateManager.Instance.Power;
         elementXText.text = "Element X: " + GameStateManager.Instance.ElementX;
+        timeText.text = GameStateManager.Instance.GetGameTimeString(); 
     }
 }
