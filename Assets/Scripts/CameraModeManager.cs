@@ -106,5 +106,10 @@ public class CameraModeManager : MonoBehaviour
         }
     }
 
+    public bool IsBaseViewCamActive()
+    {
+        return currentMode == GameMode.BaseViewMode;
+    }
+
 
 }

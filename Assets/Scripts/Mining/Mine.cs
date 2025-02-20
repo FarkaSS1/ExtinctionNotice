@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-
 public class Mine : SelectableObject
 {   
     private GameObject mineGameObject;
-    private GameStateManager GSM;
+    public GameStateManager GSM;
     private bool isGenerating = true;
 
-    public Mine(Vector3 position)
+    public Mine(Vector3 position, GameObject minePrefab)
     {   
-        mineGameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        Renderer rend = mineGameObject.GetComponent<Renderer>();
-        rend.material.color = Color.yellow;
-        mineGameObject.transform.position = position;
-        //mineGameObject = new GameObject("Mine");
-        //  mineGameObject.transform.position = position;
-        mineGameObject.AddComponent<Rigidbody>();
-        
+        if (minePrefab != null)
+        {
+            mineGameObject = GameObject.Instantiate(minePrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Mine prefab is not assigned.");
+            return;
+        }
+
+        // Ensure GSM is assigned
+        if (GSM == null)
+        {
+            GSM = GameObject.FindObjectOfType<GameStateManager>();
+        }
 
         TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs e){
-            if (isGenerating)
+            if (isGenerating && e.tick % 10 == 0)
             { 
-                GSM.AddResource("elementX", 1);
+                GSM.AddResource("elementX", 10);
                 Debug.Log("Generating elementX" + GSM.ReturnResources("elementX"));
             }
         };

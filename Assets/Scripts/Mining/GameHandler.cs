@@ -6,29 +6,27 @@ using UnityEngine.Diagnostics;
 public class GameHandler : MonoBehaviour
 {
     public GameObject minePrefab; // Assign a mine prefab in the inspector
-    public float mineDistanceFromCamera = 10f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs e){
-        //     Debug.Log("Tick: " + e.tick);
-        // };
-    }
+    public CameraModeManager cameraModeManager; // Assign the CameraModeManager in the inspector
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && cameraModeManager.IsBaseViewCamActive())
         {
             Vector3 mouseWorldPosition = GetMouseWorldPosition();
-            new Mine(mouseWorldPosition);
+            new Mine(mouseWorldPosition, minePrefab);
         }
     }
 
     private Vector3 GetMouseWorldPosition()
     {
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition.z = mineDistanceFromCamera; // Set this to the fixed distance from the camera
-        return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            return hit.point;
+        }
+
+        return Vector3.zero; // Return zero if no hit
     }
 }
