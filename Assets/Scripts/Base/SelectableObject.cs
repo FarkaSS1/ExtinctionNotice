@@ -9,7 +9,7 @@ public abstract class SelectableObject : MonoBehaviour
     protected int cost = 300; // Default placeholder cost
     protected string costType = "elementX"; // Placeholder cost type
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         objectRenderer = GetComponent<Renderer>();
 
