@@ -12,7 +12,7 @@ class BasicTower : AttackTower
         Vector3 shootDirection = (target.position - turretMuzzle.position).normalized;
         Vector3 targetPoint = target.position;
 
-        if (Physics.Raycast(turretMuzzle.position, shootDirection, out hit, turretData.range, LayerMask.GetMask("Enemy")))
+        if (Physics.Raycast(turretMuzzle.position, shootDirection, out hit, turretData.shootingRange, LayerMask.GetMask("Enemy")))
         {
             targetPoint = hit.point;
             if (hit.collider.TryGetComponent<IHealth>(out var health))

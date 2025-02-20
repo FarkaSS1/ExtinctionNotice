@@ -33,7 +33,7 @@ abstract class AttackTower : SelectableObject
 
     private void FindTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, turretData.range, LayerMask.GetMask("Enemy"));
+        Collider[] colliders = Physics.OverlapSphere(transform.position, turretData.shootingRange, LayerMask.GetMask("Enemy"));
 
         if (colliders.Length == 0)
         {
@@ -69,10 +69,17 @@ abstract class AttackTower : SelectableObject
     private void HandleShoot()
     {
         Debug.Log("AttackTower Fired: " + turretData.turretName);
+        PlayFireSound();
         Shoot();
     }
 
     public Transform GetCurrentTarget() => currentTarget; // Allow subclass access to target
+
+    private void PlayFireSound() {
+        if(turretData.fireSound != null && audioSource != null) {
+            audioSource.PlayOneShot(turretData.fireSound);
+        }
+    }
 
     public abstract void Shoot();
 }

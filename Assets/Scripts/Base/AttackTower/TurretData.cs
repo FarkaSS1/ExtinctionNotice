@@ -7,7 +7,6 @@ public class TurretData : ScriptableObject
 {
     public string turretName;
     public LayerMask targetLayerMask;
-    public float range;
     public float rotationSpeed;
 
     [Header("Weapon Damage")]
@@ -21,5 +20,8 @@ public class TurretData : ScriptableObject
     [Header("VFX")]
     public GameObject bulletTrailPrefab;
     public float bulletSpeed;
+
+    [Header("SFX")]
+    public AudioClip fireSound;
 
 }
