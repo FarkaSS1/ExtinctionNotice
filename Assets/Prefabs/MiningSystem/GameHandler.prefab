@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d01f5d42299af47a16553fee9be114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minePrefab: {fileID: 3849640422412442789, guid: c297d406f73c6d24b84e1263f3b046c0,
+  minePrefab: {fileID: 9002209186936726012, guid: be7872148f800fe4d99c1ac06b18f938,
     type: 3}
   cameraModeManager: {fileID: 0}
