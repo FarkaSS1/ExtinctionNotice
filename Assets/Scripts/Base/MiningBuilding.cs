@@ -4,7 +4,7 @@ public class Mining : SelectableObject
 {
     public int miningSpeed = 10;
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start(); //  Ensure parent logic runs
         cost = 300; // Mining-specific cost
