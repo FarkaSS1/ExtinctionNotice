@@ -229,7 +229,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerMovementScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1077788696}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -753,6 +753,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1324944467}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1077788696 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4103677787395037156, guid: dce939e5df3b28d43ba5be026b3f8dd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1324944467}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077788691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79199eff368f4dd40abefa6f19abe46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1091113042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1072,7 @@ Transform:
   m_GameObject: {fileID: 1646187679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 697.05, y: 0.267, z: 547.52}
+  m_LocalPosition: {x: 719.84, y: 0.267, z: 331.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
