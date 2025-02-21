@@ -17,9 +17,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotationSpeed: 10
-  damage: 10
+  damage: 1
   shootingRange: 50
-  fireRate: 0.5
+  fireRate: 5
   bulletTrailPrefab: {fileID: 3688642848477571922, guid: 28edc8137f3ca5f4293ed088f74d0743,
     type: 3}
   bulletSpeed: 100
