@@ -60,9 +60,29 @@ public class UIManager : MonoBehaviour
 
     private void OnBuildTowerButtonClick()
     {
+        if (towerPrefab == null)
+        {
+            Debug.LogError("Tower prefab is NULL! Check the UIManager inspector reference.");
+            return;
+        }
+
         blueprint = Instantiate(towerPrefab);
         blueprintRenderer = blueprint.GetComponent<Renderer>();
         MakeBlueprintTransparent();
+
+        if (blueprint == null)
+        {
+            Debug.LogError("Instantiation failed! The blueprint is NULL.");
+            return;
+        }
+
+        Debug.Log($"Blueprint instantiated successfully: {blueprint.name}");
+
+        if (blueprint.GetComponent<BasicTower>() == null)
+        {
+            blueprint.AddComponent<BasicTower>();
+            Debug.LogWarning("BasicTower was missing and has been added.");
+        }
 
         // Debug the components attached to the instantiated blueprint
         foreach (var component in blueprint.GetComponents<MonoBehaviour>())
@@ -70,19 +90,35 @@ public class UIManager : MonoBehaviour
             Debug.Log($"Blueprint has component: {component.GetType()}");
         }
 
+        MonoBehaviour[] components = blueprint.GetComponents<MonoBehaviour>();
+
+        if (components.Length == 0)
+        {
+            Debug.LogError("Blueprint has NO MonoBehaviour components! Check if scripts are attached to the prefab.");
+        }
+        else
+        {
+            foreach (var component in components)
+            {
+                Debug.Log($"Blueprint has component: {component.GetType()}");
+            }
+        }
+
+
         // Fetch cost from the actual tower class
-        TowerOne towerData = blueprint.GetComponent<TowerOne>();
+        SelectableObject towerData = blueprint.GetComponent<SelectableObject>();
         if (towerData != null)
         {
-            Debug.Log("Fetched TowerOne component successfully.");
+            Debug.Log("Fetched SelectableObject successfully.");
             currentTowerCost = towerData.GetCost();
             currentTowerCostType = towerData.GetCostType();
             Debug.Log($"Tower cost: {currentTowerCost} {currentTowerCostType}");
         }
         else
         {
-            Debug.LogError("Tower prefab is missing TowerOne component! Using default values.");
+            Debug.LogError("Tower prefab is missing a SelectableObject-derived component! Using default values.");
         }
+
 
         isBuildingTower = true;
     }
@@ -130,6 +166,12 @@ public class UIManager : MonoBehaviour
             Debug.Log("Too far from CentralHub! Choose another spot.");
             return;
         }
+        Debug.Log($"Checking affordability for {currentTowerCostType} with cost {currentTowerCost}");
+        if (string.IsNullOrEmpty(currentTowerCostType))
+        {
+            Debug.LogError("Invalid cost type detected! Make sure the tower prefab has a valid costType.");
+        }
+
 
         // Check if player has enough resources
         if (gameStateManager.CanAfford(currentTowerCostType, currentTowerCost))
@@ -139,7 +181,7 @@ public class UIManager : MonoBehaviour
             // Instantiate real tower
             GameObject newTower = Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
 
-            TowerOne towerComponent = newTower.GetComponent<TowerOne>();
+            SelectableObject towerComponent = newTower.GetComponent<SelectableObject>();
             if (towerComponent != null)
             {
                 currentTowerCost = towerComponent.GetCost();
@@ -147,7 +189,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Placed tower is missing TowerOne component!");
+                Debug.LogError("Placed tower is missing Tower component!");
             }
 
             isBuildingTower = false;

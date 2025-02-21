@@ -6,8 +6,8 @@ public abstract class SelectableObject : MonoBehaviour
     private Color originalColor;
     public Color selectedColor = Color.green; // Highlight color when selected
 
-    protected int cost = 300; // Default placeholder cost
-    protected string costType = "elementX"; // Placeholder cost type
+    public int cost = 300; // Default placeholder cost
+    public string costType = "elementX"; // Placeholder cost type
 
     public virtual void Start()
     {

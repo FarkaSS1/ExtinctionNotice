@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,7 +15,7 @@
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -46,8 +46,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Base\\UIManagerTop.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T20:01:38.373Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-20T20:01:38.373Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Base\\TowerOne.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T15:03:17.833Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-19T15:03:17.833Z"
             },
             {
               "$type": "Document",
@@ -109,8 +107,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Base\\SelectableObject.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T08:25:11.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-19T08:25:11.616Z"
             }
           ]
         }
