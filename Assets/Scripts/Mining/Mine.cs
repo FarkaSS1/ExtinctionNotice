@@ -15,28 +15,6 @@ public class Mine : SelectableObject
         if (minePrefab != null)
         {
             mineGameObject = GameObject.Instantiate(minePrefab, position, rotation);
-            
-            // Ensure the mineGameObject has a BoxCollider
-            if (mineGameObject.GetComponent<BoxCollider>() == null)
-            {
-                mineGameObject.AddComponent<BoxCollider>();
-            }
-
-            // Ensure the mineGameObject has the SelectableObject component
-            if (mineGameObject.GetComponent<SelectableObject>() == null)
-            {
-                mineGameObject.AddComponent<SelectableObject>();
-            }
-
-            // Initialize the SelectableObject component
-            SelectableObject selectable = mineGameObject.GetComponent<SelectableObject>();
-            if (selectable != null)
-            {
-                selectable.selectionManager = this.selectionManager;
-                selectable.selectedColor = this.selectedColor;
-                selectable.cost = this.cost;
-                selectable.costType = this.costType;
-            }
         }
         else
         {
