@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -9,11 +10,11 @@ public class Mine : SelectableObject
     public GameStateManager GSM;
     private bool isGenerating = true;
 
-    public Mine(Vector3 position, GameObject minePrefab)
+    public Mine(Vector3 position, GameObject minePrefab, quaternion rotation)
     {   
         if (minePrefab != null)
         {
-            mineGameObject = GameObject.Instantiate(minePrefab, position, Quaternion.identity);
+            mineGameObject = GameObject.Instantiate(minePrefab, position, rotation);
             
             // Ensure the mineGameObject has a BoxCollider
             if (mineGameObject.GetComponent<BoxCollider>() == null)

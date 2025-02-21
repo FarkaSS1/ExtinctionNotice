@@ -13,7 +13,8 @@ public class GameHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && cameraModeManager.IsBaseViewCamActive())
         {
             Vector3 mouseWorldPosition = GetMouseWorldPosition();
-            new Mine(mouseWorldPosition, minePrefab);
+            Quaternion rotation = Quaternion.Euler(-90, 90, 0);
+            new Mine(mouseWorldPosition, minePrefab, rotation);
         }
     }
 
