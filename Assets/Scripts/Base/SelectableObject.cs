@@ -2,49 +2,65 @@ using UnityEngine;
 
 public abstract class SelectableObject : MonoBehaviour
 {
-    protected Renderer objectRenderer;
     protected Renderer towerRenderer;
     protected GameObject blueprint;
     private Color originalColor;
-    public Color selectedColor = Color.green; // Highlight color when selected
+    public Color selectedColor = Color.green;
 
-    [SerializeField] private int cost = 300; // Default placeholder cost
-    [SerializeField] private string costType = "elementX"; // Placeholder cost type
+    [SerializeField] private int cost = 300;
+    [SerializeField] private string costType = "elementX";
 
-    private UIManager uiManager;
+    private UIManagerBot uiManager;
 
-   public virtual void Start()
-{
-    objectRenderer = GetComponentInChildren<Renderer>();
 
-    if (objectRenderer != null && objectRenderer.material.HasProperty("_Color"))
+
+    public virtual void Start()
     {
-        originalColor = objectRenderer.material.color;
-        Debug.Log($"{gameObject.name} Renderer and material color property found.");
+        // Check for Collider
+        if (GetComponent<Collider>() == null)
+        {
+            Debug.LogWarning($"[{gameObject.name}] Missing Collider! Adding BoxCollider.");
+            gameObject.AddComponent<BoxCollider>();
+        }
     }
-    else
+    private void OnEnable()
     {
-        Debug.LogWarning($"{gameObject.name} Renderer or material color property is missing!");
-    }
-
-    if (GetComponent<Collider>() == null)
-    {
-        Debug.LogWarning($"{gameObject.name} is missing a Collider! Adding BoxCollider.");
-        gameObject.AddComponent<BoxCollider>();
+        FindUIManager();
     }
 
-    uiManager = FindObjectOfType<UIManager>(); // Store reference once
-}
+    private void FindUIManager()
+    {
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManagerBot>();
+            if (uiManager != null)
+            {
+                Debug.Log($"[{gameObject.name}] Successfully connected to UIManager");
+            }
+        }
+    }
+
     public virtual void Select()
     {
+
         towerRenderer = this.GetComponentInChildren<Renderer>();
-        Debug.Log($"{gameObject.name} Selected! Cost: {cost} {costType}");
+
+        Debug.Log($"[{gameObject.name}] Selected! Cost: {cost} {costType}");
 
         if (towerRenderer != null)
+        {
             towerRenderer.material.color = selectedColor;
+        }
+
+        if (uiManager == null)
+        {
+            FindUIManager();
+        }
 
         if (uiManager != null)
+        {
             uiManager.SetSelectedObject(this);
+        }
     }
 
     public virtual void Deselect()
