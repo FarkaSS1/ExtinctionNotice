@@ -17,12 +17,9 @@ public class UIManager : MonoBehaviour
     private int currentTowerCost;
     private string currentTowerCostType;
 
-
     public float minBuildDistance = 5f;  // Prevents building too close
     public float maxBuildDistance = 30f; // Ensures building stays within range
     public Transform centralHub; // Assign in Inspector
-
-
 
     private void Start()
     {
@@ -59,71 +56,48 @@ public class UIManager : MonoBehaviour
     }
 
     private void OnBuildTowerButtonClick()
+{
+    if (towerPrefab == null)
     {
-        if (towerPrefab == null)
-        {
-            Debug.LogError("Tower prefab is NULL! Check the UIManager inspector reference.");
-            return;
-        }
-
-        blueprint = Instantiate(towerPrefab);
-        blueprintRenderer = blueprint.GetComponent<Renderer>();
-        MakeBlueprintTransparent();
-
-        if (blueprint == null)
-        {
-            Debug.LogError("Instantiation failed! The blueprint is NULL.");
-            return;
-        }
-
-        Debug.Log($"Blueprint instantiated successfully: {blueprint.name}");
-
-        if (blueprint.GetComponent<BasicTower>() == null)
-        {
-            blueprint.AddComponent<BasicTower>();
-            Debug.LogWarning("BasicTower was missing and has been added.");
-        }
-
-        // Debug the components attached to the instantiated blueprint
-        foreach (var component in blueprint.GetComponents<MonoBehaviour>())
-        {
-            Debug.Log($"Blueprint has component: {component.GetType()}");
-        }
-
-        MonoBehaviour[] components = blueprint.GetComponents<MonoBehaviour>();
-
-        if (components.Length == 0)
-        {
-            Debug.LogError("Blueprint has NO MonoBehaviour components! Check if scripts are attached to the prefab.");
-        }
-        else
-        {
-            foreach (var component in components)
-            {
-                Debug.Log($"Blueprint has component: {component.GetType()}");
-            }
-        }
-
-
-        // Fetch cost from the actual tower class
-        SelectableObject towerData = blueprint.GetComponent<SelectableObject>();
-        if (towerData != null)
-        {
-            Debug.Log("Fetched SelectableObject successfully.");
-            currentTowerCost = towerData.GetCost();
-            currentTowerCostType = towerData.GetCostType();
-            Debug.Log($"Tower cost: {currentTowerCost} {currentTowerCostType}");
-        }
-        else
-        {
-            Debug.LogError("Tower prefab is missing a SelectableObject-derived component! Using default values.");
-        }
-
-
-        isBuildingTower = true;
+        Debug.LogError("Tower prefab is NULL! Check the UIManager inspector reference.");
+        return;
     }
 
+    blueprint = Instantiate(towerPrefab);
+    if (blueprint == null)
+    {
+        Debug.LogError("Instantiation failed! The blueprint is NULL.");
+        return;
+    }
 
+    Debug.Log($"Blueprint instantiated successfully: {blueprint.name}");
+
+    blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
+    if (blueprintRenderer == null)
+    {
+        Debug.LogWarning("Blueprint Renderer not found! Trying to get from child objects.");
+        blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
+    }
+
+    //MakeBlueprintTransparent();
+
+    // Ensure the tower has a SelectableObject-derived component
+    SelectableObject towerData = blueprint.GetComponentInChildren<SelectableObject>();
+    if (towerData != null)
+    {
+        currentTowerCost = towerData.Cost;
+        currentTowerCostType = towerData.CostType;
+        Debug.Log($"Blueprint cost set: {currentTowerCost} {currentTowerCostType}");
+    }
+    else
+    {
+        Debug.LogError("Tower prefab is missing a SelectableObject-derived component! Using default values.");
+        currentTowerCost = 0;
+        currentTowerCostType = "";
+    }
+
+    isBuildingTower = true;
+}
 
     private void UpdateBlueprintPosition()
     {
@@ -133,90 +107,75 @@ public class UIManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 fixedPosition = hit.point;
-
-            //  Ensure the Y value is locked to terrain height
-            // THIS CAN BE REMOVED IF WE FIX THE SCALING ISSUE IN THE PREFAB
             fixedPosition.y = 1.5f; // Adjust this value to match your game
 
             blueprint.transform.position = fixedPosition;
             blueprint.transform.rotation = Quaternion.identity; // Prevent unwanted rotation
 
-           
-
             UpdateBlueprintColor();
         }
     }
 
-
-
     private void TryPlaceTower()
+{
+    if (blueprint == null) return;
+
+    float distanceToHub = Vector3.Distance(blueprint.transform.position, centralHub.position);
+
+    if (distanceToHub < minBuildDistance)
     {
-        if (blueprint == null) return; 
-
-        float distanceToHub = Vector3.Distance(blueprint.transform.position, centralHub.position);
-
-        // Check if within allowed range
-        if (distanceToHub < minBuildDistance)
-        {
-            Debug.Log("Too close to CentralHub! Choose another spot.");
-            return;
-        }
-        if (distanceToHub > maxBuildDistance)
-        {
-            Debug.Log("Too far from CentralHub! Choose another spot.");
-            return;
-        }
-        Debug.Log($"Checking affordability for {currentTowerCostType} with cost {currentTowerCost}");
-        if (string.IsNullOrEmpty(currentTowerCostType))
-        {
-            Debug.LogError("Invalid cost type detected! Make sure the tower prefab has a valid costType.");
-        }
-
-
-        // Check if player has enough resources
-        if (gameStateManager.CanAfford(currentTowerCostType, currentTowerCost))
-        {
-            gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
-
-            // Instantiate real tower
-            GameObject newTower = Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
-
-            SelectableObject towerComponent = newTower.GetComponent<SelectableObject>();
-            if (towerComponent != null)
-            {
-                currentTowerCost = towerComponent.GetCost();
-                currentTowerCostType = towerComponent.GetCostType();
-            }
-            else
-            {
-                Debug.LogError("Placed tower is missing Tower component!");
-            }
-
-            isBuildingTower = false;
-            Destroy(blueprint);
-        }
+        Debug.Log("Too close to CentralHub! Choose another spot.");
+        return;
+    }
+    if (distanceToHub > maxBuildDistance)
+    {
+        Debug.Log("Too far from CentralHub! Choose another spot.");
+        return;
     }
 
+    if (string.IsNullOrEmpty(currentTowerCostType))
+    {
+        Debug.LogError("Invalid cost type detected! Cannot proceed with tower placement.");
+        return;
+    }
+
+    if (!gameStateManager.CanAfford(currentTowerCostType, currentTowerCost))
+    {
+        Debug.LogWarning("Not enough resources to build this tower.");
+        return;
+    }
+
+    gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
+
+    // Instantiate the real tower at the blueprint's position
+    GameObject newTower = Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
+
+    SelectableObject towerComponent = newTower.GetComponentInChildren<SelectableObject>();
+    if (towerComponent != null)
+    {
+        Debug.Log($"Tower placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
+    }
+    else
+    {
+        Debug.LogError("Placed tower is missing SelectableObject component!");
+    }
+
+    isBuildingTower = false;
+    Destroy(blueprint);
+}
 
     private void UpdateBlueprintColor()
     {
-        if (blueprint == null) return;
+        if (blueprint == null || blueprintRenderer == null) return;
 
         float distanceToHub = Vector3.Distance(blueprint.transform.position, centralHub.position);
 
         bool isAffordable = gameStateManager.CanAfford(currentTowerCostType, currentTowerCost);
         bool isInValidRange = (distanceToHub >= minBuildDistance && distanceToHub <= maxBuildDistance);
 
-        if (isAffordable && isInValidRange)
-        {
-            blueprintRenderer.material.color = new Color(0, 1, 0, 0.5f); // Green if valid
-        }
-        else
-        {
-            blueprintRenderer.material.color = new Color(1, 0, 0, 0.5f); // Red if invalid
-        }
+        Color newColor = (isAffordable && isInValidRange) ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
+        blueprintRenderer.material.color = newColor;
     }
-
 
     private void MakeBlueprintTransparent()
     {

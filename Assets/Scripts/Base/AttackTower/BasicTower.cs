@@ -3,28 +3,11 @@ using UnityEngine;
 
 class BasicTower : AttackTower
 {
-
-    private void Awake()
-    {
-        if (GetComponent<SelectableObject>() == null)
-        {
-            gameObject.AddComponent<SelectableObject>();
-            Debug.LogWarning("SelectableObject component was missing and has been added.");
-        }
-
-        cost = 600;
-        costType = "elementX"; 
-        Debug.Log($"BasicTower initialized with cost: {cost}, costType: {costType}");
+    internal override int GetCost() {
+        return 200;
     }
-
-    public override int GetCost()
-    {
-        return cost; // Return the TowerOne cost
-    }
-
-    public override string GetCostType()
-    {
-        return costType; // Return the TowerOne cost type
+    internal override string GetCostType() {
+        return "elementX";
     }
 
     public override void Shoot()
