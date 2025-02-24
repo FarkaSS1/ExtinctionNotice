@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PlayerHealth : Health
 {
@@ -13,11 +14,18 @@ public class PlayerHealth : Health
         {
             Heal(10);  // Heal the player by 10
         }
+
+        if (Input.GetKeyDown(KeyCode.O))  // Press "H" to heal
+        {
+            Time.timeScale = 1;  // Heal the player by 10
+        }
     }
 
-    protected override void Die()
+    async protected override void Die()
     {
         Debug.Log("Player Died. Game Over!");
+        await Task.Delay(500);
+        Time.timeScale = 0;
         // Add respawn or game-over logic here
     }
 }
