@@ -32,7 +32,15 @@ public class EnemyAI : MonoBehaviour
 
         // Find the player using the "Player" tag
         GameObject playerObject = GameObject.FindWithTag("Player");
-        if (playerObject != null) player = playerObject.transform;
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("No Player found! Is it missing in the scene?");
+        }
+
 
         // Set initial destination to base
         if (baseTarget != null) agent.SetDestination(baseTarget.position);
