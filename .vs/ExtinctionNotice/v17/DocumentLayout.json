@@ -7,16 +7,20 @@
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\towerone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\towerone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\base\\attacktower\\basictower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\attacktower\\basictower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\base\\attacktower\\attacktower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\attacktower\\attacktower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\towerone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\towerone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\gamestatemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,6 +29,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +46,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "UIManagerTop.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerTop.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\UIManagerTop.cs",
@@ -50,27 +58,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "SelectionManager.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\SelectionManager.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base\\SelectionManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T15:15:20.02Z"
+              "WhenOpened": "2025-02-20T15:15:20.02Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "GameStateManager.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\GameStateManager.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base\\GameStateManager.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwG8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwE0AAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T15:15:10.865Z"
+              "WhenOpened": "2025-02-20T15:15:10.865Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,7 +90,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\UIManagerBot.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerBot.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base\\UIManagerBot.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAIwBsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAIA4wDsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-19T16:54:36.335Z",
               "EditorCaption": ""
@@ -88,14 +98,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TowerOne.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\TowerOne.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\TowerOne.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\TowerOne.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\TowerOne.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
+              "Title": "BasicTower.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T15:03:17.833Z"
+              "WhenOpened": "2025-02-21T17:54:12.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AttackTower.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T17:54:29.79Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -105,9 +129,44 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\SelectableObject.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectableObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base\\SelectableObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T08:25:11.616Z"
+              "WhenOpened": "2025-02-19T08:25:11.616Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "947d4d37-d7a8-483e-a938-f1840a84ccf6",
+        "Display": 1,
+        "X": 75,
+        "Y": 86,
+        "Width": 1112,
+        "Height": 1144,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TowerOne.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\TowerOne.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\TowerOne.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\TowerOne.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\TowerOne.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T15:03:17.833Z",
+              "EditorCaption": ""
             }
           ]
         }

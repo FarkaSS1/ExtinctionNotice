@@ -3,6 +3,13 @@ using UnityEngine;
 
 class BasicTower : AttackTower
 {
+    internal override int GetCost() {
+        return 200;
+    }
+    internal override string GetCostType() {
+        return "elementX";
+    }
+
     public override void Shoot()
     {
         Transform target = GetCurrentTarget();
