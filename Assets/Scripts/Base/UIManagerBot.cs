@@ -139,7 +139,7 @@ public class UIManagerBot : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 fixedPosition = hit.point;
-            fixedPosition.y = 1.5f; // Adjust this value to match your game
+            fixedPosition.y = 0; // Adjust this value to match your game
 
             blueprint.transform.position = fixedPosition;
             blueprint.transform.rotation = Quaternion.identity; // Prevent unwanted rotation
