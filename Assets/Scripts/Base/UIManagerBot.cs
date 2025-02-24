@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIManagerBot : MonoBehaviour
 {
     public Button buildTowerButton;
+    public Button buildMineButton;
     public Button destroyTowerButton;
     public GameObject towerPrefab; // Prefab for the tower
+    public GameObject minePrefab; // Prefab for the mine
     public GameStateManager gameStateManager; // Reference to GameStateManager
 
     private bool isBuildingTower = false;
@@ -21,8 +24,10 @@ public class UIManagerBot : MonoBehaviour
     public float maxBuildDistance = 30f; // Ensures building stays within range
     public Transform centralHub; // Assign in Inspector
 
+    private GameObject currentPrefabToBuild;
 
-    //apa
+
+
     public static UIManagerBot Instance { get; private set; }
 
     private void Awake()
@@ -37,12 +42,66 @@ public class UIManagerBot : MonoBehaviour
         Debug.Log("Instance set UIMANAGER");
     }
 
-    //apa
+
     private void Start()
     {
-        buildTowerButton.onClick.AddListener(OnBuildTowerButtonClick);
+        // buildTowerButton.onClick.AddListener(OnBuildTowerButtonClick);
+        // buildMineButton.onClick.AddListener(OnBuildMineButtonClick);
+        // destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
+
+        buildTowerButton.onClick.AddListener(() => OnBuildButtonClick(towerPrefab));
+        buildMineButton.onClick.AddListener(() => OnBuildButtonClick(minePrefab));
         destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
     }
+
+    //test
+    private void OnBuildButtonClick(GameObject prefabToSpawn)
+    {
+        if (prefabToSpawn == null)
+        {
+            Debug.LogError("Prefab is NULL! Check the UIManager inspector reference.");
+            return;
+        }
+
+        blueprint = Instantiate(prefabToSpawn);
+        if (blueprint == null)
+        {
+            Debug.LogError("Instantiation failed! The blueprint is NULL.");
+            return;
+        }
+
+        Debug.Log($"Blueprint instantiated successfully: {blueprint.name}");
+
+        blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
+        if (blueprintRenderer == null)
+        {
+            Debug.LogWarning("Blueprint Renderer not found! Trying to get from child objects.");
+            blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
+        }
+
+        MakeBlueprintTransparent();
+
+        // Ensure the object has a SelectableObject-derived component
+        SelectableObject objectData = blueprint.GetComponentInChildren<SelectableObject>();
+        if (objectData != null)
+        {
+            currentTowerCost = objectData.Cost;
+            currentTowerCostType = objectData.CostType;
+            Debug.Log($"Blueprint cost set: {currentTowerCost} {currentTowerCostType}");
+        }
+        else
+        {
+            Debug.LogError("Prefab is missing a SelectableObject-derived component! Using default values.");
+            currentTowerCost = 0;
+            currentTowerCostType = "";
+        }
+
+        currentPrefabToBuild = prefabToSpawn;
+        isBuildingTower = true;
+    }
+    //test
+
+    
 
     private void Update()
     {
@@ -52,7 +111,7 @@ public class UIManagerBot : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // Left-click to place tower
             {
-                TryPlaceTower();
+                TryPlaceTower(currentPrefabToBuild);
             }
 
             if (Input.GetMouseButtonDown(1)) // Right-click to cancel
@@ -72,50 +131,6 @@ public class UIManagerBot : MonoBehaviour
         }
     }
 
-    private void OnBuildTowerButtonClick()
-    {
-        if (towerPrefab == null)
-        {
-            Debug.LogError("Tower prefab is NULL! Check the UIManager inspector reference.");
-            return;
-        }
-
-        blueprint = Instantiate(towerPrefab);
-        if (blueprint == null)
-        {
-            Debug.LogError("Instantiation failed! The blueprint is NULL.");
-            return;
-        }
-
-        Debug.Log($"Blueprint instantiated successfully: {blueprint.name}");
-
-        blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
-        if (blueprintRenderer == null)
-        {
-            Debug.LogWarning("Blueprint Renderer not found! Trying to get from child objects.");
-            blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
-        }
-
-        MakeBlueprintTransparent();
-
-        // Ensure the tower has a SelectableObject-derived component
-        SelectableObject towerData = blueprint.GetComponentInChildren<SelectableObject>();
-        if (towerData != null)
-        {
-            currentTowerCost = towerData.Cost;
-            currentTowerCostType = towerData.CostType;
-            Debug.Log($"Blueprint cost set: {currentTowerCost} {currentTowerCostType}");
-        }
-        else
-        {
-            Debug.LogError("Tower prefab is missing a SelectableObject-derived component! Using default values.");
-            currentTowerCost = 0;
-            currentTowerCostType = "";
-        }
-
-        isBuildingTower = true;
-    }
-
     private void UpdateBlueprintPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -133,7 +148,7 @@ public class UIManagerBot : MonoBehaviour
         }
     }
 
-    private void TryPlaceTower()
+    private void TryPlaceTower(GameObject buildingPrefab)
     {
         if (blueprint == null) return;
 
@@ -165,9 +180,9 @@ public class UIManagerBot : MonoBehaviour
         gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
 
         // Instantiate the real tower at the blueprint's position
-        GameObject newTower = Instantiate(towerPrefab, blueprint.transform.position, Quaternion.identity);
+        GameObject newBuilding = Instantiate(buildingPrefab, blueprint.transform.position, Quaternion.identity);
 
-        SelectableObject towerComponent = newTower.GetComponentInChildren<SelectableObject>();
+        SelectableObject towerComponent = newBuilding.GetComponentInChildren<SelectableObject>();
         if (towerComponent != null)
         {
             Debug.Log($"Tower placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
