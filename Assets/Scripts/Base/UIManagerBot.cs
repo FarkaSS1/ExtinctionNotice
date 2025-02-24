@@ -96,7 +96,7 @@ public class UIManagerBot : MonoBehaviour
             blueprintRenderer = blueprint.GetComponentInChildren<Renderer>();
         }
 
-        //MakeBlueprintTransparent();
+        MakeBlueprintTransparent();
 
         // Ensure the tower has a SelectableObject-derived component
         SelectableObject towerData = blueprint.GetComponentInChildren<SelectableObject>();

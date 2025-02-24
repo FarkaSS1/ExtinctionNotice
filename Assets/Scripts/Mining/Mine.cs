@@ -10,6 +10,14 @@ public class Mine : SelectableObject
     public GameStateManager GSM;
     private bool isGenerating = true;
 
+    internal override int GetCost() {
+        return 200;
+    }
+    internal override string GetCostType() {
+        return "elementX";
+    }
+
+
     public Mine(Vector3 position, GameObject minePrefab, quaternion rotation)
     {   
         if (minePrefab != null)
