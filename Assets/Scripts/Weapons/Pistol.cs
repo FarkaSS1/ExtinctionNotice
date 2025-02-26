@@ -1,62 +1,73 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Pistol : Gun
 {
+    private Shooter shooter;
+
+    public void Awake()
+    {
+        shooter = GetComponent<Shooter>();
+
+        if (shooter == null)
+        {
+            Debug.LogError("Shooter component missing on Pistol!");
+        }
+    }
 
     public override void Update()
     {
         base.Update();
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0))
+        {
             TryShoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             TryReload();
         }
-        
     }
 
     public override void Shoot()
-{
-    RaycastHit hit;
-    Vector3 target = Vector3.zero;
+    {
+        if (shooter == null) return;
 
-    // Use the camera's forward direction, adjusted for sway
-    Vector3 shootDirection = Camera.main.transform.forward;
+        RaycastHit hit;
+        Vector3 target = shooter.Shoot(cameraTransform, gunData.shootingRange, gunData.damage, gunData.targetLayerMask, out hit);
 
-    // Raycast to determine where the bullet will hit
-    if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, gunData.shootingRange, gunData.targetLayerMask)) {
-        Debug.Log(gunData.gunName + " hit " + hit.collider.name);
-        target = hit.point;
-        if (hit.collider.TryGetComponent<IHealth>(out var health)) {
-            health.TakeDamage(gunData.damage); // Deal damage to the enemy
+        if (hit.collider != null)
+        {
+            EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.AggroEnemy();
+            }
+
+            BulletHitFX(hit);
         }
-    } else {
-        target = cameraTransform.position + (shootDirection * gunData.shootingRange);
+
+        StartCoroutine(BulletFire(target, hit));
     }
 
-    // Start bullet firing coroutine with the calculated target
-    StartCoroutine(BulletFire(target, hit));
-}
-
-
-    private IEnumerator BulletFire(Vector3 target, RaycastHit hit) {
-        GameObject bulletTrail = Instantiate(gunData.bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);  
-        while(bulletTrail != null && Vector3.Distance(bulletTrail.transform.position, target) > 0.1f) {
+    private IEnumerator BulletFire(Vector3 target, RaycastHit hit)
+    {
+        GameObject bulletTrail = Instantiate(gunData.bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
+        while (bulletTrail != null && Vector3.Distance(bulletTrail.transform.position, target) > 0.1f)
+        {
             bulletTrail.transform.position = Vector3.MoveTowards(bulletTrail.transform.position, target, Time.deltaTime * gunData.bulletSpeed);
             yield return null;
         }
         Destroy(bulletTrail);
 
-        if (hit.collider != null) {
+        if (hit.collider != null)
+        {
             BulletHitFX(hit);
         }
     }
 
-    private void BulletHitFX(RaycastHit hit) {
+    private void BulletHitFX(RaycastHit hit)
+    {
         Vector3 hitPosition = hit.point + hit.normal * 0.1f;
 
         GameObject bulletHole = Instantiate(bulletHolePrefab, hitPosition, Quaternion.LookRotation(hit.normal));

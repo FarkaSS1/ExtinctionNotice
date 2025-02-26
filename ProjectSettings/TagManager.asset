@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Base
   - Hive
+  - Tower
   layers:
   - Default
   - TransparentFX

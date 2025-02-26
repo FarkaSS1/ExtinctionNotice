@@ -122,22 +122,28 @@ public class EnemyAI : MonoBehaviour
     // Called when the enemy gets attacked
     public void AggroEnemy()
     {
-        if (agent == null || !agent.isOnNavMesh) // 
+        if (agent == null || !agent.isOnNavMesh)
         {
-            Debug.LogWarning(gameObject.name + " tried to aggro but is either dead or not on a NavMesh!");
+            Debug.LogWarning(gameObject.name + " tried to aggro but is not on a NavMesh or is dead!");
             return;
         }
 
-        isAggroed = true;
-        aggroTimer = aggroDuration;
-        agent.SetDestination(player.position);
-        Debug.Log(gameObject.name + " is now aggroed!");
+        if (!isAggroed) //  Prevent re-aggroing
+        {
+            isAggroed = true;
+            aggroTimer = aggroDuration;
 
-        AlertNearbyEnemies(); // Aggroes closeby enemies
+            if (player != null)
+            {
+                agent.SetDestination(player.position);
+                Debug.Log(gameObject.name + " is now aggroed onto the player!");
+            }
+
+            AlertNearbyEnemies(); //  Aggro nearby enemies **only once**
+        }
     }
 
-
-    // Notifies nearby enemies to aggro
+    //  Spread aggro to nearby enemies in a controlled way
     private void AlertNearbyEnemies()
     {
         float alertRadius = 10f; // Adjust for how far the aggro spreads
@@ -146,16 +152,15 @@ public class EnemyAI : MonoBehaviour
         foreach (Collider col in nearbyEnemies)
         {
             EnemyAI enemy = col.GetComponent<EnemyAI>();
+
+            //  Only aggro if enemy exists, is not the same enemy, and isn't already aggroed
             if (enemy != null && enemy != this && !enemy.IsAggroed)
             {
-                enemy.AggroEnemy();
-                enemy.ResetAggroTimer(); // Reset timer only for enemies that were aggroed
+                enemy.AggroEnemy(); //  This will make them chase the player
             }
         }
-
-
-
     }
+
 
     public void ResetAggroTimer()
     {

@@ -12,11 +12,6 @@ public class EnemyHealth : Health
     {
         base.TakeDamage(damage); // Call base damage function
 
-        if (enemyAI != null) // Only aggro if not already aggroed
-        {
-            enemyAI.AggroEnemy();
-            enemyAI.ResetAggroTimer();
-        }
     }
 
     protected override void Die()
