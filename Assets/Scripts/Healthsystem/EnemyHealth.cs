@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EnemyHealth : Health
 {
     private EnemyAI enemyAI;
@@ -8,14 +10,13 @@ public class EnemyHealth : Health
         enemyAI = GetComponent<EnemyAI>(); // Get AI script
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Transform attacker)
     {
-        base.TakeDamage(damage); // Call base damage function
+        base.TakeDamage(damage, attacker); // Call base damage function
 
         if (enemyAI != null) // Only aggro if not already aggroed
         {
-            enemyAI.AggroEnemy();
-            enemyAI.ResetAggroTimer();
+            enemyAI.AggroEnemy(attacker);
         }
     }
 

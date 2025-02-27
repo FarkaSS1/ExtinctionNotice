@@ -8,14 +8,16 @@ public class Hive : MonoBehaviour
 
     private Transform player;
 
+    [SerializeField] private Transform bossSpawnPoint; // Assign in Inspector
+
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     private void Update()
     {
-        if (!hasSpawnedBoss && Vector3.Distance(transform.position, player.position) <= detectionRange)
+        if (!hasSpawnedBoss && player != null && Vector3.Distance(transform.position, player.position) <= detectionRange)
         {
             SpawnBoss();
         }
@@ -23,14 +25,28 @@ public class Hive : MonoBehaviour
 
     private void SpawnBoss()
     {
-        Instantiate(bossPrefab, transform.position, transform.rotation); // Spawn at Hive's position
+        if (bossSpawnPoint == null)
+        {
+            Debug.LogError("Boss spawn point is not set! Assign a Transform in the Inspector.");
+            return;
+        }
+
+        Instantiate(bossPrefab, bossSpawnPoint.position, bossSpawnPoint.rotation);
+
         hasSpawnedBoss = true; // Ensure it only spawns once
+        Debug.Log("Boss spawned at: " + bossSpawnPoint.position);
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Draw detection range in Scene view
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        // Show designated spawn point
+        if (bossSpawnPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(bossSpawnPoint.position, 1f);
+        }
     }
 }
