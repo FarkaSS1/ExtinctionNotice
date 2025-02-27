@@ -22,6 +22,25 @@ public class EnemyHealth : Health
 
     protected override void Die()
     {
+        // Check if enemy has a drop
+        IDroppable dropInfo = GetComponent<IDroppable>();
+        if (dropInfo != null)
+        {
+            SpawnDrop(dropInfo);
+        }
+
         base.Die();
     }
+
+    private void SpawnDrop(IDroppable dropInfo)
+    {
+        GameObject dropPrefab = dropInfo.GetDropPrefab();
+        if (dropPrefab == null) return;
+
+        GameObject drop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+        DropItem dropItem = drop.AddComponent<DropItem>();
+        dropItem.resourceType = dropInfo.GetResourceType();
+        dropItem.amount = dropInfo.GetDropAmount();
+    }
+
 }
