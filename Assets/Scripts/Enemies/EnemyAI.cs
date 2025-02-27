@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private Animator animator;
+    protected NavMeshAgent agent;
+    protected Animator animator;
     private Transform baseTarget;
     private Transform player;
     private Transform currentTarget;
@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
 
     public bool IsAggroed => isAggroed;
 
-    void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -43,7 +43,7 @@ public class EnemyAI : MonoBehaviour
         if (baseTarget != null) agent.SetDestination(baseTarget.position);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (baseTarget == null || agent == null) return;
 
