@@ -7,42 +7,39 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
     private Transform baseTarget;
     private Transform player;
+    private Transform currentTarget;
+    private Transform towerTarget;
+    private EnemyMeleeAttack meleeAttack; // Reference to attack script (if melee)
+    private EnemyRangedAttack rangedAttack; // Reference to attack script (if ranged)
 
+    [Header("Detection & Aggro")]
     public float playerDetectionRange = 10f;
-    public bool isRangedEnemy = false;
-    public float attackRange = 6f; // Melee attack range
-    public float attackCooldown = 2f;
-    private float nextAttackTime = 0f;
-
-    // Aggro System
-    public float aggroDuration = 5f; // Time before losing aggro
     private bool isAggroed = false;
-
-    public bool IsAggroed => isAggroed; // read-only property
     private float aggroTimer = 0f;
+    public float aggroDuration = 5f;
+
+    public bool IsAggroed => isAggroed;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
-        // Find the base using the "Base" tag
+        // Assign attack components
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
+        rangedAttack = GetComponent<EnemyRangedAttack>();
+
+        // Find base
         GameObject baseObject = GameObject.FindWithTag("Base");
         if (baseObject != null) baseTarget = baseObject.transform;
 
-        // Find the player using the "Player" tag
+        // Find player
         GameObject playerObject = GameObject.FindWithTag("Player");
-        if (playerObject != null)
-        {
-            player = playerObject.transform;
-        }
-        else
-        {
-            Debug.LogError("No Player found! Is it missing in the scene?");
-        }
+        if (playerObject != null) player = playerObject.transform;
+        else Debug.LogError("No Player found! Is it missing in the scene?");
 
-
-        // Set initial destination to base
+        // Set default target to base
+        currentTarget = baseTarget;
         if (baseTarget != null) agent.SetDestination(baseTarget.position);
     }
 
@@ -50,77 +47,52 @@ public class EnemyAI : MonoBehaviour
     {
         if (baseTarget == null || agent == null) return;
 
-        float distanceToPlayer = player != null ? Vector3.Distance(transform.position, player.position) : Mathf.Infinity;
-
         // If enemy is aggroed, update aggro timer
         if (isAggroed)
         {
             aggroTimer -= Time.deltaTime;
             if (aggroTimer <= 0)
             {
-                isAggroed = false; // Lose aggro after time
+                isAggroed = false;
+                currentTarget = baseTarget; // Lose aggro, reset to base
             }
         }
 
-        //  Check if the enemy should attack (melee or ranged)
-        if (player != null && distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
-        {
-            Attack();
-            nextAttackTime = Time.time + attackCooldown;
-        }
-        else
-        {
-            MoveTowardsTarget(distanceToPlayer);
-        }
+        MoveTowardsTarget();
 
         // Update Animator Speed
         float moveSpeed = agent.velocity.magnitude;
         animator.SetFloat("Speed", moveSpeed);
     }
 
-    void MoveTowardsTarget(float distanceToPlayer)
+    void MoveTowardsTarget()
     {
-        if ((player != null && distanceToPlayer <= playerDetectionRange) || isAggroed)
+        if (currentTarget == null)
         {
-            if (isRangedEnemy)
-            {
-                // Keep distance if ranged
-                if (distanceToPlayer > attackRange + 3f)
-                {
-                    agent.SetDestination(player.position);  // Move closer
-                }
-                else
-                {
-                    agent.SetDestination(transform.position);  // Stop moving and shoot
-                }
-            }
-            else
-            {
-                // Melee enemy chases player
-                agent.SetDestination(player.position);
-            }
+            currentTarget = baseTarget; // Default to attacking base
+        }
+
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+
+        // Adjust attack range if target is a tower
+        float adjustedAttackRange = meleeAttack != null ? meleeAttack.AttackRange : 2f;
+        if (currentTarget.CompareTag("Tower")) adjustedAttackRange += 2f;
+
+        if (distanceToTarget <= adjustedAttackRange)
+        {
+            agent.isStopped = true; // Stop moving when close enough
+
+            // Tell the attack component to attack
+            if (meleeAttack != null) meleeAttack.TryAttack(currentTarget);
         }
         else
         {
-            agent.SetDestination(baseTarget.position);
+            agent.isStopped = false;
+            agent.SetDestination(currentTarget.position);
         }
     }
 
-    void Attack()
-    {
-        animator.SetTrigger("Attack"); // Play Attack Animation
-        Debug.Log("Enemy is attacking!");
-
-        if (!isRangedEnemy)
-        {
-            if (player.GetComponent<HealthSystem>())
-            {
-                player.GetComponent<HealthSystem>().TakeDamage(15f); // Melee attack damage
-            }
-        }
-    }
-    // Called when the enemy gets attacked
-    public void AggroEnemy()
+    public void AggroEnemy(Transform attacker)
     {
         if (agent == null || !agent.isOnNavMesh)
         {
@@ -128,47 +100,45 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (!isAggroed) //  Prevent re-aggroing
+        isAggroed = true;
+        aggroTimer = aggroDuration;
+
+        if (attacker.CompareTag("Tower"))
         {
-            isAggroed = true;
-            aggroTimer = aggroDuration;
-
-            if (player != null)
-            {
-                agent.SetDestination(player.position);
-                Debug.Log(gameObject.name + " is now aggroed onto the player!");
-            }
-
-            AlertNearbyEnemies(); //  Aggro nearby enemies **only once**
+            currentTarget = attacker;
         }
+        else if (attacker.CompareTag("Player"))
+        {
+            currentTarget = player;
+        }
+
+        Debug.Log(gameObject.name + " is now aggroed onto " + currentTarget.name);
+        agent.SetDestination(currentTarget.position);
+        AlertNearbyEnemies(attacker);
     }
 
-    //  Spread aggro to nearby enemies in a controlled way
-    private void AlertNearbyEnemies()
+    private void AlertNearbyEnemies(Transform attacker)
     {
-        float alertRadius = 10f; // Adjust for how far the aggro spreads
+        float alertRadius = 10f;
         Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, alertRadius);
 
         foreach (Collider col in nearbyEnemies)
         {
             EnemyAI enemy = col.GetComponent<EnemyAI>();
-
-            //  Only aggro if enemy exists, is not the same enemy, and isn't already aggroed
             if (enemy != null && enemy != this && !enemy.IsAggroed)
             {
-                enemy.AggroEnemy(); //  This will make them chase the player
+                enemy.AggroEnemy(attacker);
             }
         }
     }
 
-
     public void ResetAggroTimer()
     {
-        if (isAggroed)
-        {
-            aggroTimer = aggroDuration; // Reset aggro timer so enemy doesn't lose interest
-        }
+        if (isAggroed) aggroTimer = aggroDuration;
     }
 
-
+    public Transform GetCurrentTarget()
+    {
+        return currentTarget ?? baseTarget;
+    }
 }

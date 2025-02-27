@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Pistol : Gun
+public class Pistol : Gun, IAttacker
 {
     private Shooter shooter;
 
@@ -33,15 +33,31 @@ public class Pistol : Gun
     {
         if (shooter == null) return;
 
+        Transform playerTransform = GameObject.FindWithTag("Player")?.transform;
+
+        if (playerTransform == null)
+        {
+            Debug.LogError("Pistol.Shoot(): Player transform is NULL! Make sure the Player has the 'Player' tag.");
+            return;
+        }
+
         RaycastHit hit;
-        Vector3 target = shooter.Shoot(cameraTransform, gunData.shootingRange, gunData.damage, gunData.targetLayerMask, out hit);
+        Vector3 target = shooter.Shoot(
+            cameraTransform.position,  // Start position
+            cameraTransform.forward,   // Shooting direction
+            gunData.shootingRange,
+            gunData.damage,
+            gunData.targetLayerMask,
+            playerTransform,                 // Pass the player as the attacker
+            out hit
+        );
 
         if (hit.collider != null)
         {
             EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
             if (enemyAI != null)
             {
-                enemyAI.AggroEnemy();
+                enemyAI.AggroEnemy(transform); // Pass player as the attacker
             }
 
             BulletHitFX(hit);
@@ -49,6 +65,7 @@ public class Pistol : Gun
 
         StartCoroutine(BulletFire(target, hit));
     }
+
 
     private IEnumerator BulletFire(Vector3 target, RaycastHit hit)
     {
@@ -78,5 +95,10 @@ public class Pistol : Gun
 
         Destroy(bulletHole, 1f);
         Destroy(hitParticle, 1f);
+    }
+
+    public float GetDamage()
+    {
+        return gunData.damage;
     }
 }

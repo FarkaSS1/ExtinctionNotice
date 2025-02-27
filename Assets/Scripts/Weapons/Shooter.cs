@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    public Vector3 Shoot(Transform cameraTransform, float range, float damage, LayerMask targetLayerMask, out RaycastHit hit)
+    public Vector3 Shoot(Vector3 shootFrom, Vector3 shootDirection, float range, float damage, LayerMask targetLayer, Transform attacker, out RaycastHit hit)
     {
-        Vector3 shootDirection = cameraTransform.forward;
-        Vector3 target = cameraTransform.position + (shootDirection * range);
+        Vector3 targetPoint = shootFrom + shootDirection * range;
 
-        if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, range, targetLayerMask))
+        if (Physics.Raycast(shootFrom, shootDirection, out hit, range, targetLayer))
         {
-            Debug.Log("Shot hit: " + hit.collider.name);
-            target = hit.point;
+            targetPoint = hit.point;
 
-            if (hit.collider.TryGetComponent<IHealth>(out var health))
+            if (hit.collider.TryGetComponent<IHealth>(out var targetHealth))
             {
-                health.TakeDamage(damage);
+                targetHealth.TakeDamage(damage, attacker);
             }
         }
 
-        return target;
+        return targetPoint;
     }
 }

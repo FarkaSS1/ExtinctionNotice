@@ -535,10 +535,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df6f5386b541d143ae6f2099bd735af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDetectionRange: 10
-  isRangedEnemy: 0
   attackRange: 2
   attackCooldown: 2
+  attackDamage: 0
+  playerDetectionRange: 10
+  isRangedEnemy: 0
+  aggroDuration: 5
 --- !u!195 &6651802137364564074
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -586,8 +588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 5
-  attackDamage: 20
+  attackDamage: 10
   attackCooldown: 1.5
+  enemyDamage: 10
 --- !u!114 &-2068920692256482536
 MonoBehaviour:
   m_ObjectHideFlags: 0

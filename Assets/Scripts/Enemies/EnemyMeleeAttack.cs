@@ -1,79 +1,58 @@
 using UnityEngine;
 
-public class EnemyMeleeAttack : MonoBehaviour
+public class EnemyMeleeAttack : MonoBehaviour, IAttacker
 {
-    public float attackRange = 2f;
-    public float attackDamage = 20f;
-    public float attackCooldown = 1.5f;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float enemyDamage = 10f;
+    [SerializeField] private float attackCooldown = 1.5f;
     private float nextAttackTime = 0f;
 
-    private Transform player;
     private Animator animator;
     private UnityEngine.AI.NavMeshAgent agent;
 
+    public float AttackRange => attackRange;
+
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
-    void Update()
+    public void TryAttack(Transform target)
     {
-        if (player == null) return;
+        if (target == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToTarget <= attackRange && Time.time >= nextAttackTime)
         {
-            // Rotate toward the player
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
-            // Stop moving while attacking
-            if (Time.time >= nextAttackTime)
-            {
-                if (agent != null)
-                {
-                    agent.isStopped = true;
-                }
-
-                Attack();
-                nextAttackTime = Time.time + attackCooldown;
-            }
-        }
-        else
-        {
-            if (agent != null)
-            {
-                agent.isStopped = false;
-            }
+            if (agent != null) agent.isStopped = true; // Stop moving when attacking
+            Attack();
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 
     void Attack()
     {
-        Debug.Log("Enemy is attempting to attack!"); // Check if attack is triggered
-        animator.SetTrigger("Attack"); // Triggers attack animation
+        animator.SetTrigger("Attack");
     }
 
-
-    // This function will be called by the animation event
-    public void ApplyMeleeDamage()
+    public void ApplyMeleeDamage(Transform target)
     {
-        if (player == null) return;
+        if (target == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        if (distanceToTarget > attackRange) return;
 
-        if (distanceToPlayer <= attackRange)
+        if (target.TryGetComponent<IHealth>(out var targetHealth))
         {
-            Health playerHealth = player.GetComponent<Health>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log("Melee Enemy hit the player at the correct animation frame!");
-            }
+            targetHealth.TakeDamage(enemyDamage, transform);
+            Debug.Log("Enemy dealt " + enemyDamage + " damage to " + target.name);
         }
+    }
+
+    public float GetDamage()
+    {
+        return enemyDamage;
     }
 }
