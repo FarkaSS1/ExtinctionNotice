@@ -11,6 +11,7 @@ public class CameraModeManager : MonoBehaviour
     public GameObject mainCamera;
     public GameObject baseViewCam;
     public GameObject player;
+    public GameObject omega;
     public PlayerController playerMovementScript; // The script handling player movement 
     public float baseViewMoveSpeed = 10f;
     public float zoomSpeed = 5f;
