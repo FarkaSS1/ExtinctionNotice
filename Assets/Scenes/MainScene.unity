@@ -408,6 +408,74 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 226238118}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &352919934
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 232.40984
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 215.65948
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791756996, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniBossChomper (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed027ced45156744fbe06bf2879a5500, type: 3}
 --- !u!4 &441066053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1631483976768326304, guid: 8002759cf3e38044e9bcc56f5fa6792e,
@@ -1285,7 +1353,7 @@ Transform:
   m_GameObject: {fileID: 1243391181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 366.2, y: 0, z: 235.2}
+  m_LocalPosition: {x: 366.2, y: 0, z: 196.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1901,6 +1969,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f818784c8cbe448b7e6036e675b553, type: 3}
+--- !u!1001 &1506391952
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 155.28467
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 254.09666
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791323876, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849086806791756996, guid: ed027ced45156744fbe06bf2879a5500,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniBossChomper
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed027ced45156744fbe06bf2879a5500, type: 3}
 --- !u!4 &1619328669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1634948981156121270, guid: 80f818784c8cbe448b7e6036e675b553,
@@ -1925,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f6bf5ea3641bd4eb57b96ec54f4d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 100
 --- !u!4 &1793356845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7422548558956482804, guid: 9b9fdd332a58b154f821c71d74a2d112,
@@ -2984,3 +3120,5 @@ SceneRoots:
   - {fileID: 1286182709}
   - {fileID: 226238118}
   - {fileID: 1409070612}
+  - {fileID: 1506391952}
+  - {fileID: 352919934}

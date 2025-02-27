@@ -45,7 +45,18 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (baseTarget == null || agent == null) return;
+        if (baseTarget == null) return;
+
+        if (!isAggroed)
+        {
+            FindClosestBase();
+        }
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (!isAggroed && distanceToPlayer <= playerDetectionRange)
+        {
+            AggroEnemy(player);  // Aggro if player is close
+        }
 
         // If enemy is aggroed, update aggro timer
         if (isAggroed)
@@ -54,7 +65,8 @@ public class EnemyAI : MonoBehaviour
             if (aggroTimer <= 0)
             {
                 isAggroed = false;
-                currentTarget = baseTarget; // Lose aggro, reset to base
+                FindClosestBase();
+                //currentTarget = baseTarget; // Lose aggro, reset to base
             }
         }
 
@@ -65,11 +77,44 @@ public class EnemyAI : MonoBehaviour
         animator.SetFloat("Speed", moveSpeed);
     }
 
+    private void FindClosestBase()
+    {
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("Base");
+
+        if (bases.Length == 0)
+        {
+            currentTarget = null; // No bases left
+            return;
+        }
+
+        Transform closestBase = baseTarget; // Default to initial base if no closer is found
+        float closestDistance = Vector3.Distance(transform.position, baseTarget.position);
+
+        foreach (GameObject baseObj in bases)
+        {
+            float distance = Vector3.Distance(transform.position, baseObj.transform.position);
+            if (distance < closestDistance)
+            {
+                closestBase = baseObj.transform;
+                closestDistance = distance;
+            }
+        }
+
+        if (closestBase != currentTarget)
+        {
+            currentTarget = closestBase;
+            agent.SetDestination(currentTarget.position);
+        }
+    }
+
+
+
     void MoveTowardsTarget()
     {
         if (currentTarget == null)
         {
-            currentTarget = baseTarget; // Default to attacking base
+            FindClosestBase();
+            // currentTarget = baseTarget; // Default to attacking base
         }
 
         float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
