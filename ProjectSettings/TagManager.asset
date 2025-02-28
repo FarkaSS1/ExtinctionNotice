@@ -8,6 +8,7 @@ TagManager:
   - Base
   - Hive
   - Tower
+  - HUD
   layers:
   - Default
   - TransparentFX
