@@ -1,38 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\",
+  "WorkspaceRootPath": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\github\\testargit\\extinctionnotice\\assets\\scripts\\base\\cameramodemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\cameramodemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\droplogic\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\droplogic\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\github\\testargit\\extinctionnotice\\assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\healthsystem\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\healthsystem\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\attacktower\\basictower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\attacktower\\basictower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|c:\\users\\david\\documents\\githubv2\\extinctionnoticew1\\extinctionnotice\\assets\\scripts\\droplogic\\chomperdrop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\droplogic\\chomperdrop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\droplogic\\idroppable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\droplogic\\idroppable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\attacktower\\attacktower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\attacktower\\attacktower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\gamestatemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\gamestatemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\gamestatemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\healthsystem\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\healthsystem\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagertop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\uimanagerbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\cameramodemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\cameramodemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF841451-F21F-8ACD-7C81-5C7DE4CAD9CF}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,40 +46,104 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CameraModeManager.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\CameraModeManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\CameraModeManager.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\CameraModeManager.cs*",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\CameraModeManager.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ChomperDrop.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\ChomperDrop.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DropLogic\\ChomperDrop.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\ChomperDrop.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DropLogic\\ChomperDrop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T11:48:08.885Z",
+              "WhenOpened": "2025-02-27T15:02:32.548Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UIManagerTop.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerTop.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\UIManagerTop.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerTop.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\UIManagerTop.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "IDroppable.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\IDroppable.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DropLogic\\IDroppable.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\IDroppable.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DropLogic\\IDroppable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T20:01:38.373Z"
+              "WhenOpened": "2025-02-27T14:50:40.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DropItem.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\DropItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DropLogic\\DropItem.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\DropLogic\\DropItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DropLogic\\DropItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T14:50:37.552Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EnemyHealth.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Healthsystem\\EnemyHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Healthsystem\\EnemyHealth.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Healthsystem\\EnemyHealth.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Healthsystem\\EnemyHealth.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCcAAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T09:30:05.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Health.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Healthsystem\\Health.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Healthsystem\\Health.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Healthsystem\\Health.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Healthsystem\\Health.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwCwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T09:26:15.849Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "UIManagerBot.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerBot.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\UIManagerBot.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerBot.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\UIManagerBot.cs",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAlwOMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T16:54:36.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CameraModeManager.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\CameraModeManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\CameraModeManager.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\CameraModeManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\CameraModeManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-25T11:48:08.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "SelectionManager.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\SelectionManager.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectionManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base\\SelectionManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -83,64 +151,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GameStateManager.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\GameStateManager.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\GameStateManager.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwE0AAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T15:15:10.865Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UIManagerBot.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerBot.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\UIManagerBot.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\UIManagerBot.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\UIManagerBot.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAewDsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T16:54:36.335Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BasicTower.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\AttackTower\\BasicTower.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T17:54:12.568Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AttackTower.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\AttackTower\\AttackTower.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABKAAAAAAAAAA==",
+              "Title": "GameStateManager.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\GameStateManager.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\githubv2\\ExtinctionNoticeW1\\ExtinctionNotice\\Assets\\Scripts\\Base\\GameStateManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\GameStateManager.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwDkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T17:54:29.79Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SelectableObject.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectableObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\SelectableObject.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\GitHub\\testargit\\ExtinctionNotice\\Assets\\Scripts\\Base\\SelectableObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\SelectableObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T08:25:11.616Z"
+              "WhenOpened": "2025-02-20T15:15:10.865Z",
+              "EditorCaption": ""
             }
           ]
         }
