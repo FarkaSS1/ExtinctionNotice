@@ -18,17 +18,20 @@ public class CameraModeManager : MonoBehaviour
     public GameObject HUD; // Drag your HUD here in the inspector
     public SelectionManager selectionManager; // Reference to SelectionManager
     public GameObject weaponHolder; // Drag the Weapon Holder object here in the Inspector
-    public GameObject health; 
+    public GameObject health;
 
 
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-        SwitchMode(GameMode.PlayerMode);
+        // Start in BaseViewMode, but keep HUD disabled initially
+        SwitchMode(GameMode.BaseViewMode);
+        HUD.SetActive(false);
     }
+
 
     private void Update()
     {
@@ -50,7 +53,7 @@ public class CameraModeManager : MonoBehaviour
 
     }
 
-    private void SwitchMode(GameMode newMode)
+    public void SwitchMode(GameMode newMode)
     {
         currentMode = newMode;
 

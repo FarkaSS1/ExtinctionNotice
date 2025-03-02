@@ -516,6 +516,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5510447702319017184}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6566453218690351295}
   m_SourcePrefab: {fileID: 100100000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
 --- !u!1 &3074657719725428346 stripped
 GameObject:
@@ -536,9 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDetectionRange: 10
-  isRangedEnemy: 0
-  attackRange: 2
-  attackCooldown: 2
+  aggroDuration: 5
 --- !u!195 &6651802137364564074
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -586,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 5
-  attackDamage: 20
+  enemyDamage: 10
   attackCooldown: 1.5
 --- !u!114 &-2068920692256482536
 MonoBehaviour:
@@ -622,3 +624,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &6566453218690351295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3074657719725428346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc8e24d9d44ba940a7d3e638f3eb1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPrefab: {fileID: 364938535662359846, guid: 11135234da60f2e46ba154e63e13fd38,
+    type: 3}
+  resourceType: elementX
+  dropAmount: 10

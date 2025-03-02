@@ -1,31 +1,55 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab; // Assign your enemy prefab in Inspector
     public Transform[] spawnPoints; // Assign spawn points in Inspector
-    public float spawnInterval = 15f; // Time between waves
-    public int enemiesPerWave = 3; // Number of enemies per wave
+    [SerializeField] private float initialSpawnInterval = 20f; // Start slow
+    [SerializeField] private float minSpawnInterval = 10f; // Prevent spawning too fast
+    [SerializeField] private float spawnDecayRate = 0.95f; // Reduce interval per wave
+    private float currentSpawnInterval;
+
+    public int maxEnemiesPerWave = 5; // Maximum enemies per wave
+    private int currentEnemiesPerWave = 1; // Start with 1 enemy in wave
 
     private void Start()
     {
-        InvokeRepeating("SpawnEnemyWave", 2f, spawnInterval); // Start enemy wave spawning
+        currentSpawnInterval = initialSpawnInterval;
+        StartCoroutine(SpawnWaves());
     }
 
-    private void SpawnEnemyWave()
+    private IEnumerator SpawnWaves()
     {
-        if (spawnPoints.Length == 0 || enemyPrefab == null) return;
+        yield return new WaitForSeconds(currentSpawnInterval); // Delay first spawn
 
-        for (int i = 0; i < enemiesPerWave; i++)
+        while (true)
         {
-            SpawnEnemy();
+            // Spawn enemies according to current wave size
+            for (int i = 0; i < currentEnemiesPerWave; i++)
+            {
+                SpawnEnemy();
+                yield return new WaitForSeconds(0.5f); // Small delay between spawns in a wave
+            }
+
+            // Increase enemies per wave, up to the max limit
+            if (currentEnemiesPerWave < maxEnemiesPerWave)
+            {
+                currentEnemiesPerWave++;
+            }
+
+            // Reduce spawn interval over time
+            currentSpawnInterval = Mathf.Max(minSpawnInterval, currentSpawnInterval * spawnDecayRate);
+
+            yield return new WaitForSeconds(currentSpawnInterval);
         }
     }
 
     private void SpawnEnemy()
     {
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        if (spawnPoints.Length == 0 || enemyPrefab == null) return;
 
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         Debug.Log("Spawned enemy at: " + spawnPoint.position);
     }

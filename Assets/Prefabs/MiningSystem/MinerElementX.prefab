@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7449527595670129083}
   - component: {fileID: 7062784399839210997}
   - component: {fileID: 4200759658580582596}
+  - component: {fileID: 3932679438606789839}
   m_Layer: 0
   m_Name: MinerElementX
-  m_TagString: Untagged
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,4 +123,16 @@ MonoBehaviour:
   selectedColor: {r: 0.1821239, g: 1, b: 0, a: 0}
   cost: 500
   costType: elementX
-  GSM: {fileID: 0}
+--- !u!114 &3932679438606789839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5390290112159068619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231c27a0a3604304d8e29f0892cb70f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
