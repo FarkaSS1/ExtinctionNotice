@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 5645506077952989682}
   m_Layer: 0
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1702,8 +1702,9 @@ MonoBehaviour:
   buildTowerButton: {fileID: 4320925005033795204}
   buildMineButton: {fileID: 5488110399774419219}
   destroyTowerButton: {fileID: 9006075334526748470}
-  towerPrefab: {fileID: 0}
-  minePrefab: {fileID: 9002209186936726012, guid: be7872148f800fe4d99c1ac06b18f938,
+  towerPrefab: {fileID: 7420085353628314085, guid: 7e1f05da51ebb2a4aa256077625960a4,
+    type: 3}
+  minePrefab: {fileID: 5390290112159068619, guid: d1baa5e0bac70754186b9df45f32ba26,
     type: 3}
   gameStateManager: {fileID: 0}
   minBuildDistance: 23

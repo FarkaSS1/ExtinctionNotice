@@ -51,12 +51,29 @@ public class EnemyAnimations : MonoBehaviour
     {
         if (meleeAttack != null)
         {
-            meleeAttack.ApplyMeleeDamage();
+            EnemyAI enemyAI = GetComponentInParent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                Transform target = enemyAI.GetCurrentTarget();
+                if (target != null)
+                {
+                    meleeAttack.ApplyMeleeDamage(target);
+                }
+                else
+                {
+                    Debug.LogError("Bite() failed: No valid target found for ApplyMeleeDamage().");
+                }
+            }
+            else
+            {
+                Debug.LogError("Bite() failed: EnemyAI component not found.");
+            }
         }
         else
         {
             Debug.LogError("ApplyMeleeDamage() cannot be called because EnemyMeleeAttack is missing.");
         }
     }
+
 }
 

@@ -55,11 +55,13 @@ public class WelcomeScreen : MonoBehaviour
         canvasGroup.alpha = 1f;  // Ensure it ends with full opacity
     }
 
-    private void StartGame() {
+    private void StartGame()
+    {
         Debug.Log("Game Starting...");
 
         // Play the main audio clip
-        if (audioClip != null && audioSource != null) {
+        if (audioClip != null && audioSource != null)
+        {
             audioSource.PlayOneShot(audioClip);
         }
 
@@ -71,10 +73,25 @@ public class WelcomeScreen : MonoBehaviour
         // Resume the game
         Time.timeScale = 1;
 
-        // Hide cursor if needed
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Enable HUD
+        GameObject hud = GameObject.FindWithTag("HUD");
+        if (hud != null)
+        {
+            hud.SetActive(true);
+        }
+
+        // Unlock and show the cursor
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // Ensure the game starts in BaseViewMode
+        CameraModeManager camManager = FindObjectOfType<CameraModeManager>();
+        if (camManager != null)
+        {
+            camManager.SwitchMode(CameraModeManager.GameMode.BaseViewMode);
+        }
     }
+
 
     IEnumerator FadeOut() {
         float fadeDuration = 1f; // Duration of the fade out

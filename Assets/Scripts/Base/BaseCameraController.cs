@@ -19,7 +19,7 @@ public class BaseCameraController : MonoBehaviour
     {
         if (hub != null)
         {
-            startPosition = hub.position - new Vector3(0, 0, 400);
+            startPosition = hub.position - new Vector3(0, 0, 200);
             transform.position = startPosition + new Vector3(0, maxZoom, 0); // Start at max zoom
             transform.rotation = Quaternion.Euler(60, 0, 0); // Tilt the camera to a 45-degree angle
         }
@@ -55,10 +55,29 @@ public class BaseCameraController : MonoBehaviour
     private void HandleZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        targetZoom = Mathf.Clamp(targetZoom - scroll, minZoom, maxZoom);
+        if (scroll == 0) return;
 
-        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, targetZoom, transform.position.z), 0.1f);
+        // Get the mouse position in world space
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Vector3 targetPoint = transform.position;
+
+        if (groundPlane.Raycast(ray, out float enter))
+        {
+            targetPoint = ray.GetPoint(enter);
+        }
+
+        // Calculate direction towards the zoom target
+        Vector3 direction = (targetPoint - transform.position).normalized;
+
+        // Adjust zoom target
+        targetZoom = Mathf.Clamp(targetZoom - scroll, minZoom, maxZoom);
+        Vector3 zoomTargetPosition = transform.position + direction * scroll * 10f; // Adjust multiplier for speed
+
+        // Lerp for smooth movement
+        transform.position = Vector3.Lerp(transform.position, zoomTargetPosition, 0.1f);
     }
+
 
     public void ResetToHub()
     {
