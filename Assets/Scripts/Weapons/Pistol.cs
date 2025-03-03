@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Pistol : Gun, IAttacker
@@ -13,6 +14,7 @@ public class Pistol : Gun, IAttacker
         {
             Debug.LogError("Shooter component missing on Pistol!");
         }
+
     }
 
     public override void Update()
@@ -101,4 +103,5 @@ public class Pistol : Gun, IAttacker
     {
         return gunData.damage;
     }
+
 }
