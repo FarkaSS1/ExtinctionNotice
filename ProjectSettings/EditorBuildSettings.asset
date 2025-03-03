@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 4bd1084f9dcee8d4387c6e3bf0775b02
+  - enabled: 1
+    path: Assets/Scenes/Mikael/VictoryScene.unity
+    guid: 06d38d3c0a1fcb342a08bf27eead2af5
   m_configObjects: {}
