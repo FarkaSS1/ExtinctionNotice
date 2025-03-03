@@ -71,33 +71,33 @@ public class GamePauseMenu : MonoBehaviour
     }
 
     IEnumerator FadeIn()
-{
-    float fadeDuration = 0.5f;
-    float time = 0f;
-    pauseScreen.gameObject.SetActive(true);
-
-    // Ensure the Canvas Group is interactable and blocks raycasts
-    pauseScreen.interactable = true;
-    pauseScreen.blocksRaycasts = true;
-
-    // Ensure buttons are rendered on top
-    Canvas canvas = pauseScreen.GetComponent<Canvas>();
-    if (canvas)
     {
-        canvas.sortingOrder = 10;  // Set a higher sorting order if necessary
-    }
+        float fadeDuration = 0.5f;
+        float time = 0f;
+        pauseScreen.gameObject.SetActive(true);
 
-    while (time < fadeDuration)
-    {
-        pauseScreen.alpha = Mathf.Lerp(0f, 1f, time / fadeDuration);
-        time += Time.unscaledDeltaTime;
-        yield return null;
-    }
-    pauseScreen.alpha = 1f;
+        // Ensure the Canvas Group is interactable and blocks raycasts
+        pauseScreen.interactable = true;
+        pauseScreen.blocksRaycasts = true;
 
-    // Debugging: Check if buttons are interactable
-    Debug.Log("Pause screen buttons should now be interactable.");
-}
+        // Ensure buttons are rendered on top
+        Canvas canvas = pauseScreen.GetComponent<Canvas>();
+        if (canvas)
+        {
+            canvas.sortingOrder = 10;  // Set a higher sorting order if necessary
+        }
+
+        while (time < fadeDuration)
+        {
+            pauseScreen.alpha = Mathf.Lerp(0f, 1f, time / fadeDuration);
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        pauseScreen.alpha = 1f;
+
+        // Debugging: Check if buttons are interactable
+        Debug.Log("Pause screen buttons should now be interactable.");
+    }
 
     IEnumerator FadeOut()
     {

@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;  // Add this for EventSystem
+using UnityEngine.Events; // Add this for UnityEvent support
 
 public class CameraModeManager : MonoBehaviour
 {
@@ -12,14 +11,18 @@ public class CameraModeManager : MonoBehaviour
     public GameObject mainCamera;
     public GameObject baseViewCam;
     public GameObject player;
-    public PlayerController playerMovementScript; // The script handling player movement 
+    public PlayerController playerMovementScript;
     public float baseViewMoveSpeed = 10f;
     public float zoomSpeed = 5f;
-    public Transform baseCameraTransform; // Drag your BaseViewCam here in the inspector
-    public GameObject HUD; // Drag your HUD here in the inspector
-    public SelectionManager selectionManager; // Reference to SelectionManager
-    public GameObject weaponHolder; // Drag the Weapon Holder object here in the Inspector
+    public Transform baseCameraTransform;
+    public GameObject HUD;
+    public SelectionManager selectionManager;
+    public GameObject weaponHolder;
     public GameObject health;
+
+    // Events for mode changes
+    public UnityEvent OnPlayerModeActivated;
+    public UnityEvent OnBaseViewModeActivated;
 
     private void Start()
     {
@@ -61,7 +64,7 @@ public class CameraModeManager : MonoBehaviour
             baseViewCam.SetActive(false);
             if (playerMovementScript != null)
             {
-                playerMovementScript.enabled = true; // Enable player movement
+                playerMovementScript.enabled = true;
             }
 
             if (weaponHolder != null)
@@ -74,35 +77,33 @@ public class CameraModeManager : MonoBehaviour
                 health.SetActive(true);
             }
 
-            // Disable Base View Camera's AudioListener & Enable Player Camera's
             mainCamera.GetComponent<AudioListener>().enabled = true;
             baseViewCam.GetComponent<AudioListener>().enabled = false;
 
-            // Switch cursor state to locked for FPS mode
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            //here
-            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true); // Get all Canvas components
+            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true);
             foreach (var canvas in canvases)
             {
-                if (canvas.gameObject.name == "Canvas") // Check by name or you can use a tag
+                if (canvas.gameObject.name == "Canvas")
                 {
-                    canvas.gameObject.SetActive(false);  // Disable Canvas
+                    canvas.gameObject.SetActive(false);
                 }
                 else if (canvas.gameObject.name == "BottomCanvas")
                 {
-                    canvas.gameObject.SetActive(false);  // Disable BottomCanvas
+                    canvas.gameObject.SetActive(false);
                 }
             }
-            //here
 
-            if (selectionManager != null) selectionManager.enabled = false; // Disable selection
-            selectionManager.Deselect(); // Deselect any selected objects
+            if (selectionManager != null) selectionManager.enabled = false;
+            selectionManager.Deselect();
 
-            // Update Camera Tags
             mainCamera.tag = "MainCamera";
-            baseViewCam.tag = "Untagged"; // Remove MainCamera tag
+            baseViewCam.tag = "Untagged";
+
+            // Trigger event for Player Mode
+            OnPlayerModeActivated?.Invoke();
         }
         else if (newMode == GameMode.BaseViewMode)
         {
@@ -110,7 +111,7 @@ public class CameraModeManager : MonoBehaviour
             baseViewCam.SetActive(true);
             if (playerMovementScript != null)
             {
-                playerMovementScript.enabled = false; // Disable player movement
+                playerMovementScript.enabled = false;
             }
 
             if (weaponHolder != null)
@@ -123,37 +124,35 @@ public class CameraModeManager : MonoBehaviour
                 health.SetActive(false);
             }
 
-            // Disable Player Camera's AudioListener & Enable Base View Camera's
             mainCamera.GetComponent<AudioListener>().enabled = false;
             baseViewCam.GetComponent<AudioListener>().enabled = true;
 
-            // Switch cursor state to unlocked and visible for UI interaction
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             baseViewCam.GetComponent<BaseCameraController>().ResetToHub();
-            HUD.SetActive(true);  // Show HUD when in Base View Mode
+            HUD.SetActive(true);
 
-            //here
-            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true); // Get all Canvas components
+            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true);
             foreach (var canvas in canvases)
             {
-                if (canvas.gameObject.name == "Canvas") // Check by name or you can use a tag
+                if (canvas.gameObject.name == "Canvas")
                 {
-                    canvas.gameObject.SetActive(true);  // Disable Canvas
+                    canvas.gameObject.SetActive(true);
                 }
                 else if (canvas.gameObject.name == "BottomCanvas")
                 {
-                    canvas.gameObject.SetActive(true);  // Disable BottomCanvas
+                    canvas.gameObject.SetActive(true);
                 }
             }
-            //here
 
-            if (selectionManager != null) selectionManager.enabled = true; // Enable selection
+            if (selectionManager != null) selectionManager.enabled = true;
 
-            // Update Camera Tags
-            mainCamera.tag = "Untagged"; // Remove MainCamera tag
+            mainCamera.tag = "Untagged";
             baseViewCam.tag = "MainCamera";
+
+            // Trigger event for Base View Mode
+            OnBaseViewModeActivated?.Invoke();
         }
     }
 

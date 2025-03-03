@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class WelcomeScreen : MonoBehaviour
@@ -9,6 +10,8 @@ public class WelcomeScreen : MonoBehaviour
     public AudioClip audioClipAmbience;  // Assign this in the Inspector
     private AudioSource audioSource;
     private CanvasGroup canvasGroup;  // Reference to the CanvasGroup
+    // Event
+    public UnityEvent OnGameStarted;
 
     async Task Start() {
         // Get the components
@@ -37,6 +40,7 @@ public class WelcomeScreen : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
+            OnGameStarted?.Invoke();
             StartGame();
         }
     }

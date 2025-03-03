@@ -25,6 +25,9 @@ public class UIManagerBot : MonoBehaviour
     public Transform centralHub; // Assign in Inspector
 
     private GameObject currentPrefabToBuild;
+    
+    // Event
+    public static event Action<GameObject> OnBuildingPlaced;
 
 
 
@@ -185,7 +188,8 @@ public class UIManagerBot : MonoBehaviour
         SelectableObject towerComponent = newBuilding.GetComponentInChildren<SelectableObject>();
         if (towerComponent != null)
         {
-            Debug.Log($"Tower placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
+            Debug.Log($"{towerComponent.name} placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
+             OnBuildingPlaced?.Invoke(newBuilding);
         }
         else
         {
