@@ -15,12 +15,12 @@ MonoBehaviour:
   gunName: Pistol
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   damage: 25
   shootingRange: 100
-  fireRate: 2
-  magazineSize: 10
-  reloadTime: 2
+  fireRate: 4
+  magazineSize: 50
+  reloadTime: 1
   defaultWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
   adsWeaponPosition: {x: 0.03, y: 0.06, z: 0.09}
   recoilAmount: 5

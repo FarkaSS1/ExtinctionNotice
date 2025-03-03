@@ -4,10 +4,10 @@ using UnityEngine;
 public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
+    protected float currentHealth;
 
-    public event Action<float> OnHealthChanged; 
-    public event Action OnDeath; 
+    public event Action<float> OnHealthChanged;
+    public event Action OnDeath;
 
     protected virtual void Awake()
     {
@@ -16,10 +16,15 @@ public class Health : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
+        TakeDamage(damage, null); // Default attacker is null
+    }
+
+    public virtual void TakeDamage(float damage, Transform attacker)
+    {
         currentHealth -= damage;
         OnHealthChanged?.Invoke(currentHealth / maxHealth);
-        float healthPercentage = currentHealth / maxHealth;
-         Debug.Log($"Health changed! Current: {currentHealth}, Percentage: {healthPercentage}");
+        Debug.Log($"{gameObject.name} took {damage} damage. Remaining health: {currentHealth}");
+
         if (currentHealth <= 0)
         {
             Die();
@@ -36,6 +41,6 @@ public class Health : MonoBehaviour, IHealth
     protected virtual void Die()
     {
         OnDeath?.Invoke();
-        Destroy(gameObject); // Change this in Player or Enemy-specific logic
+        Destroy(gameObject);
     }
 }
