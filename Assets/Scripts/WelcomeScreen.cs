@@ -36,7 +36,6 @@ public class WelcomeScreen : MonoBehaviour
     }
 
     void Update() {
-        // Check for space key press to start the game
         if (Input.GetKeyDown(KeyCode.Space)) {
             StartGame();
         }

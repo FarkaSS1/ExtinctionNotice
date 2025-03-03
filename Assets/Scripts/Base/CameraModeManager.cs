@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;  // Add this for EventSystem
 
 public class CameraModeManager : MonoBehaviour
 {
@@ -20,8 +21,6 @@ public class CameraModeManager : MonoBehaviour
     public GameObject weaponHolder; // Drag the Weapon Holder object here in the Inspector
     public GameObject health;
 
-
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -32,7 +31,6 @@ public class CameraModeManager : MonoBehaviour
         HUD.SetActive(false);
     }
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab)) // Press Tab to switch modes
@@ -42,6 +40,7 @@ public class CameraModeManager : MonoBehaviour
             else
                 SwitchMode(GameMode.PlayerMode);
         }
+
         if (currentMode == GameMode.BaseViewMode)
         {
             float h = Input.GetAxis("Horizontal") * baseViewMoveSpeed * Time.deltaTime;
@@ -50,7 +49,6 @@ public class CameraModeManager : MonoBehaviour
 
             baseCameraTransform.position += new Vector3(h, -scroll, v);
         }
-
     }
 
     public void SwitchMode(GameMode newMode)
@@ -80,16 +78,31 @@ public class CameraModeManager : MonoBehaviour
             mainCamera.GetComponent<AudioListener>().enabled = true;
             baseViewCam.GetComponent<AudioListener>().enabled = false;
 
+            // Switch cursor state to locked for FPS mode
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            HUD.SetActive(false);  // Hide HUD when in Player Mode
+
+            //here
+            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true); // Get all Canvas components
+            foreach (var canvas in canvases)
+            {
+                if (canvas.gameObject.name == "Canvas") // Check by name or you can use a tag
+                {
+                    canvas.gameObject.SetActive(false);  // Disable Canvas
+                }
+                else if (canvas.gameObject.name == "BottomCanvas")
+                {
+                    canvas.gameObject.SetActive(false);  // Disable BottomCanvas
+                }
+            }
+            //here
 
             if (selectionManager != null) selectionManager.enabled = false; // Disable selection
-                                                                            // Update Camera Tags
+            selectionManager.Deselect(); // Deselect any selected objects
+
+            // Update Camera Tags
             mainCamera.tag = "MainCamera";
             baseViewCam.tag = "Untagged"; // Remove MainCamera tag
-    
-            selectionManager.Deselect(); // Deselect any selected objects
         }
         else if (newMode == GameMode.BaseViewMode)
         {
@@ -97,8 +110,7 @@ public class CameraModeManager : MonoBehaviour
             baseViewCam.SetActive(true);
             if (playerMovementScript != null)
             {
-                playerMovementScript.enabled = false; // Disable player movement!
-
+                playerMovementScript.enabled = false; // Disable player movement
             }
 
             if (weaponHolder != null)
@@ -115,20 +127,33 @@ public class CameraModeManager : MonoBehaviour
             mainCamera.GetComponent<AudioListener>().enabled = false;
             baseViewCam.GetComponent<AudioListener>().enabled = true;
 
+            // Switch cursor state to unlocked and visible for UI interaction
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             baseViewCam.GetComponent<BaseCameraController>().ResetToHub();
-            HUD.SetActive(true);  // Hide HUD when in Player Mode
+            HUD.SetActive(true);  // Show HUD when in Base View Mode
+
+            //here
+            Canvas[] canvases = HUD.GetComponentsInChildren<Canvas>(true); // Get all Canvas components
+            foreach (var canvas in canvases)
+            {
+                if (canvas.gameObject.name == "Canvas") // Check by name or you can use a tag
+                {
+                    canvas.gameObject.SetActive(true);  // Disable Canvas
+                }
+                else if (canvas.gameObject.name == "BottomCanvas")
+                {
+                    canvas.gameObject.SetActive(true);  // Disable BottomCanvas
+                }
+            }
+            //here
 
             if (selectionManager != null) selectionManager.enabled = true; // Enable selection
 
             // Update Camera Tags
             mainCamera.tag = "Untagged"; // Remove MainCamera tag
             baseViewCam.tag = "MainCamera";
-
-
-
         }
     }
 
@@ -136,6 +161,4 @@ public class CameraModeManager : MonoBehaviour
     {
         return currentMode == GameMode.BaseViewMode;
     }
-
-
 }
