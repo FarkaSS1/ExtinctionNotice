@@ -155,6 +155,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7198702488066169790}
+    - targetCorrespondingSourceObject: {fileID: 8870592839556487193, guid: 6ab4a941639d4c241aaf47a18141b78e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 776023842356577862}
   m_SourcePrefab: {fileID: 100100000, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
 --- !u!4 &2526827740551447533 stripped
 Transform:
@@ -321,3 +325,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &776023842356577862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871424428445817229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f26643cc82d947b675b40ba997a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHealth: {fileID: 7198702488066169790}
+  canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
+    type: 3}
+  halthBarHeightAboveBuilding: 8

@@ -46,7 +46,7 @@ class BossChomperHealth : EnemyHealth
 
     private IEnumerator LoadSceneAfterDelay(float delay)
     {
-        Debug.LogError("Changing Scene");
+        Debug.Log("Changing Scene");
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("VictoryScene");
     }
