@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class EnemyHealth : Health
 {
     private EnemyAI enemyAI;
+
+    // Event
+    public event Action OnEnemyDie;
 
     protected override void Awake()
     {
@@ -22,6 +26,7 @@ public class EnemyHealth : Health
 
     protected override void Die()
     {
+        OnEnemyDie?.Invoke();
         // Check if enemy has a drop
         IDroppable dropInfo = GetComponent<IDroppable>();
         if (dropInfo != null)

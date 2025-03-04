@@ -5,14 +5,25 @@ using UnityEngine;
 public class Pistol : Gun, IAttacker
 {
     private Shooter shooter;
+    private float pistolDamage;
+    private Light spotLight;
+    [SerializeField] private AudioClip upgradeAudioClip;
 
     public void Awake()
     {
         shooter = GetComponent<Shooter>();
+        spotLight = GetComponentInChildren<Light>();
+        DisableSpotLight();
+
+        pistolDamage = gunData.damage;
 
         if (shooter == null)
         {
             Debug.LogError("Shooter component missing on Pistol!");
+        }
+        if (spotLight == null)
+        {
+            Debug.LogError("Spotlight component missing on Pistol!");
         }
 
     }
@@ -48,7 +59,7 @@ public class Pistol : Gun, IAttacker
             cameraTransform.position,  // Start position
             cameraTransform.forward,   // Shooting direction
             gunData.shootingRange,
-            gunData.damage,
+            pistolDamage,
             gunData.targetLayerMask,
             playerTransform,                 // Pass the player as the attacker
             out hit
@@ -99,9 +110,41 @@ public class Pistol : Gun, IAttacker
         Destroy(hitParticle, 1f);
     }
 
+
+    private void DisableSpotLight()
+    {
+        if (spotLight)
+        {
+            spotLight.enabled = false;
+        }
+        else
+        {
+            Debug.LogError("SpotLight object not assigned.");
+        }
+    }
+    public void EnableSpotLight()
+    {
+        if (spotLight)
+        {
+            spotLight.enabled = true;
+        }
+        else
+        {
+            Debug.LogError("SpotLight object not assigned.");
+        }
+    }
+
+    public void PlayUpgradeSound() {
+        audioSource.PlayOneShot(upgradeAudioClip);
+    }
+
+    // Getters and Setters
     public float GetDamage()
     {
         return gunData.damage;
     }
-
+    public void SetDamage(float dmg)
+    {
+        pistolDamage = dmg;
+    }
 }
