@@ -19,6 +19,7 @@ public class GameStateManager : MonoBehaviour
     public float timeMultiplier = 10f; // 1 real second = 10 in-game minutes
 
     public event Action<int, int> OnTimeUpdated; // UI Hook
+    public event Action<int> OnElementXUpdated; // Event ElementX change
 
     private void Awake()
     {
@@ -58,7 +59,7 @@ public void AddResource(string type, int amount)
     {
         if (type == "gold") gold += amount;
         else if (type == "power") power += amount;
-        else if (type == "elementX") elementX += amount;
+        else if (type == "elementX") {elementX += amount; OnElementXUpdated?.Invoke(elementX);}
         else throw new ArgumentException("Invalid resource type", nameof(type));
     }
 
