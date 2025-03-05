@@ -11,7 +11,7 @@ public class UIManagerBot : MonoBehaviour
     public GameObject towerPrefab; // Prefab for the tower
     public GameObject minePrefab; // Prefab for the mine
     public GameStateManager gameStateManager; // Reference to GameStateManager
-
+    public GameObject buyBackButton; // Reference to the buy back button
     private bool isBuildingTower = false;
     private GameObject blueprint; // The preview object
     private Renderer blueprintRenderer; // Store renderer for color changes
@@ -52,9 +52,9 @@ public class UIManagerBot : MonoBehaviour
         buildTowerButton.onClick.AddListener(() => OnBuildButtonClick(towerPrefab));
         buildMineButton.onClick.AddListener(() => OnBuildButtonClick(minePrefab));
         destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
+        HideBuyBackButton();
     }
 
-    //test
     private void OnBuildButtonClick(GameObject prefabToSpawn)
     {
         if (prefabToSpawn == null)
@@ -99,9 +99,6 @@ public class UIManagerBot : MonoBehaviour
         currentPrefabToBuild = prefabToSpawn;
         isBuildingTower = true;
     }
-    //test
-
-    
 
     private void Update()
     {
@@ -233,5 +230,21 @@ public class UIManagerBot : MonoBehaviour
     public void SetSelectedObject(SelectableObject newSelection)
     {
         selectedObject = newSelection;
+    }
+
+    public void ShowBuyBackButton()
+    {
+        if (buyBackButton != null)
+        {
+            buyBackButton.SetActive(true);
+        }
+    }
+
+    public void HideBuyBackButton()
+    {
+        if (buyBackButton != null)
+        {
+            buyBackButton.SetActive(false);
+        }
     }
 }

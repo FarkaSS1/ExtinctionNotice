@@ -107,8 +107,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
-
     void MoveTowardsTarget()
     {
         if (currentTarget == null)
@@ -142,6 +140,13 @@ public class EnemyAI : MonoBehaviour
         if (agent == null || !agent.isOnNavMesh)
         {
             Debug.LogWarning(gameObject.name + " tried to aggro but is not on a NavMesh or is dead!");
+            return;
+        }
+
+        // Ensure the attacker is active before aggroing
+        if (!attacker.gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning(gameObject.name + " tried to aggro onto an inactive target!");
             return;
         }
 
@@ -184,6 +189,10 @@ public class EnemyAI : MonoBehaviour
 
     public Transform GetCurrentTarget()
     {
-        return currentTarget ?? baseTarget;
+        if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
+        {
+            return currentTarget;
+        }
+        return baseTarget;
     }
 }
