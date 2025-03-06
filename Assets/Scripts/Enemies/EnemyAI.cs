@@ -34,9 +34,7 @@ public class EnemyAI : MonoBehaviour
         if (baseObject != null) baseTarget = baseObject.transform;
 
         // Find player
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        if (playerObject != null) player = playerObject.transform;
-        else Debug.LogError("No Player found! Is it missing in the scene?");
+        UpdatePlayerReference();
 
         // Set default target to base
         currentTarget = baseTarget;
@@ -45,7 +43,7 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (baseTarget == null) return;
+                if (baseTarget == null) return;
 
         if (!isAggroed)
         {
@@ -189,10 +187,27 @@ public class EnemyAI : MonoBehaviour
 
     public Transform GetCurrentTarget()
     {
-        if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
+        return currentTarget ?? baseTarget;
+    }
+
+    public void UpdatePlayerReference()
+    {
+        GameObject omegaObject = GameObject.Find("O.M.E.G.A");
+        if (omegaObject != null)
         {
-            return currentTarget;
+            Transform playerTransform = omegaObject.transform.Find("Player");
+            if (playerTransform != null)
+            {
+                player = playerTransform;
+            }
+            else
+            {
+                Debug.LogError("Player object not found inside O.M.E.G.A!");
+            }
         }
-        return baseTarget;
+        else
+        {
+            Debug.LogError("O.M.E.G.A object not found!");
+        }
     }
 }

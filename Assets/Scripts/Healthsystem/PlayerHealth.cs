@@ -7,6 +7,9 @@ public class PlayerHealth : Health
     public UIManagerBot uiManagerBot; // Reference to the UIManagerBot
     public Transform respawnPoint; // Reference to the respawn point
     public CameraModeManager cameraModeManager; // Reference to the CameraModeManager
+    public GameStateManager gameStateManager; // Reference to the GameStateManager
+    public int respawnCost = 750;
+    private string resourceType = "elementX";
 
     void Start()
     {
@@ -59,21 +62,31 @@ public class PlayerHealth : Health
 
     public void RespawnOmega()
     {
-        Debug.Log("O.M.E.G.A is brought back!");
-        Time.timeScale = 1;
+        if (gameStateManager != null && gameStateManager.CanAfford(resourceType, respawnCost))
+        {   
+                gameStateManager.RemoveResources(resourceType, respawnCost);
+                Debug.Log("O.M.E.G.A is brought back!");
+                Time.timeScale = 1;
 
-        transform.position = respawnPoint.position;
-        transform.rotation = respawnPoint.rotation;
-    
-        gameObject.SetActive(true);
-        Heal(100);
-        if (uiManagerBot != null)
-        {
-            uiManagerBot.HideBuyBackButton();
+                transform.position = respawnPoint.position;
+                transform.rotation = respawnPoint.rotation;
+            
+                gameObject.SetActive(true);
+                Heal(100);
+
+                foreach (var enemy in FindObjectsOfType<EnemyAI>())
+                {
+                enemy.UpdatePlayerReference();
+                }
+                if (uiManagerBot != null)
+                {
+                    uiManagerBot.HideBuyBackButton();
+                }
+                if (cameraModeManager != null)
+                {
+                    cameraModeManager.SwitchMode(CameraModeManager.GameMode.PlayerMode); // Switch to main camera
+                }
+            }
         }
-        if (cameraModeManager != null)
-        {
-            cameraModeManager.SwitchMode(CameraModeManager.GameMode.PlayerMode); // Switch to main camera
-        }
-    }
+        
 }
