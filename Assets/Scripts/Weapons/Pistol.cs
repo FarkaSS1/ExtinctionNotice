@@ -65,16 +65,7 @@ public class Pistol : Gun, IAttacker
             out hit
         );
 
-        if (hit.collider != null)
-        {
-            EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
-            if (enemyAI != null)
-            {
-                enemyAI.AggroEnemy(transform); // Pass player as the attacker
-            }
-
-            BulletHitFX(hit);
-        }
+        
 
         StartCoroutine(BulletFire(target, hit));
     }
@@ -92,6 +83,12 @@ public class Pistol : Gun, IAttacker
 
         if (hit.collider != null)
         {
+            EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.AggroEnemy(transform); // Pass player as the attacker
+            }
+
             BulletHitFX(hit);
         }
     }
