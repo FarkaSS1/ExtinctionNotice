@@ -29,5 +29,5 @@ MonoBehaviour:
   resetRecoilSpeed: 4
   bulletTrailPrefab: {fileID: 3688642848477571922, guid: 9647437b9b4b4b4418fa9c96585a47dc,
     type: 3}
-  bulletSpeed: 100
+  bulletSpeed: 200
   fireSound: {fileID: 8300000, guid: 044fe71855e0059468b73a0a2ed0efaa, type: 3}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public abstract class Gun : MonoBehaviour
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
     protected TextMeshProUGUI ammoText;
+
+    // Camera Mode Manager
+    private CameraModeManager cameraModeManager;
     
 
 private void Start() {
@@ -52,6 +56,11 @@ private void Start() {
     defaultWeaponPosition = transform.localPosition;
     defaultWeaponRotation = transform.localRotation;
     audioSource = GetComponent<AudioSource>();
+    
+    // Fixes reload bug
+    cameraModeManager = FindObjectOfType<CameraModeManager>();
+    if(!cameraModeManager) { Debug.LogError("Gun.cs: CameraModeManager not found"); }
+    cameraModeManager.OnBaseViewModeActivated.AddListener(CancelReload);
 
     UpdateAmmoUI();
 }
@@ -86,6 +95,14 @@ private void Start() {
         if (ammoText != null)
         {
             ammoText.text = $"{currentAmmo}";
+        }
+    }
+
+    public void CancelReload() {
+        if (isReloading) {
+            StopCoroutine(Reload());
+            isReloading = false;
+            UpdateAmmoUI(); 
         }
     }
 
