@@ -42,13 +42,13 @@ public abstract class SelectableObject : MonoBehaviour
 
     public virtual void Select()
     {
-
-        towerRenderer = this.GetComponentInChildren<Renderer>();
+        towerRenderer = GetComponentInChildren<Renderer>();
 
         Debug.Log($"[{gameObject.name}] Selected! Cost: {cost} {costType}");
 
         if (towerRenderer != null)
         {
+            originalColor = towerRenderer.material.color; // Store the original color before changing it
             towerRenderer.material.color = selectedColor;
         }
 
@@ -65,12 +65,15 @@ public abstract class SelectableObject : MonoBehaviour
 
     public virtual void Deselect()
     {
-        towerRenderer = this.GetComponentInChildren<Renderer>();
-        Debug.Log($"{gameObject.name} Deselected!");
+        towerRenderer = GetComponentInChildren<Renderer>();
+        Debug.Log($"{gameObject.name} Deselected! Reverting to original color: {originalColor}");
 
         if (towerRenderer != null)
-            towerRenderer.material.color = originalColor;
+        {
+            towerRenderer.material.color = originalColor; // Restore original color
+        }
     }
+
 
     internal abstract int GetCost();
     internal abstract string GetCostType();

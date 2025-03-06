@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (UIManagerBot.Instance != null)
+            {
+                UIManagerBot.Instance.HandleBuildTowerButtonClick();
+            }
+            else
+            {
+                Debug.LogError("UIManagerBot instance is not set.");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (UIManagerBot.Instance != null)
+            {
+                UIManagerBot.Instance.HandleBuildMineButtonClick();
+            }
+            else
+            {
+                Debug.LogError("UIManagerBot instance is not set.");
+            }
+        }
         
     }
 }

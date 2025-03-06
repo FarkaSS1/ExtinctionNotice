@@ -8,6 +8,8 @@ abstract class AttackTower : SelectableObject
     public Transform turretMuzzle;
     private float nextTimeToFire = 0f;
     private Transform currentTarget; // The enemy currently being targeted
+    public bool isPlaced = false; 
+
 
     [Header("VFX")]
     public GameObject bulletHolePrefab;
@@ -21,10 +23,13 @@ abstract class AttackTower : SelectableObject
     {
         audioSource = GetComponent<AudioSource>();
         InvokeRepeating(nameof(FindTarget), 0f, 0.5f); // Check for targets every 0.5s
+
     }
 
     private void Update()
     {
+        if (!isPlaced) return; // Don't find targets before placement!
+
         if (currentTarget != null)
         {
             RotateTowardsTarget();
@@ -83,4 +88,9 @@ abstract class AttackTower : SelectableObject
     }
 
     public abstract void Shoot();
+
+    public void PlacedTower()
+    {
+        isPlaced = true;
+    }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEditor.Search;
 
 public class UIManagerBot : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UIManagerBot : MonoBehaviour
     public GameObject towerPrefab; // Prefab for the tower
     public GameObject minePrefab; // Prefab for the mine
     public GameStateManager gameStateManager; // Reference to GameStateManager
+
 
     private bool isBuildingTower = false;
     private GameObject blueprint; // The preview object
@@ -28,6 +30,14 @@ public class UIManagerBot : MonoBehaviour
     
     // Event
     public static event Action<GameObject> OnBuildingPlaced;
+
+    [Header("UI Elements")]
+    public TMP_Text costTextTower;
+    public TMP_Text costTextMine;
+    public Image costIconTower;
+    public Image costIconMine;
+    public Sprite defaultIcon;
+
 
 
 
@@ -48,13 +58,84 @@ public class UIManagerBot : MonoBehaviour
 
     private void Start()
     {
-        // buildTowerButton.onClick.AddListener(OnBuildTowerButtonClick);
-        // buildMineButton.onClick.AddListener(OnBuildMineButtonClick);
-        // destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
+        InitializeBuildButtons();
 
         buildTowerButton.onClick.AddListener(() => OnBuildButtonClick(towerPrefab));
         buildMineButton.onClick.AddListener(() => OnBuildButtonClick(minePrefab));
         destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
+    }
+
+    private void Update()
+    {
+        if (isBuildingTower)
+        {
+            UpdateBlueprintPosition();
+
+            if (Input.GetMouseButtonDown(0)) // Left-click to place tower
+            {
+                TryPlaceTower(currentPrefabToBuild);
+            }
+
+            if (Input.GetMouseButtonDown(1)) // Right-click to cancel
+            {
+                CancelBuildingMode();
+            }
+        }
+        CheckAndUpdateButtonCosts();
+
+    }
+
+    public void HandleBuildTowerButtonClick()
+    {
+        OnBuildButtonClick(towerPrefab);
+    }
+
+    public void HandleBuildMineButtonClick()
+    {
+        OnBuildButtonClick(minePrefab);
+    }
+
+    private void InitializeBuildButtons()
+    {
+        IconManager.InitializeIcons(); 
+
+        // Setup Tower Button UI
+        UpdateButtonUI(buildTowerButton, towerPrefab, costTextTower, costIconTower);
+
+        // Setup Mine Button UI
+        UpdateButtonUI(buildMineButton, minePrefab, costTextMine, costIconMine);
+    }
+
+    private void UpdateButtonUI(Button button, GameObject prefab, TMP_Text costText, Image costIcon)
+    {
+        if (prefab == null)
+        {
+            Debug.LogError($"Prefab for button {button.name} is NULL.");
+            return;
+        }
+
+        SelectableObject objectData = prefab.GetComponentInChildren<SelectableObject>();
+        if (objectData != null)
+        {
+            int cost = objectData.Cost;
+            string costType = objectData.CostType;
+
+            costText.text = cost.ToString();
+            costIcon.sprite = IconManager.GetIcon(costType) ?? defaultIcon;
+            costIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError($"Prefab {prefab.name} is missing SelectableObject component.");
+            costText.text = "N/A";
+            costIcon.sprite = defaultIcon;
+        }
+    }
+
+    private void CheckAndUpdateButtonCosts()
+    {
+        UpdateButtonUI(buildTowerButton, towerPrefab, costTextTower, costIconTower);
+        UpdateButtonUI(buildMineButton, minePrefab, costTextMine, costIconMine);
     }
 
     //test
@@ -106,23 +187,7 @@ public class UIManagerBot : MonoBehaviour
 
     
 
-    private void Update()
-    {
-        if (isBuildingTower)
-        {
-            UpdateBlueprintPosition();
-
-            if (Input.GetMouseButtonDown(0)) // Left-click to place tower
-            {
-                TryPlaceTower(currentPrefabToBuild);
-            }
-
-            if (Input.GetMouseButtonDown(1)) // Right-click to cancel
-            {
-                CancelBuildingMode();
-            }
-        }
-    }
+    
 
     private void CancelBuildingMode()
     {
@@ -179,10 +244,22 @@ public class UIManagerBot : MonoBehaviour
             Debug.LogWarning("Not enough resources to build this tower.");
             return;
         }
+        if (IsOverlappingWithOtherBuildings())
+        {
+            Debug.LogWarning("Cannot place building here, it's overlapping with another building.");
+            return;
+        }
+        if (gameStateManager.MaximumCapacityReached(buildingPrefab))
+        {
+            Debug.LogWarning("Building limit reached for this type!");
+            return;
+        }
+
 
         gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
+        gameStateManager.BuildStructure(buildingPrefab); 
 
-        // Instantiate the real tower at the blueprint's position
+        // Instantiate the real tower at the blueprint position
         GameObject newBuilding = Instantiate(buildingPrefab, blueprint.transform.position, Quaternion.identity);
 
         SelectableObject towerComponent = newBuilding.GetComponentInChildren<SelectableObject>();
@@ -194,6 +271,19 @@ public class UIManagerBot : MonoBehaviour
         else
         {
             Debug.LogError("Placed tower is missing SelectableObject component!");
+        }
+
+        // Activate the buildings functionality only after placement
+        AttackTower placedTower = newBuilding.GetComponentInChildren<AttackTower>();
+        if (placedTower != null)
+        {
+            placedTower.PlacedTower();
+        }
+
+        Mine placedQuarry = newBuilding.GetComponent<Mine>();
+        if (placedQuarry != null)
+        {
+            placedQuarry.PlacedMine();
         }
 
         isBuildingTower = false;
@@ -209,7 +299,10 @@ public class UIManagerBot : MonoBehaviour
         bool isAffordable = gameStateManager.CanAfford(currentTowerCostType, currentTowerCost);
         bool isInValidRange = (distanceToHub >= minBuildDistance && distanceToHub <= maxBuildDistance);
 
-        Color newColor = (isAffordable && isInValidRange) ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
+        bool isOverlapping = IsOverlappingWithOtherBuildings();
+
+
+        Color newColor = (isAffordable && isInValidRange && !isOverlapping) ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
         blueprintRenderer.material.color = newColor;
     }
 
@@ -229,6 +322,7 @@ public class UIManagerBot : MonoBehaviour
         {
             int refundAmount = selectedObject.GetCost(); // Refund 100% of cost for now
             gameStateManager.AddResource(selectedObject.GetCostType(), refundAmount);
+            gameStateManager.RemoveStructure(selectedObject.gameObject);
             Destroy(selectedObject.gameObject);
             selectedObject = null;
         }
@@ -238,4 +332,38 @@ public class UIManagerBot : MonoBehaviour
     {
         selectedObject = newSelection;
     }
+
+    private bool IsOverlappingWithOtherBuildings()
+    {
+        if (blueprint == null) return false;
+
+        Collider[] blueprintColliders = blueprint.GetComponentsInChildren<Collider>();
+        if (blueprintColliders.Length == 0)
+        {
+            Debug.LogWarning("Blueprint has no colliders! Skipping overlap check.");
+            return false;
+        }
+
+        foreach (var blueprintCollider in blueprintColliders)
+        {
+            Vector3 position = blueprintCollider.bounds.center;
+            Vector3 size = blueprintCollider.bounds.extents; // Use extents instead of size/2 for better accuracy
+
+            Collider[] colliders = Physics.OverlapBox(position, size, Quaternion.identity);
+            foreach (var col in colliders)
+            {
+                // Ignore collisions with the blueprint's own colliders
+                if (Array.Exists(blueprintColliders, c => c == col)) continue;
+
+                if (col.gameObject.CompareTag("Tower") || col.gameObject.CompareTag("Base"))
+                {
+                    return true; // Found an overlapping building
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 }

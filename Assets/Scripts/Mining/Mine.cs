@@ -3,7 +3,7 @@ using UnityEngine;
 public class Mine : SelectableObject
 {   
     private GameStateManager GSM;
-    private bool isGenerating = true;
+    private bool isGenerating = false;
 
     internal override int GetCost() {
         return 200;
@@ -34,6 +34,7 @@ public class Mine : SelectableObject
         base.Start();
         // Subscribe to the tick event
         TimeTickSystem.OnTick += HandleTick;
+
     }
 
     private void HandleTick(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -49,5 +50,15 @@ public class Mine : SelectableObject
     {
         // Always unsubscribe from events when the object is destroyed
         TimeTickSystem.OnTick -= HandleTick;
+    }
+
+    public void PlacedMine()
+    {
+        SetActiveState(true);
+    }
+
+    private void SetActiveState(bool state)
+    {
+        isGenerating = state;
     }
 }

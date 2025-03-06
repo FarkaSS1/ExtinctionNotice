@@ -8,8 +8,14 @@ public class GameStateManager : MonoBehaviour
 
     private int gold = 1000;
     private int power = 500;
-    private int elementX = 2000;
+    private int elementX = 1200;
     private List<GameObject> builtStructures = new List<GameObject>();
+
+    private int towerCount = 0;
+    private int mineCount = 0;
+    private int maxTowers = 10;
+    private int maxMines = 3;
+
 
     // Time Variables
     private float elapsedTime = 0f;
@@ -55,13 +61,13 @@ public class GameStateManager : MonoBehaviour
         return $"Day {gameDays}, {gameHours}:00";
     }
 
-public void AddResource(string type, int amount)
-    {
-        if (type == "gold") gold += amount;
-        else if (type == "power") power += amount;
-        else if (type == "elementX") {elementX += amount; OnElementXUpdated?.Invoke(elementX);}
-        else throw new ArgumentException("Invalid resource type", nameof(type));
-    }
+    public void AddResource(string type, int amount)
+        {
+            if (type == "gold") gold += amount;
+            else if (type == "power") power += amount;
+            else if (type == "elementX") {elementX += amount; OnElementXUpdated?.Invoke(elementX);}
+            else throw new ArgumentException("Invalid resource type", nameof(type));
+        }
 
     public void RemoveResources(string type, int amount)
     {
@@ -92,15 +98,43 @@ public void AddResource(string type, int amount)
     public int Power => power;
     public int ElementX => elementX;
 
+    // dont use this one
     public void AddStructure(GameObject structure)
     {
-        builtStructures.Add(structure);
+        if (structure.CompareTag("Tower"))
+        {
+            if (towerCount >= maxTowers)
+            {
+                Debug.Log("Max tower limit reached!");
+                return;
+            }
+            towerCount++;
+        }
+        else if (structure.CompareTag("Mine"))
+        {
+            if (mineCount >= maxMines)
+            {
+                Debug.Log("Max mine limit reached!");
+                return;
+            }
+            mineCount++;
+        }
     }
 
     public void RemoveStructure(GameObject structure)
     {
-        builtStructures.Remove(structure);
+        if (structure.CompareTag("Tower")) towerCount--;
+        else if (structure.CompareTag("Base")) mineCount--;
     }
+
+    public void BuildStructure(GameObject structure)
+    {
+        Debug.Log("Building structure");
+        Debug.Log(structure.name);
+        if (structure.CompareTag("Tower")) towerCount++;
+        else if (structure.CompareTag("Base")) mineCount++;
+    }
+
 
     public void returnStructures()
     {
@@ -109,4 +143,14 @@ public void AddResource(string type, int amount)
             Debug.Log(structure.name);
         }
     }
+    public bool MaximumCapacityReached(GameObject building)
+    {
+        Debug.Log("Checking max capacity");
+        Debug.Log("Tower count: " + towerCount);
+        Debug.Log("Mine count: " + mineCount);
+        if (building.CompareTag("Tower")) return towerCount >= maxTowers;
+        if (building.CompareTag("Base")) return mineCount >= maxMines;
+        return false;
+    }
+
 }
