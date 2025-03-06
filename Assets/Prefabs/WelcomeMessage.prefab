@@ -221,8 +221,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a88af561942a349a4f147c127203a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 2ba67a07b69dab848b2acbf2c601e8f8, type: 3}
-  audioClipAmbience: {fileID: 8300000, guid: 0043b76f9d81e3342ad879996489f9aa, type: 3}
+  audioClip: {fileID: 8300000, guid: 58cbec39954f5fc49a2ee4d6a9e172b5, type: 3}
+  audioClipAmbience: {fileID: 8300000, guid: a162f603cd7df2444a110f85172beadc, type: 3}
+  OnGameStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &342693238437385749
 AudioSource:
   m_ObjectHideFlags: 0

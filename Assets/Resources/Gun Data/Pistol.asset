@@ -30,4 +30,4 @@ MonoBehaviour:
   bulletTrailPrefab: {fileID: 3688642848477571922, guid: 9647437b9b4b4b4418fa9c96585a47dc,
     type: 3}
   bulletSpeed: 100
-  fireSound: {fileID: 8300000, guid: 5116b315a293b8a4c81cd098ea2af7c6, type: 3}
+  fireSound: {fileID: 8300000, guid: 044fe71855e0059468b73a0a2ed0efaa, type: 3}

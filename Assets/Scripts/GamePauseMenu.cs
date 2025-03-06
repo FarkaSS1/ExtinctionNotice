@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GamePauseMenu : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class GamePauseMenu : MonoBehaviour
     public Button resumeButton; // Assign in Inspector
     public Button controlsButton; // Assign in Inspector
     public Button gameInfoButton; // Assign in Inspector
+    public Button resetButton; // Assign in Inspector
+    public Button quitButton; // Assign in Inspector
     public RawImage controlsImage; // Assign in Inspector
     public RawImage gameInfoImage; // Assign in Inspector
 
@@ -19,6 +23,8 @@ public class GamePauseMenu : MonoBehaviour
         resumeButton.onClick.AddListener(ResumeGame);
         controlsButton.onClick.AddListener(ShowControls);
         gameInfoButton.onClick.AddListener(ShowGameInfo);
+        resetButton.onClick.AddListener(RestartGame);
+        quitButton.onClick.AddListener(QuitGame);
 
         // Ensure pause screen is hidden at start
         pauseScreen.alpha = 0f;
@@ -31,9 +37,11 @@ public class GamePauseMenu : MonoBehaviour
         gameInfoImage.gameObject.SetActive(false);
     }
 
+
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
                 ResumeGame();
@@ -69,6 +77,26 @@ public class GamePauseMenu : MonoBehaviour
         controlsImage.gameObject.SetActive(false);
         gameInfoImage.gameObject.SetActive(true);
     }
+
+    private void RestartGame()
+    {
+        Time.timeScale = 1; // Resume the game
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        SceneManager.LoadScene("MainScene"); // Reload the current scene
+    }
+    private void QuitGame()
+    {
+        #if UNITY_EDITOR
+        // Stop play mode in the Unity Editor
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        // Quit the application when built (.exr)
+        Application.Quit();
+        #endif
+    }
+
+
 
     IEnumerator FadeIn()
     {
