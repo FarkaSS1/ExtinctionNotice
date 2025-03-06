@@ -1219,6 +1219,7 @@ MonoBehaviour:
   gameInfoImage: {fileID: 7161531380877540198}
   audioSource: {fileID: 5646430336290214417}
   titleScreenMusic: {fileID: 8300000, guid: 46bd4152c23daf54d84770354c10e927, type: 3}
+  startButtonSound: {fileID: 0}
 --- !u!82 &5646430336290214417
 AudioSource:
   m_ObjectHideFlags: 0
