@@ -2569,6 +2569,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  uiManagerBot: {fileID: 0}
+  respawnPoint: {fileID: 0}
+  cameraModeManager: {fileID: 0}
+  gameStateManager: {fileID: 0}
+  respawnCost: 750
 --- !u!1 &5801460987477530722
 GameObject:
   m_ObjectHideFlags: 0

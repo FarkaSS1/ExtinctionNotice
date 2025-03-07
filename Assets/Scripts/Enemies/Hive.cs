@@ -12,14 +12,20 @@ public class Hive : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        UpdatePlayerReference();
     }
 
     private void Update()
     {
-        if (!hasSpawnedBoss && player != null && Vector3.Distance(transform.position, player.position) <= detectionRange)
+        if (!hasSpawnedBoss && player != null)
         {
-            SpawnBoss();
+            float distance = Vector3.Distance(transform.position, player.position);
+
+            if (distance <= detectionRange)
+            {
+                Debug.Log("Player is within detection range. Spawning boss!");
+                SpawnBoss();
+            }
         }
     }
 
@@ -35,6 +41,28 @@ public class Hive : MonoBehaviour
 
         hasSpawnedBoss = true; // Ensure it only spawns once
         Debug.Log("Boss spawned at: " + bossSpawnPoint.position);
+    }
+
+    private void UpdatePlayerReference()
+    {
+        GameObject omegaObject = GameObject.Find("O.M.E.G.A");
+        if (omegaObject != null)
+        {
+            Transform playerTransform = omegaObject.transform.Find("Player");
+            if (playerTransform != null)
+            {
+                player = playerTransform;
+                Debug.Log("Player found: " + player.name);
+            }
+            else
+            {
+                Debug.LogError("Player object not found inside O.M.E.G.A!");
+            }
+        }
+        else
+        {
+            Debug.LogError("O.M.E.G.A object not found!");
+        }
     }
 
     private void OnDrawGizmosSelected()
