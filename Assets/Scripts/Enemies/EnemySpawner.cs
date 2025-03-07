@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class EnemySpawner : MonoBehaviour
 
     public int maxEnemiesPerWave = 5; // Maximum enemies per wave
     private int currentEnemiesPerWave = 1; // Start with 1 enemy in wave
+    private GameObject newEnemy;
+    
+    // Event
+    public event Action<EnemyHealth> OnEnemySpawned;
 
     private void Start()
     {
@@ -49,8 +54,10 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnPoints.Length == 0 || enemyPrefab == null) return;
 
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+        newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        EnemyHealth enemyHealth = newEnemy.GetComponent<EnemyHealth>();
+        OnEnemySpawned?.Invoke(enemyHealth);
         Debug.Log("Spawned enemy at: " + spawnPoint.position);
     }
 }

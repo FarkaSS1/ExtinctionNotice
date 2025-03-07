@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hive : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Hive : MonoBehaviour
     private Transform player;
 
     [SerializeField] private Transform bossSpawnPoint; // Assign in Inspector
+
+    // Events 
+    public UnityEvent OnBossSpawned;
 
     private void Start()
     {
@@ -40,6 +44,7 @@ public class Hive : MonoBehaviour
         Instantiate(bossPrefab, bossSpawnPoint.position, bossSpawnPoint.rotation);
 
         hasSpawnedBoss = true; // Ensure it only spawns once
+         OnBossSpawned?.Invoke();
         Debug.Log("Boss spawned at: " + bossSpawnPoint.position);
     }
 

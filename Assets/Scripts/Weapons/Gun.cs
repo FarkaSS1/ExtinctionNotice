@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -22,15 +24,20 @@ public abstract class Gun : MonoBehaviour
     private float adsSpeed = 15f; // Speed of movement
     
     [Header("Reload Config")]
-    private float currentAmmo = 0f;
+    protected float currentAmmo = 0f;
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
+    protected TextMeshProUGUI ammoText;
+
+    // Camera Mode Manager
+    private CameraModeManager cameraModeManager;
     
 
 private void Start() {
     currentAmmo = gunData.magazineSize;
 
     playerController = transform.parent.GetComponentInParent<PlayerController>();
+    ammoText = GetComponentInChildren<TextMeshProUGUI>();
 
     if (playerController == null) {
         Debug.LogError("PlayerController is null! Check if it is attached to " + transform.root.name);
@@ -41,11 +48,21 @@ private void Start() {
         Debug.LogError("virtualCamera is null in PlayerController!");
         return;
     }
+    if (ammoText == null) {
+        Debug.LogError("Ammotext (TextMeshPro) component missing on Pistol!");
+    }
 
     cameraTransform = playerController.virtualCamera.transform;
     defaultWeaponPosition = transform.localPosition;
     defaultWeaponRotation = transform.localRotation;
     audioSource = GetComponent<AudioSource>();
+    
+    // Fixes reload bug
+    cameraModeManager = FindObjectOfType<CameraModeManager>();
+    if(!cameraModeManager) { Debug.LogError("Gun.cs: CameraModeManager not found"); }
+    cameraModeManager.OnBaseViewModeActivated.AddListener(CancelReload);
+
+    UpdateAmmoUI();
 }
 
 
@@ -62,8 +79,12 @@ private void Start() {
 
     public IEnumerator Reload() {
         isReloading = true;
-
+        
         Debug.Log(gunData.gunName + " is reloading....");
+        if (ammoText != null)
+        {
+            ammoText.text = "--";
+        }
 
         yield return new WaitForSeconds(gunData.reloadTime);
 
@@ -71,6 +92,18 @@ private void Start() {
         isReloading = false;
 
         Debug.Log(gunData.gunName + " is reloaded");
+        if (ammoText != null)
+        {
+            ammoText.text = $"{currentAmmo}";
+        }
+    }
+
+    public void CancelReload() {
+        if (isReloading) {
+            StopCoroutine(Reload());
+            isReloading = false;
+            UpdateAmmoUI(); 
+        }
     }
 
     public void TryShoot() {
@@ -92,6 +125,7 @@ private void Start() {
         currentAmmo--;
         Debug.Log(gunData.gunName + " Shot!, Bullets Left: " + currentAmmo);
         Shoot();
+        UpdateAmmoUI();
 
         playerController.ApplyRecoil(gunData);
 
@@ -125,4 +159,11 @@ private void Start() {
     }
 
     public abstract void Shoot();
+    
+    protected virtual void UpdateAmmoUI() {
+        if (ammoText != null)
+        {
+            ammoText.text = $"{currentAmmo}";
+        }
+    }
 }
