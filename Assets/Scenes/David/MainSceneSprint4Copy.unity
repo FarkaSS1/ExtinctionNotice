@@ -1275,7 +1275,7 @@ PrefabInstance:
     - target: {fileID: 2359620973941161373, guid: dce939e5df3b28d43ba5be026b3f8dd3,
         type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2359620973941161373, guid: dce939e5df3b28d43ba5be026b3f8dd3,
         type: 3}
@@ -2390,6 +2390,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104787646008942238, guid: f736c75cf660f584dbdd6473e59ab34a,
         type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104787646008942238, guid: f736c75cf660f584dbdd6473e59ab34a,
+        type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1366170275}
@@ -3231,7 +3236,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: f336d1edd57b68845801ee4fb66a8630,
+      objectReference: {fileID: 23800000, guid: 78691fe8efa104c4da5a362d9b88641e,
         type: 2}
     - target: {fileID: 6446601349472193476, guid: 8002759cf3e38044e9bcc56f5fa6792e,
         type: 3}
