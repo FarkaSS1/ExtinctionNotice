@@ -202,27 +202,6 @@ public class UIManagerBot : MonoBehaviour
         currentPrefabToBuild = prefabToSpawn;
         isBuildingTower = true;
     }
-    //test
-
-    
-
-    private void Update()
-    {
-        if (isBuildingTower)
-        {
-            UpdateBlueprintPosition();
-
-            if (Input.GetMouseButtonDown(0)) // Left-click to place tower
-            {
-                TryPlaceTower(currentPrefabToBuild);
-            }
-
-            if (Input.GetMouseButtonDown(1)) // Right-click to cancel
-            {
-                CancelBuildingMode();
-            }
-        }
-    }
 
     private void CancelBuildingMode()
     {

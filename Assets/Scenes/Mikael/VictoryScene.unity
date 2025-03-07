@@ -1695,14 +1695,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 3cf0e1d8d1f921c4e9de8f66baf5ece0,
+      objectReference: {fileID: 23800000, guid: 77f9564e3d681e641a144628a20b974b,
         type: 2}
     - target: {fileID: 6446601349472193476, guid: 8002759cf3e38044e9bcc56f5fa6792e,
         type: 3}
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4471670481065046819, guid: 8002759cf3e38044e9bcc56f5fa6792e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
