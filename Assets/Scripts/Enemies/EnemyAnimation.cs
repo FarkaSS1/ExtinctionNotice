@@ -36,17 +36,18 @@ public class EnemyAnimations : MonoBehaviour
     {
         //Debug.Log("AttackBegin event triggered, but no action set.");
     }
-    public void Shoot()
+    public void Spit()
     {
         if (rangedAttack != null)
         {
-            rangedAttack.ShootProjectile();
+            rangedAttack.TriggerShoot(); 
         }
         else
         {
             Debug.LogError("ShootProjectile() cannot be called because EnemyRangedAttack is missing.");
         }
     }
+
     public void Bite()
     {
         if (meleeAttack != null)

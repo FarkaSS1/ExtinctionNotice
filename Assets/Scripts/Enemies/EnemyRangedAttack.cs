@@ -1,87 +1,115 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyRangedAttack : MonoBehaviour
+public class EnemyRangedAttack : MonoBehaviour, IAttacker
 {
+    [SerializeField] private float attackRange = 15f;
+    [SerializeField] private float enemyDamage = 8f;
+    [SerializeField] private float attackCooldown = 2f;
+    private float nextAttackTime = 0f;
+
+    private Transform currentTarget;
+    private Animator animator;
     public GameObject projectilePrefab;
     public Transform firePoint;
-    public float attackRange = 15f;
-    public float fireRate = 2f;
-    private float nextFireTime = 0f;
+    private NavMeshAgent agent;
+    private EnemyAI enemyAI;
 
-    private Transform player;
-    private Animator animator;
+    public float AttackRange => attackRange;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        enemyAI = GetComponent<EnemyAI>();
+
+        if (enemyAI != null)
+        {
+            currentTarget = enemyAI.GetCurrentTarget();
+        }
     }
 
     void Update()
     {
-        if (player == null) return;
-
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= attackRange)
+        if (enemyAI != null)
         {
-            // Rotate toward the player
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            currentTarget = enemyAI.GetCurrentTarget();
+        }
 
-            // Stop moving while attacking
-            if (Time.time >= nextFireTime)
+        if (currentTarget == null) return;
+
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+
+        if (distanceToTarget <= attackRange && Time.time >= nextAttackTime)
+        {
+            if (agent != null)
             {
-                if (GetComponent<UnityEngine.AI.NavMeshAgent>() != null)
-                {
-                    GetComponent<UnityEngine.AI.NavMeshAgent>().isStopped = true;
-                }
-
-                Attack();
-                nextFireTime = Time.time + fireRate;
+                agent.isStopped = true; // Stop movement before attacking
+                agent.velocity = Vector3.zero; // Ensure they fully stop
             }
+
+            RotateTowardsTarget();
+            Attack();
+            nextAttackTime = Time.time + attackCooldown;
         }
         else
         {
-            if (GetComponent<UnityEngine.AI.NavMeshAgent>() != null)
+            if (agent != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
-                GetComponent<UnityEngine.AI.NavMeshAgent>().isStopped = false;
+                agent.isStopped = false;
             }
         }
+    }
+
+    void RotateTowardsTarget()
+    {
+        if (currentTarget == null) return;
+
+        Vector3 direction = (currentTarget.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void Attack()
     {
-        animator.SetTrigger("Attack"); // Triggers attack animation
+        animator.SetTrigger("Attack");  // Triggers the attack animation
     }
 
-    // This function will be called by the animation event
+    // Called by animation event
+    public void TriggerShoot()
+    {
+        ShootProjectile();  // This ensures the animation calls the function correctly
+    }
+
     public void ShootProjectile()
     {
-        if (firePoint == null || projectilePrefab == null || player == null)
+        if (firePoint == null || projectilePrefab == null || currentTarget == null)
         {
-            Debug.LogError("Missing FirePoint, Projectile Prefab, or Player reference!");
+            Debug.LogError("Missing FirePoint, Projectile Prefab, or Target reference!");
             return;
         }
 
-        // Calculate direction toward the player's exact position
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        Vector3 directionToTarget = (currentTarget.position - firePoint.position).normalized;
 
-        // Rotate the Spitter to face the player before shooting
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = lookRotation; // Instantly face the player
-
-        // Instantiate the projectile
-        GameObject spit = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-        Rigidbody rb = spit.GetComponent<Rigidbody>();
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
-            rb.velocity = directionToPlayer * 10f;  // Shoots directly at player
+            rb.velocity = directionToTarget * 10f;  // Shoots toward the current target
         }
 
-        Debug.Log("Projectile fired at the correct animation frame!");
+        Debug.Log(gameObject.name + " fired at " + currentTarget.name);
+
+        // Resume movement after shooting
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
+    }
+
+    public float GetDamage()
+    {
+        return enemyDamage;
     }
 }

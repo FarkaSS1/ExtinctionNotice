@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 25f;
     public float damage = 15f;
     public float lifetime = 5f; // Destroy after 5s
 
@@ -27,16 +27,16 @@ public class EnemyProjectile : MonoBehaviour
     {
         Debug.Log("Projectile hit: " + other.gameObject.name);
 
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent<IHealth>(out IHealth health))
         {
-            Debug.Log("Hit the Player!");
-
-            if (other.GetComponent<HealthSystem>())
-            {
-                Debug.Log("Applying damage to Player...");
-                other.GetComponent<HealthSystem>().TakeDamage(damage);
-            }
+            Debug.Log("Projectile hit " + other.name + "! Applying " + damage + " damage...");
+            health.TakeDamage(damage, transform);
         }
+        else
+        {
+            Debug.Log("Projectile hit " + other.name + " but it has no IHealth component.");
+        }
+
 
         Debug.Log("Destroying projectile...");
         Destroy(gameObject); // Destroy spit on impact
