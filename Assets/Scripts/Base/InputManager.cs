@@ -26,6 +26,17 @@ public class InputManager : MonoBehaviour
                 Debug.LogError("UIManagerBot instance is not set.");
             }
         }
-        
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            if (UIManagerBot.Instance != null)
+            {
+                UIManagerBot.Instance.HandleSellButtonClick();
+            }
+            else
+            {
+                Debug.LogError("UIManagerBot instance is not set.");
+            }
+        }
+
     }
 }

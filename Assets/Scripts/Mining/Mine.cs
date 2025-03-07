@@ -6,7 +6,7 @@ public class Mine : SelectableObject
     private bool isGenerating = false;
 
     internal override int GetCost() {
-        return 200;
+        return 500;
     }
     internal override string GetCostType() {
         return "elementX";

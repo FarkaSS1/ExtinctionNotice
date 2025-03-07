@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using UnityEditor.Search;
+using UnityEngine.EventSystems;
 
 public class UIManagerBot : MonoBehaviour
 {
@@ -12,7 +12,6 @@ public class UIManagerBot : MonoBehaviour
     public GameObject towerPrefab; // Prefab for the tower
     public GameObject minePrefab; // Prefab for the mine
     public GameStateManager gameStateManager; // Reference to GameStateManager
-
 
     private bool isBuildingTower = false;
     private GameObject blueprint; // The preview object
@@ -27,7 +26,7 @@ public class UIManagerBot : MonoBehaviour
     public Transform centralHub; // Assign in Inspector
 
     private GameObject currentPrefabToBuild;
-    
+
     // Event
     public static event Action<GameObject> OnBuildingPlaced;
 
@@ -37,8 +36,7 @@ public class UIManagerBot : MonoBehaviour
     public Image costIconTower;
     public Image costIconMine;
     public Sprite defaultIcon;
-
-
+    public EventSystem eventSystem;
 
 
     public static UIManagerBot Instance { get; private set; }
@@ -55,13 +53,12 @@ public class UIManagerBot : MonoBehaviour
         Debug.Log("Instance set UIMANAGER");
     }
 
-
     private void Start()
     {
         InitializeBuildButtons();
 
-        buildTowerButton.onClick.AddListener(() => OnBuildButtonClick(towerPrefab));
-        buildMineButton.onClick.AddListener(() => OnBuildButtonClick(minePrefab));
+        buildTowerButton.onClick.AddListener(() => HandleBuildTowerButtonClick());
+        buildMineButton.onClick.AddListener(() => HandleBuildMineButtonClick());
         destroyTowerButton.onClick.AddListener(OnDestroyTowerButtonClick);
     }
 
@@ -71,7 +68,7 @@ public class UIManagerBot : MonoBehaviour
         {
             UpdateBlueprintPosition();
 
-            if (Input.GetMouseButtonDown(0)) // Left-click to place tower
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement()) // Left-click to place tower
             {
                 TryPlaceTower(currentPrefabToBuild);
             }
@@ -82,22 +79,38 @@ public class UIManagerBot : MonoBehaviour
             }
         }
         CheckAndUpdateButtonCosts();
-
     }
+
 
     public void HandleBuildTowerButtonClick()
     {
+        if (isBuildingTower)
+        {
+            CancelBuildingMode(); // Cancel the current building mode if a blueprint is already active
+        }
         OnBuildButtonClick(towerPrefab);
     }
 
     public void HandleBuildMineButtonClick()
     {
+        if (isBuildingTower)
+        {
+            CancelBuildingMode(); // Cancel the current building mode if a blueprint is already active
+        }
         OnBuildButtonClick(minePrefab);
+    }
+
+    public void HandleSellButtonClick()
+    {
+        if (selectedObject != null)
+        {
+            OnDestroyTowerButtonClick();
+        }
     }
 
     private void InitializeBuildButtons()
     {
-        IconManager.InitializeIcons(); 
+        IconManager.InitializeIcons();
 
         // Setup Tower Button UI
         UpdateButtonUI(buildTowerButton, towerPrefab, costTextTower, costIconTower);
@@ -105,6 +118,12 @@ public class UIManagerBot : MonoBehaviour
         // Setup Mine Button UI
         UpdateButtonUI(buildMineButton, minePrefab, costTextMine, costIconMine);
     }
+
+    private bool IsPointerOverUIElement()
+    {
+        return eventSystem.IsPointerOverGameObject();
+    }
+
 
     private void UpdateButtonUI(Button button, GameObject prefab, TMP_Text costText, Image costIcon)
     {
@@ -138,7 +157,6 @@ public class UIManagerBot : MonoBehaviour
         UpdateButtonUI(buildMineButton, minePrefab, costTextMine, costIconMine);
     }
 
-    //test
     private void OnBuildButtonClick(GameObject prefabToSpawn)
     {
         if (prefabToSpawn == null)
@@ -183,11 +201,6 @@ public class UIManagerBot : MonoBehaviour
         currentPrefabToBuild = prefabToSpawn;
         isBuildingTower = true;
     }
-    //test
-
-    
-
-    
 
     private void CancelBuildingMode()
     {
@@ -255,9 +268,8 @@ public class UIManagerBot : MonoBehaviour
             return;
         }
 
-
         gameStateManager.RemoveResources(currentTowerCostType, currentTowerCost);
-        gameStateManager.BuildStructure(buildingPrefab); 
+        gameStateManager.BuildStructure(buildingPrefab);
 
         // Instantiate the real tower at the blueprint position
         GameObject newBuilding = Instantiate(buildingPrefab, blueprint.transform.position, Quaternion.identity);
@@ -266,7 +278,7 @@ public class UIManagerBot : MonoBehaviour
         if (towerComponent != null)
         {
             Debug.Log($"{towerComponent.name} placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
-             OnBuildingPlaced?.Invoke(newBuilding);
+            OnBuildingPlaced?.Invoke(newBuilding);
         }
         else
         {
@@ -301,7 +313,6 @@ public class UIManagerBot : MonoBehaviour
 
         bool isOverlapping = IsOverlappingWithOtherBuildings();
 
-
         Color newColor = (isAffordable && isInValidRange && !isOverlapping) ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
         blueprintRenderer.material.color = newColor;
     }
@@ -318,6 +329,14 @@ public class UIManagerBot : MonoBehaviour
 
     private void OnDestroyTowerButtonClick()
     {
+        if (isBuildingTower)
+        {
+            return;
+        }
+        if (blueprint != null)
+        {
+            Destroy(blueprint);
+        }
         if (selectedObject != null)
         {
             int refundAmount = selectedObject.GetCost(); // Refund 100% of cost for now
@@ -364,6 +383,4 @@ public class UIManagerBot : MonoBehaviour
 
         return false;
     }
-
-
 }
