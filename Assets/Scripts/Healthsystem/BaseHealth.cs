@@ -6,6 +6,29 @@ using System.Threading.Tasks;
 public class BaseHealth : Health
 {
     public GameObject gameOverPanel; // Assign the game-over panel in the Inspector
+    private VignetteOnHit vignetteOnHit;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        // Find the VignetteOnHit component in the scene
+        vignetteOnHit = FindObjectOfType<VignetteOnHit>();
+        if (vignetteOnHit == null)
+        {
+            Debug.LogError("VignetteOnHit component not found in the scene");
+        }
+    }
+
+    public override void TakeDamage(float damage, Transform attacker = null)
+    {
+        base.TakeDamage(damage, attacker);
+
+        // Show vignette effect when taking damage
+        if (vignetteOnHit != null)
+        {
+            VignetteOnHit.ShowVignetteOnHit();
+        }
+    }
 
     async protected override void Die()
     {
