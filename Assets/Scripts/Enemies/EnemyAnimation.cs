@@ -24,7 +24,8 @@ public class EnemyAnimations : MonoBehaviour
     {
         //Debug.Log("PlayStep event triggered, but no action set.");
     }
-    public void Grunt() { 
+    public void Grunt()
+    {
         //Debug.Log("Grunt event triggered, but no action set.");
     }
 
@@ -36,17 +37,18 @@ public class EnemyAnimations : MonoBehaviour
     {
         //Debug.Log("AttackBegin event triggered, but no action set.");
     }
-    public void Shoot()
+    public void Spit()
     {
         if (rangedAttack != null)
         {
-            rangedAttack.ShootProjectile();
+            rangedAttack.TriggerShoot();
         }
         else
         {
             Debug.LogError("ShootProjectile() cannot be called because EnemyRangedAttack is missing.");
         }
     }
+
     public void Bite()
     {
         if (meleeAttack != null)
@@ -76,4 +78,3 @@ public class EnemyAnimations : MonoBehaviour
     }
 
 }
-
