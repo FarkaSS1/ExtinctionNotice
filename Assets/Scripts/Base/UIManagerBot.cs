@@ -137,8 +137,8 @@ public class UIManagerBot : MonoBehaviour
         SelectableObject objectData = prefab.GetComponentInChildren<SelectableObject>();
         if (objectData != null)
         {
-            int cost = objectData.Cost;
-            string costType = objectData.CostType;
+            int cost = objectData.GetCost();
+            string costType = objectData.GetCostType();
 
             costText.text = cost.ToString();
             costIcon.sprite = IconManager.GetIcon(costType) ?? defaultIcon;
@@ -188,8 +188,8 @@ public class UIManagerBot : MonoBehaviour
         SelectableObject objectData = blueprint.GetComponentInChildren<SelectableObject>();
         if (objectData != null)
         {
-            currentTowerCost = objectData.Cost;
-            currentTowerCostType = objectData.CostType;
+            currentTowerCost = objectData.GetCost();
+            currentTowerCostType = objectData.GetCostType();
             Debug.Log($"Blueprint cost set: {currentTowerCost} {currentTowerCostType}");
         }
         else
@@ -278,7 +278,7 @@ public class UIManagerBot : MonoBehaviour
         SelectableObject towerComponent = newBuilding.GetComponentInChildren<SelectableObject>();
         if (towerComponent != null)
         {
-            Debug.Log($"{towerComponent.name} placed successfully with cost: {towerComponent.Cost} {towerComponent.CostType}");
+            Debug.Log($"{towerComponent.name} placed successfully with cost: {towerComponent.GetCost()} {towerComponent.GetCostType()}");
             OnBuildingPlaced?.Invoke(newBuilding);
         }
         else

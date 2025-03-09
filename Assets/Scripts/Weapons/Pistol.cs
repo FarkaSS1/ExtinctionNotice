@@ -8,6 +8,8 @@ public class Pistol : Gun, IAttacker
     private float pistolDamage;
     private Light spotLight;
     [SerializeField] private AudioClip upgradeAudioClip;
+    private static float flatDamageIncrease = 0f;
+
 
     public void Awake()
     {
@@ -59,7 +61,7 @@ public class Pistol : Gun, IAttacker
             cameraTransform.position,  // Start position
             cameraTransform.forward,   // Shooting direction
             gunData.shootingRange,
-            pistolDamage,
+            GetDamage(),
             gunData.targetLayerMask,
             playerTransform,                 // Pass the player as the attacker
             out hit
@@ -139,9 +141,14 @@ public class Pistol : Gun, IAttacker
     public float GetDamage()
     {
         return gunData.damage;
+        // return gunData.damage + flatDamageIncrease; // This one should be correct 
     }
     public void SetDamage(float dmg)
     {
         pistolDamage = dmg;
+    }
+    public static void UpgradeFlatDamage()
+    {
+        flatDamageIncrease += 5;
     }
 }

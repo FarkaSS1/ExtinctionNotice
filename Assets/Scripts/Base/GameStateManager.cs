@@ -8,13 +8,13 @@ public class GameStateManager : MonoBehaviour
 
     private int gold = 1000;
     private int power = 500;
-    private int elementX = 1200;
+    private int elementX = 10300;
     private List<GameObject> builtStructures = new List<GameObject>();
 
     private int towerCount = 0;
     private int mineCount = 0;
-    private int maxTowers = 10;
-    private int maxMines = 3;
+    private int maxTowers = 5;
+    private int maxMines = 1;
 
 
     // Time Variables
@@ -151,6 +151,18 @@ public class GameStateManager : MonoBehaviour
         if (building.CompareTag("Tower")) return towerCount >= maxTowers;
         if (building.CompareTag("Base")) return mineCount >= maxMines;
         return false;
+    }
+
+    public void IncreaseMaxTowers()
+    {
+        maxTowers++;
+        Debug.Log("Increased tower capacity. New max: " + maxTowers);
+    }
+
+    public void IncreaseMaxQuarries()
+    {
+        maxMines++;
+        Debug.Log("Increased mine capacity. New max: " + maxMines);
     }
 
 }

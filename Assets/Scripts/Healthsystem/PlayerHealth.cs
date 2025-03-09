@@ -8,7 +8,7 @@ public class PlayerHealth : Health
     public Transform respawnPoint; // Reference to the respawn point
     public CameraModeManager cameraModeManager; // Reference to the CameraModeManager
     public GameStateManager gameStateManager; // Reference to the GameStateManager
-    public int respawnCost = 750;
+    private static int respawnCost = 750;
     private string resourceType = "elementX";
     private VignetteOnHit vignetteOnHit;
 
@@ -107,5 +107,9 @@ public class PlayerHealth : Health
                 }
             }
         }
-        
+    public static void UpgradeRespawnCost()
+    {
+        respawnCost -= 50;
+    }
+
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 class BasicTower : AttackTower, IAttacker
 {
     private Shooter shooter;
+    private static int cost = 200;
+    private static int damageModifier = 1;
 
     private void Awake()
     {
@@ -16,7 +18,7 @@ class BasicTower : AttackTower, IAttacker
 
     internal override int GetCost()
     {
-        return 200;
+        return cost;
     }
 
     internal override string GetCostType()
@@ -36,7 +38,7 @@ class BasicTower : AttackTower, IAttacker
             turretMuzzle.position,   // Tower's shooting position
             shootDirection,          // Direction toward the enemy
             turretData.shootingRange,
-            turretData.damage,
+            GetDamage(), // swapped to use the getter!!!
             LayerMask.GetMask("Enemy"),
             transform,               // Pass the tower as the attacker!
             out hit
@@ -86,6 +88,18 @@ class BasicTower : AttackTower, IAttacker
 
     public float GetDamage()
     {
-        return turretData.damage;
+        Debug.Log("Damage: " + turretData.damage * damageModifier);
+        return turretData.damage * damageModifier;
+    }
+
+    public static void UpgradeLowerCost()
+    {
+        cost -= 50;
+        Debug.Log("Cost: " + cost);
+    }
+
+    public static void UpgradeTowerDamage()
+    {
+        damageModifier += 1; // damn nice upgrade lol
     }
 }

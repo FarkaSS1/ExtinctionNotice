@@ -266,7 +266,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8583747360973061582}
         m_TargetAssemblyTypeName: UpgradeButtonUI, Assembly-CSharp
-        m_MethodName: Upgrade
+        m_MethodName: TryUpgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -318,6 +318,7 @@ MonoBehaviour:
   - {fileID: 8914517022029662665}
   - {fileID: 4822031973170286444}
   - {fileID: 2187083711408762482}
+  upgradeType: 1
 --- !u!1 &6854087746291621351
 GameObject:
   m_ObjectHideFlags: 0

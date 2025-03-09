@@ -5,8 +5,13 @@ public class Mine : SelectableObject
     private GameStateManager GSM;
     private bool isGenerating = false;
 
+    private static int cost = 500;
+    private static int productionModifier = 1;
+    private int production = 10;
+
+
     internal override int GetCost() {
-        return 500;
+        return cost;
     }
     internal override string GetCostType() {
         return "elementX";
@@ -41,7 +46,7 @@ public class Mine : SelectableObject
     {
         if (isGenerating && e.tick % 10 == 0)
         { 
-            GSM.AddResource("elementX", 10);
+            GSM.AddResource("elementX", production * productionModifier);
             Debug.Log("Generating elementX: " + GSM.ReturnResources("elementX"));
         }
     }
@@ -60,5 +65,15 @@ public class Mine : SelectableObject
     private void SetActiveState(bool state)
     {
         isGenerating = state;
+    }
+
+    public static void UpgradeLowerCost()
+    {
+        cost -= 50;
+    }
+
+    public static void UpgradeProduction()
+    {
+        productionModifier += 1;
     }
 }
