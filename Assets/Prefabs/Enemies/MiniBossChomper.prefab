@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_Name
-      value: MiniBossChomper 1
+      value: MiniBossChomper
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_Layer
@@ -438,15 +438,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 719.8824
+      value: 232.40984
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000667572
+      value: 0.0000047683716
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 327.98407
+      value: 215.65948
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -516,6 +516,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4982165834250014451}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6099876765524887698}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7709137780125819862}
   m_SourcePrefab: {fileID: 100100000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
 --- !u!1 &3849086806791756996 stripped
 GameObject:
@@ -599,7 +607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c80e2d741ca504aa5783a7d5c73202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
 --- !u!65 &4982165834250014451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -621,3 +628,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &6099876765524887698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849086806791756996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9cf01f86b0a874f9940797d64a5222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: {fileID: 3082616940101882312}
+  canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
+    type: 3}
+  halthBarHeightAboveEnemy: 5
+--- !u!114 &7709137780125819862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849086806791756996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9cf01f86b0a874f9940797d64a5222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: {fileID: 3082616940101882312}
+  canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
+    type: 3}
+  halthBarHeightAboveEnemy: 5

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 public class BaseHealth : Health
 {
+    [SerializeField] private float baseMaxHealth = 500f; // Set a default value for the base health
     public GameObject gameOverPanel; // Assign the game-over panel in the Inspector
     private VignetteOnHit vignetteOnHit;
 
     protected override void Awake()
     {
+        maxHealth = baseMaxHealth; // Override the maxHealth value
         base.Awake();
         // Find the VignetteOnHit component in the scene
         vignetteOnHit = FindObjectOfType<VignetteOnHit>();
@@ -17,6 +19,12 @@ public class BaseHealth : Health
         {
             Debug.LogError("VignetteOnHit component not found in the scene");
         }
+    }
+
+    public override void UpgradeMaxHealth()
+    {
+        baseMaxHealth += 100;
+        maxHealth = baseMaxHealth;
     }
 
     public override void TakeDamage(float damage, Transform attacker = null)

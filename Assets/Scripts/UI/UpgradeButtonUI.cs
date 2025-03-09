@@ -14,7 +14,6 @@ public enum UpgradeType
     LowerOMEGARespawnCost,
     IncreaseOMEGADamage,
     IncreaseOMEGAHealth
-
 }
 
 public class UpgradeButtonUI : MonoBehaviour
@@ -24,9 +23,17 @@ public class UpgradeButtonUI : MonoBehaviour
     private int activeStripes = 0;
     public int upgradeCost = 100; // default cost per upgrade
     private string costType = "elementX";
+    private PlayerHealth playerHealth;
 
     private void Start()
     {
+        // Find the PlayerHealth instance in the scene
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        if (playerHealth == null)
+        {
+            Debug.LogError("PlayerHealth component not found in the scene");
+        }
+
         // all stripes are dimmed initially
         foreach (var stripe in stripes)
         {
@@ -82,18 +89,22 @@ public class UpgradeButtonUI : MonoBehaviour
                 break;
 
             case UpgradeType.IncreaseOMEGAHealth:
-                Health.UpgradeMaxHealth();
+                if (playerHealth != null)
+                {
+                    playerHealth.UpgradeMaxHealth();
+                }
                 break;
+
             case UpgradeType.IncreaseOMEGADamage:
                 Pistol.UpgradeFlatDamage();
                 break;
 
-
+            
 
             default:
                 Debug.LogWarning("Unhandled upgrade type: " + upgradeType);
                 break;
         }
     }
-
 }
+

@@ -37,7 +37,7 @@ class UpgradePistol : MonoBehaviour
         pistolObject.PlayUpgradeSound();
         ChangeMaterialPistolSkinBody();
         ChangeColorLaser();
-        pistolObject.SetDamage(pistolObject.GetDamage() * 2); // Double the damage
+        pistolObject.SetDamage(pistolObject.GetPistolDamage() * 2); // Double the damage
         pistolObject.EnableSpotLight();
     }
 

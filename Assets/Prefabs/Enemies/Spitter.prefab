@@ -3292,11 +3292,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8faf239ce4f784881385ec76da20b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 15
+  enemyDamage: 8
+  attackCooldown: 2
   projectilePrefab: {fileID: 8368943492058833540, guid: 2c0b5515139fa2f4f95a70e4febfb906,
     type: 3}
   firePoint: {fileID: 6907199959192517751}
-  attackRange: 15
-  fireRate: 2
 --- !u!65 &-3788381238791863921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3330,7 +3331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c80e2d741ca504aa5783a7d5c73202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &-2094137572269388152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3343,8 +3343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9cf01f86b0a874f9940797d64a5222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: -2068920692256482536, guid: da26987b598b37742af7c1c0bad2efe2,
-    type: 3}
+  enemyHealth: {fileID: 1627673224432493467}
   canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
     type: 3}
   halthBarHeightAboveEnemy: 5

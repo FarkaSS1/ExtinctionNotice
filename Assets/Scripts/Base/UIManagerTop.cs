@@ -11,10 +11,16 @@ public class UIManagerTop : MonoBehaviour
     public TMP_Text towerCountText;
     public TMP_Text quarryCountText;
 
+    private BaseHealth baseHealth;
+
     private void Start()
     {
+        baseHealth = FindObjectOfType<BaseHealth>();
+        if (baseHealth == null)
+        {
+            Debug.LogError("BaseHealth component not found in the scene");
+        }
         UpdateUI();
-        //GameStateManager.Instance.OnElementXUpdated += UpdateResourceUI;
     }
 
     private void OnEnable()
@@ -34,7 +40,10 @@ public class UIManagerTop : MonoBehaviour
         elementXText.text = "Element X: " + GameStateManager.Instance.ElementX;
         timeText.text = GameStateManager.Instance.GetGameTimeString();
 
-        baseHealthText.text = "Base Health: " + Health.GetBaseHealth();
+        if (baseHealth != null)
+        {
+            baseHealthText.text = "Base Health: " + baseHealth.GetMaxHealth();
+        }
         towerCountText.text = $"Towers: {GameStateManager.Instance.GetTowerCount()}/{GameStateManager.Instance.GetMaxTowers()}";
         quarryCountText.text = $"Quarries: {GameStateManager.Instance.GetQuarryCount()}/{GameStateManager.Instance.GetMaxQuarries()}";
     }

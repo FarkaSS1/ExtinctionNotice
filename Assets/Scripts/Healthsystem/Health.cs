@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IHealth
 {
-    [SerializeField] private static float maxHealth = 100f;
+    [SerializeField] protected float maxHealth = 100f;
     protected float currentHealth;
 
     public event Action<float> OnHealthChanged;
@@ -45,10 +45,10 @@ public class Health : MonoBehaviour, IHealth
         Destroy(gameObject);
     }
 
-    public static void UpgradeMaxHealth()
+    public virtual void UpgradeMaxHealth()
     {
         maxHealth += 100;
     }
-    public static float GetBaseHealth() => maxHealth;
 
+    public float GetMaxHealth() => maxHealth;
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-5728795245283698026
+--- !u!21 &-1941962232164255280
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: elementX
   m_EditorClassIdentifier: 
   hashCode: 657058054
-  material: {fileID: -5728795245283698026}
+  material: {fileID: -1941962232164255280}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:

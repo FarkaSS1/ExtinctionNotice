@@ -140,8 +140,13 @@ public class Pistol : Gun, IAttacker
     // Getters and Setters
     public float GetDamage()
     {
+        float dmg = pistolDamage + flatDamageIncrease;
+        return dmg; 
+    }
+
+    public float GetPistolDamage()
+    {
         return gunData.damage;
-        // return gunData.damage + flatDamageIncrease; // This one should be correct 
     }
     public void SetDamage(float dmg)
     {

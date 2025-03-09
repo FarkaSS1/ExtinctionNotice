@@ -35,7 +35,8 @@ class GameObjectives : MonoBehaviour
     private EnemyHealth enemyHealthObject;
     private UIManagerBot UIManagerBotObject;
     private GameStateManager gameStateManagerObject;
-    private EnemySpawner enemySpawnerObject;
+    private EnemySpawner enemySpawnerObjectSpitter;
+    private EnemySpawner enemySpawnerObjectChomper;
     private Pistol pistolObject;
 
 
@@ -61,13 +62,15 @@ class GameObjectives : MonoBehaviour
         FindEnemyHealthObject();
         FindEnemyUIManagerBotObject();
         FindEnemyGameStateManagerObject();
-        FindEnemySpawnerObject();
+        FindEnemySpawnerObjectChomper();
+        FindEnemySpawnerObjectSpitter();
         FindPistolObject();
 
         enemyHealthObject.OnEnemyDie += OnEnemyDeath;
         UIManagerBot.OnBuildingPlaced += OnTowerPlaced;
         gameStateManagerObject.OnElementXUpdated += OnElementXUpdated;
-        enemySpawnerObject.OnEnemySpawned += OnEnemySpawned;
+        enemySpawnerObjectChomper.OnEnemySpawned += OnEnemySpawned;
+        enemySpawnerObjectSpitter.OnEnemySpawned += OnEnemySpawned;
     }
 
 
@@ -170,11 +173,42 @@ class GameObjectives : MonoBehaviour
         if (!gameStateManagerObject) { Debug.LogError("Gameobjectives.cs: gameStateManagerObject not found"); }
     }
 
-    private void FindEnemySpawnerObject()
+    private void FindEnemySpawnerObjectChomper()
     {
-        enemySpawnerObject = FindObjectOfType<EnemySpawner>();
-        if (!enemySpawnerObject) { Debug.LogError("Gameobjectives.cs: enemySpawnerObject not found"); }
+        GameObject chomperSpawner = GameObject.Find("Enemy Spawner Chomper");
+        if (chomperSpawner != null)
+        {
+            enemySpawnerObjectChomper = chomperSpawner.GetComponent<EnemySpawner>();
+            if (enemySpawnerObjectChomper == null)
+            {
+                Debug.LogError("Gameobjectives.cs: Chomper object does not have an EnemySpawner component");
+            }
+        }
+        else
+        {
+            Debug.LogError("Gameobjectives.cs: Chomper object not found");
+        }
     }
+
+    private void FindEnemySpawnerObjectSpitter()
+    {
+        GameObject spitterSpawner = GameObject.Find("Enemy Spawner Spitter");
+        if (spitterSpawner != null)
+        {
+            enemySpawnerObjectSpitter = spitterSpawner.GetComponent<EnemySpawner>();
+            if (enemySpawnerObjectSpitter == null)
+            {
+                Debug.LogError("Gameobjectives.cs: Spitter object does not have an EnemySpawner component");
+            }
+        }
+        else
+        {
+            Debug.LogError("Gameobjectives.cs: Spitter object not found");
+        }
+    }
+
+
+
 
     private void FindPistolObject()
     {

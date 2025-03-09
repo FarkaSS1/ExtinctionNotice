@@ -3042,12 +3042,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d1deb6a28111648b0d3d48d511aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   uiManagerBot: {fileID: 0}
   respawnPoint: {fileID: 0}
   cameraModeManager: {fileID: 0}
   gameStateManager: {fileID: 0}
-  respawnCost: 750
 --- !u!1 &5467365602850667247
 GameObject:
   m_ObjectHideFlags: 0

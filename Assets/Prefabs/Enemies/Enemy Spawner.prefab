@@ -48,7 +48,7 @@ MonoBehaviour:
     type: 3}
   spawnPoints:
   - {fileID: 0}
-  initialSpawnInterval: 30
-  minSpawnInterval: 10
+  initialSpawnInterval: 20
+  minSpawnInterval: 20
   spawnDecayRate: 0.95
-  maxEnemiesPerWave: 5
+  maxEnemiesPerWave: 8
