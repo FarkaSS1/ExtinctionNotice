@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mikael/VictoryScene.unity
     guid: 06d38d3c0a1fcb342a08bf27eead2af5
+  - enabled: 1
+    path: Assets/Scenes/IntroCinematic.unity
+    guid: 95fd0d7fb166e324897516a16bbd2f50
   m_configObjects: {}
