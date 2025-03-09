@@ -42,7 +42,7 @@ public class UIManagerTop : MonoBehaviour
 
         if (baseHealth != null)
         {
-            baseHealthText.text = "Base Health: " + baseHealth.GetMaxHealth();
+            baseHealthText.text = "Base Health: " + baseHealth.GetCurrentHealth();
         }
         towerCountText.text = $"Towers: {GameStateManager.Instance.GetTowerCount()}/{GameStateManager.Instance.GetMaxTowers()}";
         quarryCountText.text = $"Quarries: {GameStateManager.Instance.GetQuarryCount()}/{GameStateManager.Instance.GetMaxQuarries()}";
