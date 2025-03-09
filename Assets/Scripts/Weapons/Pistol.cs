@@ -7,14 +7,17 @@ public class Pistol : Gun, IAttacker
     private Shooter shooter;
     private float pistolDamage;
     private Light spotLight;
-    [SerializeField] private AudioClip upgradeAudioClip;
+    [SerializeField] private AudioClip shootingAudioClip; // Single shooting sound
+    [SerializeField] private AudioClip upgradeAudioClip; // Audio clip for upgrade sound
     private static float flatDamageIncrease = 0f;
 
+    private AudioSource audioSource; // Reference to the AudioSource component
 
     public void Awake()
     {
         shooter = GetComponent<Shooter>();
         spotLight = GetComponentInChildren<Light>();
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
         DisableSpotLight();
 
         pistolDamage = gunData.damage;
@@ -27,7 +30,10 @@ public class Pistol : Gun, IAttacker
         {
             Debug.LogError("Spotlight component missing on Pistol!");
         }
-
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component missing on Pistol!");
+        }
     }
 
     public override void Update()
@@ -67,11 +73,24 @@ public class Pistol : Gun, IAttacker
             out hit
         );
 
-        
+        PlayShootingSound(); // Play the shooting sound with varying pitch
 
         StartCoroutine(BulletFire(target, hit));
     }
 
+    private void PlayShootingSound()
+    {
+        if (shootingAudioClip != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            
+            audioSource.PlayOneShot(shootingAudioClip);
+        }
+        else
+        {
+            Debug.LogError("Shooting audio clip not assigned!");
+        }
+    }
 
     private IEnumerator BulletFire(Vector3 target, RaycastHit hit)
     {
@@ -109,7 +128,6 @@ public class Pistol : Gun, IAttacker
         Destroy(hitParticle, 1f);
     }
 
-
     private void DisableSpotLight()
     {
         if (spotLight)
@@ -121,6 +139,7 @@ public class Pistol : Gun, IAttacker
             Debug.LogError("SpotLight object not assigned.");
         }
     }
+
     public void EnableSpotLight()
     {
         if (spotLight)
@@ -133,8 +152,16 @@ public class Pistol : Gun, IAttacker
         }
     }
 
-    public void PlayUpgradeSound() {
-        audioSource.PlayOneShot(upgradeAudioClip);
+    public void PlayUpgradeSound()
+    {
+        if (upgradeAudioClip != null)
+        {
+            audioSource.PlayOneShot(upgradeAudioClip);
+        }
+        else
+        {
+            Debug.LogError("Upgrade audio clip not assigned!");
+        }
     }
 
     // Getters and Setters
@@ -143,10 +170,12 @@ public class Pistol : Gun, IAttacker
         return gunData.damage;
         // return gunData.damage + flatDamageIncrease; // This one should be correct 
     }
+
     public void SetDamage(float dmg)
     {
         pistolDamage = dmg;
     }
+
     public static void UpgradeFlatDamage()
     {
         flatDamageIncrease += 5;
