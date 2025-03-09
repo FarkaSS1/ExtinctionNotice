@@ -49,4 +49,6 @@ public class Health : MonoBehaviour, IHealth
     {
         maxHealth += 100;
     }
+    public static float GetBaseHealth() => maxHealth;
+
 }

@@ -165,4 +165,8 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Increased mine capacity. New max: " + maxMines);
     }
 
+    public int GetTowerCount() => towerCount;
+    public int GetMaxTowers() => maxTowers;
+    public int GetQuarryCount() => mineCount;
+    public int GetMaxQuarries() => maxMines;
 }
