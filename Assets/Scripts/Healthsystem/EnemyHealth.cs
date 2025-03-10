@@ -43,9 +43,11 @@ public class EnemyHealth : Health
         if (dropPrefab == null) return;
 
         GameObject drop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
-        DropItem dropItem = drop.AddComponent<DropItem>();
-        dropItem.resourceType = dropInfo.GetResourceType();
-        dropItem.amount = dropInfo.GetDropAmount();
+        DropItem dropItem = drop.GetComponent<DropItem>();
+        if (dropItem != null)
+        {
+            dropItem.resourceType = dropInfo.GetResourceType();
+            dropItem.amount = dropInfo.GetDropAmount();
+        }
     }
-
 }
