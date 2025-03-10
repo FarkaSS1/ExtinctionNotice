@@ -2109,6 +2109,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4339461820467628265, guid: f736c75cf660f584dbdd6473e59ab34a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7104787646008942238, guid: f736c75cf660f584dbdd6473e59ab34a,
         type: 3}
       propertyPath: gameOverPanel
@@ -4279,7 +4284,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 6b40b64a0becc7949822a702eab54c75,
+      objectReference: {fileID: 23800000, guid: bfadcb27f6efdc44693385b36c6b99bb,
         type: 2}
     - target: {fileID: 6446601349472193476, guid: 8002759cf3e38044e9bcc56f5fa6792e,
         type: 3}
