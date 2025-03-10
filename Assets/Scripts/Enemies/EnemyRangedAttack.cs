@@ -6,6 +6,7 @@ public class EnemyRangedAttack : MonoBehaviour, IAttacker
     [SerializeField] private float attackRange = 15f;
     [SerializeField] private float enemyDamage = 8f;
     [SerializeField] private float attackCooldown = 2f;
+     
     private float nextAttackTime = 0f;
 
     private Transform currentTarget;
@@ -14,6 +15,12 @@ public class EnemyRangedAttack : MonoBehaviour, IAttacker
     public Transform firePoint;
     private NavMeshAgent agent;
     private EnemyAI enemyAI;
+    private AudioSource audioSource;
+    private Transform player;
+
+    [Header("Attack Sounds")]
+    [SerializeField] private AudioClip[] attackSounds;
+    [SerializeField] private float soundRange = 15f;
 
     public float AttackRange => attackRange;
 
@@ -22,10 +29,16 @@ public class EnemyRangedAttack : MonoBehaviour, IAttacker
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         enemyAI = GetComponent<EnemyAI>();
+        audioSource = GetComponent<AudioSource>();
 
         if (enemyAI != null)
         {
             currentTarget = enemyAI.GetCurrentTarget();
+        }
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
         }
     }
 
@@ -73,6 +86,15 @@ public class EnemyRangedAttack : MonoBehaviour, IAttacker
     void Attack()
     {
         animator.SetTrigger("Attack");  // Triggers the attack animation
+        if (attackSounds.Length > 0 && audioSource != null && player != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer <= soundRange)
+            {
+                AudioClip randomClip = attackSounds[Random.Range(0, attackSounds.Length)];
+                audioSource.PlayOneShot(randomClip);
+            }
+        }
     }
 
     // Called by animation event

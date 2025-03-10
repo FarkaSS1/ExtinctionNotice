@@ -9,6 +9,12 @@ public class EnemyMeleeAttack : MonoBehaviour, IAttacker
 
     private Animator animator;
     private UnityEngine.AI.NavMeshAgent agent;
+    private AudioSource audioSource;
+    private Transform player;
+
+    [Header("Attack Sounds")]
+    [SerializeField] private AudioClip[] attackSounds;
+    [SerializeField] private float soundRange = 15f;
 
     public float AttackRange => attackRange;
 
@@ -16,6 +22,12 @@ public class EnemyMeleeAttack : MonoBehaviour, IAttacker
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
     }
 
     public void TryAttack(Transform target)
@@ -35,7 +47,24 @@ public class EnemyMeleeAttack : MonoBehaviour, IAttacker
     void Attack()
     {
         animator.SetTrigger("Attack");
+
+        if (attackSounds.Length > 0 && audioSource != null && player != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (distanceToPlayer <= soundRange)
+            {
+                AudioClip randomClip = attackSounds[Random.Range(0, attackSounds.Length)];
+                audioSource.PlayOneShot(randomClip);
+            }
+        }
+        else
+        {
+            Debug.LogError("Missing AudioSource or AttackSounds not assigned!");
+        }
     }
+
+
 
     public void ApplyMeleeDamage(Transform target)
     {

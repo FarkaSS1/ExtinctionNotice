@@ -595,6 +595,12 @@ MonoBehaviour:
   attackRange: 5
   enemyDamage: 10
   attackCooldown: 1.5
+  attackSounds:
+  - {fileID: 8300000, guid: 02553a84bb99c432d95defdbf87206d5, type: 3}
+  - {fileID: 8300000, guid: 193653a1bedf24a9984f1605ac37ecd5, type: 3}
+  - {fileID: 8300000, guid: 0f4311ccc586c402b97fdadfe13ef87f, type: 3}
+  - {fileID: 8300000, guid: 01c6db0a064204fa8b7b828be85d17d2, type: 3}
+  soundRange: 15
 --- !u!65 &4982165834250014451
 BoxCollider:
   m_ObjectHideFlags: 0
