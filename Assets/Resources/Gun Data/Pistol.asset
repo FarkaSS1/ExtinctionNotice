@@ -16,7 +16,7 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 65
-  damage: 25
+  damage: 20
   shootingRange: 100
   fireRate: 4
   magazineSize: 50

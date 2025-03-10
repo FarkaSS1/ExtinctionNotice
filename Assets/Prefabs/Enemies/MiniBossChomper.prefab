@@ -523,7 +523,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7709137780125819862}
+      addedObject: {fileID: -275700178556091802}
   m_SourcePrefab: {fileID: 100100000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
 --- !u!1 &3849086806791756996 stripped
 GameObject:
@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c80e2d741ca504aa5783a7d5c73202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1000
 --- !u!65 &4982165834250014451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -644,7 +645,7 @@ MonoBehaviour:
   canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
     type: 3}
   halthBarHeightAboveEnemy: 5
---- !u!114 &7709137780125819862
+--- !u!114 &-275700178556091802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -653,10 +654,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3849086806791756996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9cf01f86b0a874f9940797d64a5222, type: 3}
+  m_Script: {fileID: 11500000, guid: dbc8e24d9d44ba940a7d3e638f3eb1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 3082616940101882312}
-  canvasGroupPrefab: {fileID: 8356340079370381118, guid: fc4a011ca0ec764488aa477f3ae265d7,
+  dropPrefab: {fileID: 364938535662359846, guid: 11135234da60f2e46ba154e63e13fd38,
     type: 3}
-  halthBarHeightAboveEnemy: 5
+  resourceType: elementX
+  dropAmount: 1000

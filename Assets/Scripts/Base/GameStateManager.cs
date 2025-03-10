@@ -8,7 +8,7 @@ public class GameStateManager : MonoBehaviour
 
     private int gold = 1000;
     private int power = 500;
-    private int elementX = 10300;
+    private int elementX = 500;
     private List<GameObject> builtStructures = new List<GameObject>();
 
     private int towerCount = 0;
