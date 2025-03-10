@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class UIManagerTop : MonoBehaviour
 {
-    public TMP_Text goldText;
-    public TMP_Text powerText;
     public TMP_Text elementXText;
     public TMP_Text timeText;
     public TMP_Text baseHealthText;
@@ -35,8 +33,6 @@ public class UIManagerTop : MonoBehaviour
 
     public void UpdateUI()
     {
-        goldText.text = "Gold: " + GameStateManager.Instance.Gold;
-        powerText.text = "Power: " + GameStateManager.Instance.Power;
         elementXText.text = "Element X: " + GameStateManager.Instance.ElementX;
         timeText.text = GameStateManager.Instance.GetGameTimeString();
 
